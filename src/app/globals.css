@@ -111,4 +111,16 @@
       scroll-behavior: smooth;
     }
   }
+
+  /* Lenis owns smooth scrolling once it loads; native smoothing would fight it. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
 }

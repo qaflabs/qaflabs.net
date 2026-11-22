@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/hero";
 import { Manifesto } from "@/components/sections/manifesto";
 import { Navbar } from "@/components/sections/navbar";
 import { Principles } from "@/components/sections/principles";
+import { SmoothScroll } from "@/components/brand/smooth-scroll";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <SmoothScroll />
     </div>
   );
 }

@@ -13,3 +13,7 @@
 - [ ] Verified against Sticky Scroll Reveal: Approach pins and steps correctly at 1440; if it doesn't, Lenis is removed and the finding reported
 - [ ] Tests: anchor lands with the section heading visible below the navbar; page doesn't scroll while the menu is open; reduced motion uses native scroll; Approach reaches its last step
 - [ ] Delivery Gate reported, with the keep-or-remove decision and its evidence
+
+## Comments
+
+- 2026-11-23: Implemented and kept. Lenis loads after hydration with autoRaf (not the GSAP ticker: GSAP is lazy, and Lenis moves native scroll so ScrollTrigger and Motion read it directly), anchors offset 96px, stopped while the menu is open, off under reduced motion. Approach still pins at 120px and reaches step 5. Also: the Laser Flow clock now counts wall time, fixing a slow-machine overrun found in the ticket 10 run. 116 tests pass.

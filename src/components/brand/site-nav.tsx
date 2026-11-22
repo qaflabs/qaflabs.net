@@ -8,6 +8,7 @@ import { NavBody, NavItems, Navbar } from "@/components/ui/resizable-navbar";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { mailto, site } from "@/config/site";
 import { nav as copy } from "@/content/home";
+import { setScrollLocked } from "@/lib/smooth-scroll";
 
 // The menu (and GSAP) loads on the first open, so it never weighs on the first paint.
 const StaggeredMenu = lazy(() => import("@/components/StaggeredMenu"));
@@ -50,13 +51,19 @@ export function SiteNav() {
     if (!menuOpen) return;
     const root = document.documentElement;
     root.style.overflow = "hidden";
+    setScrollLocked(true);
     return () => {
       root.style.overflow = "";
+      setScrollLocked(false);
     };
   }, [menuOpen]);
 
   const closeOnLink = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.target instanceof Element && event.target.closest("a[href^='#']")) closeMenu();
+    if (event.target instanceof Element && event.target.closest("a[href^='#']")) {
+      // Unlock before Lenis handles the same click, or the anchor scroll is swallowed.
+      setScrollLocked(false);
+      closeMenu();
+    }
   };
 
   return (

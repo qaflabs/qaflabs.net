@@ -848,12 +848,14 @@ export const LaserFlow = ({
         }
       }
       const s = settingsRef.current;
-      const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
+      const wall = last ? (now - last) / 1000 : 1 / 60;
+      const dt = Math.min(0.05, wall);
       last = now;
       const moving = !s.paused && !reduce && state.elapsed < s.timeLimit;
       if (moving) {
         state.time += dt * s.speed;
-        state.elapsed += dt;
+        // Wall time, so a slow device still settles after about the same number of seconds.
+        state.elapsed += wall;
       }
       const introducing = state.introTime < INTRO_END;
       if (introducing) state.introTime = Math.min(INTRO_END, state.introTime + dt);
