@@ -13,3 +13,7 @@
 - [ ] Copy from the reference, as written
 - [ ] Tests: minimum computed opacity is at least 0.45; reduced motion shows full opacity; axe clean
 - [ ] Screenshots next to `desktop-05-manifesto.jpg` and `mobile-05-manifesto.jpg`; Delivery Gate reported
+
+## Comments
+
+- 2026-11-23: Implemented. Scroll Reveal edited (as="p", no aria-label on paragraphs, no mount setState), lazy-loaded so GSAP stays off the first paint, base opacity 0.45. 103 tests pass.
