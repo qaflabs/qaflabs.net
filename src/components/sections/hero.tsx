@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroFrame } from "@/components/brand/hero-frame";
 import { HeroHeadline } from "@/components/brand/hero-headline";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
@@ -8,7 +9,7 @@ import { hero } from "@/content/home";
 
 export function Hero() {
   return (
-    <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden px-6 pt-[150px] pb-24">
+    <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden px-6 pt-[150px]">
       <div className="relative mx-auto max-w-[1200px]">
         <p className="flex w-fit max-w-full items-center gap-2.5 rounded-full border border-paper/12 bg-ink-2/70 py-1.5 pr-3.5 pl-2 font-mono text-[13px]">
           <Image src="/brand/svg/qaf-labs-mark-on-dark.svg" alt="" width={18} height={18} unoptimized />
@@ -36,6 +37,7 @@ export function Hero() {
           </HoverBorderGradient>
         </div>
       </div>
+      <HeroFrame />
     </section>
   );
 }

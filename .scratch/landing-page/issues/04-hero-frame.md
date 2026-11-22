@@ -15,3 +15,7 @@
 - [ ] No horizontal scroll at 390; code text contrast checked
 - [ ] Tests: frame exposes one labelled image; pane visibility at 1440, 900 and 390; Border Beam stops; axe clean
 - [ ] Screenshots next to `desktop-02-frame.jpg` and `mobile-02-frame.jpg`; Delivery Gate reported
+
+## Comments
+
+- 2026-11-22: Implemented. Frame panes as markup, supplied mark on the top edge with the glow as a separate layer behind it, Border Beam edited to 3 laps then removed. 57 tests pass.

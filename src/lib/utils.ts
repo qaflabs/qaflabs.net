@@ -1,4 +1,10 @@
 import { createCn } from "cn/config";
 
-// Registry components import `cn` from here; brand tokens get registered as they're added.
-export const cn = createCn({});
+// Teaches the merger our radius tokens so `rounded-frame` isn't dropped as unknown.
+export const cn = createCn({
+  extend: {
+    classGroups: {
+      rounded: [{ rounded: ["window", "frame"] }],
+    },
+  },
+});

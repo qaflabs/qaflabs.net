@@ -28,6 +28,39 @@ export const hero = {
     "Illustration: a button component designed on a canvas, written as code, and previewed on a phone",
 } as const;
 
+// Hero frame illustration text, from the reference; the phone copy echoes the contact section.
+export const heroFrame = {
+  tabs: ["Button.design", "Button.tsx", "Preview"],
+  status: "main · checks passed",
+  layer: "Button / Primary",
+  button: "Start a conversation",
+  padding: "px 30 · py 16",
+  height: "56",
+  swatches: ["ink", "paper", "vermilion"],
+  radius: "radius · full",
+  code: [
+    ["import", " { cn }", ' from "@/lib/utils"'],
+    ["", "", ""],
+    ["export function", " Button", "({ children }: Props) {"],
+    ["  return", " (", ""],
+    ["", "    <button", ""],
+    ["", "", "      className={cn("],
+    ["", "", '        "rounded-full px-[30px] py-4",'],
+    ["", "", '        "bg-vermilion text-ink",'],
+    ["", "", '        "font-semibold shadow-glow",'],
+    ["", "", '        "focus-visible:ring-2"'],
+    ["", "", "      )}"],
+    ["", "    >", ""],
+    ["", "", "      {children}"],
+    ["", "    </button>", ""],
+    ["  ", ")", ""],
+    ["", "}", ""],
+  ],
+  phoneTitle: "Tell us what you're making.",
+  phoneLine: "A few lines is enough to start.",
+  phoneNote: "Design and code, one source.",
+} as const;
+
 export const capabilityBand = [
   "WEB APPS",
   "MOBILE",
