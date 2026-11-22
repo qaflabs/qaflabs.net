@@ -1,5 +1,6 @@
 import { Approach } from "@/components/sections/approach";
 import { Capabilities } from "@/components/sections/capabilities";
+import { CapabilityBand } from "@/components/sections/capability-band";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { Hero } from "@/components/sections/hero";
@@ -13,6 +14,7 @@ export default function Home() {
       <Navbar />
       <main id="main" tabIndex={-1}>
         <Hero />
+        <CapabilityBand />
         <Capabilities />
         <Manifesto />
         <Approach />

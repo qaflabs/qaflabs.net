@@ -14,3 +14,7 @@
 - [ ] No horizontal page scroll at 390 caused by the band
 - [ ] Tests: band hidden from the accessibility tree; position unchanged after scroll under reduced motion; no horizontal scroll
 - [ ] Screenshots at 1440 and 390 next to the references; Delivery Gate reported
+
+## Comments
+
+- 2026-11-23: Implemented. Scroll Velocity edited with scrollOnly (no autoplay), aria-hidden band with paper square and vermilion circle separators. 74 tests pass.
