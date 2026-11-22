@@ -16,3 +16,7 @@
 - [ ] Step copy carries the copy-approval marker
 - [ ] Tests: five steps present; on the last step the panel shows the mark; per-step drawings visible at 390; axe clean
 - [ ] Screenshots next to `desktop-06-approach.jpg`, `desktop-07-approach-end.jpg` and mobile references; Delivery Gate reported
+
+## Comments
+
+- 2026-11-23: Implemented. Sticky Scroll Reveal and Tracing Beam rewritten in place (page scroll, brand colours, render props, object-param step renderer). Loose shapes until Evolve, then the supplied mark fills their footprint with the flare behind. Only step titles dim (45%, 4.26:1 on large text) so bodies keep full contrast. Section labels now match the reference (14px sans, mono number). 110 tests pass.

@@ -1,3 +1,4 @@
+import { ApproachSteps } from "@/components/brand/approach-steps";
 import { SectionLabel } from "@/components/brand/section-label";
 import { approach } from "@/content/home";
 
@@ -6,7 +7,7 @@ export function Approach() {
     <section
       id="approach"
       aria-labelledby="approach-title"
-      className="mx-auto max-w-[1240px] px-6 py-[clamp(64px,9vw,130px)]"
+      className="relative z-[2] mx-auto max-w-[1240px] px-6 py-[clamp(64px,9vw,130px)]"
     >
       <SectionLabel number={approach.number} label={approach.label} />
       <h2
@@ -15,6 +16,7 @@ export function Approach() {
       >
         {approach.title}
       </h2>
+      <ApproachSteps />
     </section>
   );
 }

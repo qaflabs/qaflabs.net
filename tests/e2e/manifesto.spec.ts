@@ -1,12 +1,15 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 
-const minOpacity = (page: Page) =>
-  page.locator("#manifesto p").evaluate((p) => {
+// Waits for the lazy Scroll Reveal to replace the static fallback before measuring.
+const minOpacity = async (page: Page) => {
+  await expect(page.locator("#manifesto [data-piece]").first()).toBeAttached();
+  return page.locator("#manifesto p").evaluate((p) => {
     const spans = Array.from(p.querySelectorAll<HTMLElement>("[data-piece]"));
     const targets = spans.length ? spans : [p as HTMLElement];
     return Math.min(...targets.map((el) => parseFloat(getComputedStyle(el).opacity)));
   });
+};
 
 test.describe("manifesto", () => {
   test("is the light section with the ink mark and the full text", async ({ page }) => {
