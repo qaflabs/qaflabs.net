@@ -19,3 +19,7 @@
 - [ ] Tests pass: skip link, `lang`, title and OG tags, landmarks present, axe clean, no horizontal scroll at 390, no console errors
 - [ ] TypeScript strict and lint pass
 - [ ] Screenshots at 1440 and 390 placed next to `desktop-01-hero.jpg` and `mobile-01-hero.jpg`; antislop Delivery Gate reported
+
+## Comments
+
+- 2026-11-22: Implemented in a184cdc. 16/16 Playwright tests pass at 1440 and 390. Stack keeps its design h3 inside Principles and Manifesto has no heading, as in the reference. `cn` deferred to the first ticket that installs a registry component.
