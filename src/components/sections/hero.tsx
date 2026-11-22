@@ -1,21 +1,40 @@
+import Image from "next/image";
+import { HeroHeadline } from "@/components/brand/hero-headline";
+import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
+import { mailto } from "@/config/site";
 import { hero } from "@/content/home";
 
 export function Hero() {
   return (
     <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden px-6 pt-[150px] pb-24">
       <div className="relative mx-auto max-w-[1200px]">
-        <h1
-          id="hero-title"
-          className="mt-7 max-w-[820px] text-[clamp(3rem,7.6vw,7.25rem)] leading-[0.95] font-semibold tracking-[-0.048em]"
-        >
+        <p className="flex w-fit max-w-full items-center gap-2.5 rounded-full border border-paper/12 bg-ink-2/70 py-1.5 pr-3.5 pl-2 font-mono text-[13px]">
+          <Image src="/brand/svg/qaf-labs-mark-on-dark.svg" alt="" width={18} height={18} unoptimized />
+          <AnimatedShinyText>{hero.eyebrow}</AnimatedShinyText>
+        </p>
+        <HeroHeadline id="hero-title" text={`${hero.headlineLead} ${hero.headlineAccent}`}>
           {hero.headlineLead}{" "}
           <span className="[text-shadow:0_0_40px_color-mix(in_srgb,var(--vermilion)_45%,transparent)]">
             {hero.headlineAccent}
           </span>
-        </h1>
-        <p className="mt-7 max-w-[520px] text-[clamp(1.0625rem,1.4vw,1.25rem)] leading-[1.55] text-muted">
+        </HeroHeadline>
+        <p className="mt-7 max-w-[520px] text-[clamp(1.0625rem,1.4vw,1.25rem)] leading-[1.55] text-muted [text-shadow:0_0_18px_var(--ink),0_0_4px_var(--ink)]">
           {hero.subheadline}
         </p>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <ShimmerButton href={mailto} className="min-h-[54px] px-[30px] font-semibold">
+            {hero.primaryCta}
+          </ShimmerButton>
+          <HoverBorderGradient
+            as="a"
+            href="#capabilities"
+            className="inline-flex min-h-[52px] items-center px-[30px] font-semibold"
+          >
+            {hero.secondaryCta}
+          </HoverBorderGradient>
+        </div>
       </div>
     </section>
   );

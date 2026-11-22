@@ -14,3 +14,7 @@
 - [ ] Ink text on vermilion checked at 5.84:1 with the contrast script
 - [ ] Tests: with JS disabled the `h1`, sub-headline and both buttons are visible; See what we build reaches Capabilities; reduced motion shows the end state; axe clean
 - [ ] Screenshots at 1440 and 390, reduced motion on and off, next to the hero references; Delivery Gate reported
+
+## Comments
+
+- 2026-11-22: Implemented. Split Text edited (server children, never hidden, mask rise, skips after 1s, reverts after intro). Shine runs twice. 41 tests pass. Known: the craft. glow is clipped by word masks for under a second during the rise.

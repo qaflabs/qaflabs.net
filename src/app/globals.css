@@ -52,6 +52,15 @@
     opacity: 0;
     }
   }
+  --animate-shiny-text: shiny-text 2.6s ease-in-out 0.6s 2 both;
+  @keyframes shiny-text {
+  0% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+  100% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
 }
 
 @layer base {

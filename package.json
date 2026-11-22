@@ -10,6 +10,7 @@
     "test": "playwright test"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "cn": "0.5.2",
     "gsap": "^3.13.0",
     "motion": "^14.14.0",
