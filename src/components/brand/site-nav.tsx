@@ -1,14 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
-import { StaggeredMenu } from "@/components/StaggeredMenu";
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { NavBody, NavItems, Navbar } from "@/components/ui/resizable-navbar";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { mailto, site } from "@/config/site";
 import { nav as copy } from "@/content/home";
+
+// The menu (and GSAP) loads on the first open, so it never weighs on the first paint.
+const StaggeredMenu = lazy(() => import("@/components/StaggeredMenu"));
 
 const navItems = site.nav.map((item) => ({ name: item.label, link: item.href }));
 const menuItems = site.nav.map((item) => ({
@@ -33,6 +35,7 @@ function Logo() {
 
 export function SiteNav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuLoaded, setMenuLoaded] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = useCallback(() => {
@@ -81,7 +84,10 @@ export function SiteNav() {
             ref={menuButtonRef}
             aria-expanded={menuOpen}
             aria-controls="staggered-menu-panel"
-            onClick={() => setMenuOpen(true)}
+            onClick={() => {
+              setMenuLoaded(true);
+              setMenuOpen(true);
+            }}
             containerClassName="min-[861px]:hidden"
             className="inline-flex min-h-11 items-center px-5 text-[15px] font-semibold"
           >
@@ -90,6 +96,8 @@ export function SiteNav() {
         </NavBody>
       </Navbar>
 
+      {menuLoaded && (
+      <Suspense fallback={null}>
       <div onClickCapture={closeOnLink}>
         <StaggeredMenu
           isFixed
@@ -119,6 +127,8 @@ export function SiteNav() {
           }
         />
       </div>
+      </Suspense>
+      )}
     </header>
   );
 }

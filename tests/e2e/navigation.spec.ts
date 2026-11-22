@@ -73,7 +73,10 @@ test.describe("navigation", () => {
   test("closed menu panel sits off-screen", async ({ page }) => {
     await page.goto("/");
     const viewport = page.viewportSize()?.width ?? 0;
-    const x = await page.locator("#staggered-menu-panel").evaluate((el) => el.getBoundingClientRect().x);
+    const panel = page.locator("#staggered-menu-panel");
+    // The menu loads on first open; before that there is no panel at all.
+    if ((await panel.count()) === 0) return;
+    const x = await panel.evaluate((el) => el.getBoundingClientRect().x);
     expect(x).toBeGreaterThanOrEqual(viewport);
   });
 

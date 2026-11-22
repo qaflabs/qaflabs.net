@@ -16,3 +16,7 @@
 - [ ] Tests: canvas present and hidden from assistive technology; text bounding boxes end left of the beam at 390; reduced motion leaves one frame; no console errors
 - [ ] LCP element identified as the `h1`; Lighthouse mobile measured (median of 3 local runs), numbers reported as measured or "not measured"
 - [ ] Screenshots at 1440 and 390, reduced motion on and off, next to the hero references; Delivery Gate reported
+
+## Comments
+
+- 2026-11-22: Implemented. TINTS within 22 degrees of vermilion, 14s clock, surfaceRef on the hero frame, beam at 90% and text capped at 82% below 760px. Split Text and the mobile menu are lazy-loaded to keep GSAP off the critical path. Lighthouse mobile (local prod, 3 runs): Performance 96, Accessibility 100, Best Practices 100, SEO 100, CLS 0, LCP 2.7-2.8s (observed LCP is the h1 at 113ms; the simulated LCP still misses the 2.5s target). 64 tests pass.
