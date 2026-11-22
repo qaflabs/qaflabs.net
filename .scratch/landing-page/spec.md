@@ -145,7 +145,7 @@ Where the design and the brand kit disagree, the brand kit wins (ADR 0001). Wher
   - Colours: sampled computed colours on the page fall within the brand tokens and their alphas.
   - Console: no errors during load and click-through.
 - Lighthouse is a measured check, not a test: mobile preset, median of 3 local runs of the production build, reported with real numbers only.
-- Prior art: none. The repo has no tests, so Playwright and `@axe-core/playwright` are new dev dependencies.
+- Prior art: none. The repo has no tests, so Playwright and `@axe-core/playwright` are new dev dependencies, installed with bun.
 
 ## Out of Scope
 
@@ -162,5 +162,5 @@ Where the design and the brand kit disagree, the brand kit wins (ADR 0001). Wher
 
 - Work in the phases from `docs/prompts/build-landing-page.md`: Foundation, Hero, Sections, Polish and audit. Stop after each phase with screenshots next to the references and the antislop Delivery Gate.
 - Owner-approved antislop overrides (R-37): the bento grid with mockup illustrations (including the terminal), the eyebrow pill, glow on the hero, frame edge, bento borders, Approach flare and contact lamp, Geist and Geist Mono, and the dark page with one light section.
-- In the sandbox, npm installs need npm's cache pointed into `$TMPDIR`, because writes to `~/.npm` fail with EPERM.
+- The package manager is bun. In the Claude Code sandbox, `bun install`, `next build` and Playwright need to run outside the sandbox (temp-dir, port-binding and Chromium launch restrictions).
 - Vocabulary follows `GLOSSARY.md`: mark, logo, light, hero frame, capability, capability band, Manifesto, Approach step, Principle, illustration.

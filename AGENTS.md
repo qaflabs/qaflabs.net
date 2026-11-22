@@ -10,6 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Qaf Labs project notes
 
+- Package manager: bun. Use `bun install`, `bun add`, `bun run <script>` and `bunx`; there is no npm lockfile.
 - Brand kit: `public/brand/README.md` is the rule book for the logo, colors, and typeface. Use the SVGs as they are.
 - Landing page design: `docs/design/landing/README.md` is the spec. `docs/design/landing/index.html` is the runnable reference, and `screenshots/` shows every section at 1440 and 390.
 - Build prompt: `docs/prompts/build-landing-page.md`.
