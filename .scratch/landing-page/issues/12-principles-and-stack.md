@@ -14,3 +14,7 @@
 - [ ] Orbit timer cleaned up on Activity hide
 - [ ] Tests: Pause orbit stops movement and toggles its label; no tilt under reduced motion; tool list readable; axe clean
 - [ ] Screenshots next to `desktop-08-principles.jpg`, `desktop-09-stack.jpg` and mobile references; Delivery Gate reported
+
+## Comments
+
+- 2026-11-23: Implemented. Spotlight Card (brand surface, settings synced in a layout effect), Tilt Card (motion/react, 5 degrees, mouse-only, no glare), Orbiting Circles (paused prop, paused under reduced motion). Tool glyphs from Simple Icons via the reference; OpenAI as text. 127 tests pass.
