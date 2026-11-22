@@ -30,6 +30,28 @@
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out 1.4s 2 alternate both;
+  --animate-spin-around: spin-around calc(var(--speed) * 2) linear 1.4s 1 both;
+  @keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+    }
+  }
+  @keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+    }
+  15%, 35% {
+    transform: translateZ(0) rotate(90deg);
+    }
+  65%, 85% {
+    transform: translateZ(0) rotate(270deg);
+    }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+    opacity: 0;
+    }
+  }
 }
 
 @layer base {

@@ -16,3 +16,7 @@
 - [ ] Reduced motion: menu opens without staggered movement
 - [ ] Tests: each anchor scrolls to its section; menu open, focus trap, Escape, focus return; Start a conversation href matches config; axe clean at both widths
 - [ ] Screenshots at 1440 and 390 next to the hero references; Delivery Gate reported
+
+## Comments
+
+- 2026-11-22: Implemented. Navbar pill, Staggered Menu (controlled, focus trap, Escape, inert when closed, reduced motion), footer. 29 tests pass. Library edits listed in each file header (ADR 0002).

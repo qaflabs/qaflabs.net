@@ -8,6 +8,13 @@ export const meta = {
   skipLink: "Skip to content",
 } as const;
 
+export const nav = {
+  logoLabel: "Qaf Labs, back to top",
+  cta: "Start a conversation",
+  menu: "Menu",
+  close: "Close",
+} as const;
+
 export const hero = {
   // TODO copy: owner to approve
   eyebrow: "Qaf Labs · software company",
