@@ -7,8 +7,9 @@ import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { stack } from "@/content/home";
 import { toolIcons, type ToolIcon } from "@/content/tool-icons";
 
-const INNER: ToolIcon[] = ["typescript", "react", "nextdotjs", "nodedotjs"];
-const OUTER: ToolIcon[] = ["expo", "postgresql", "kubernetes", "anthropic"];
+// Languages and runtimes on the inner ring, what we build with on the outer one.
+const INNER: ToolIcon[] = ["typescript", "python", "dart", "nodedotjs"];
+const OUTER: ToolIcon[] = ["react", "nextdotjs", "nestjs", "fastapi", "flutter", "postgresql", "redis", "docker", "kubernetes", "anthropic"];
 
 interface TileProps {
   children: ReactNode;
@@ -44,6 +45,7 @@ export function StackOrbit() {
         <h3 id="stack-title" className="text-[clamp(2rem,3.4vw,3rem)] leading-[1.02] font-semibold tracking-[-0.04em]">
           {stack.title}
         </h3>
+        <p className="mt-3.5 text-muted">{stack.line}</p>
         <ul className="mt-[18px] flex list-none flex-wrap gap-2 p-0">
           {stack.tools.map((tool) => (
             <li key={tool} className="rounded-full border border-paper/10 px-2.5 py-[5px] font-mono text-xs text-muted">

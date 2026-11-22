@@ -18,3 +18,4 @@
 ## Comments
 
 - 2026-11-23: Implemented. Spotlight Card (brand surface, settings synced in a layout effect), Tilt Card (motion/react, 5 degrees, mouse-only, no glare), Orbiting Circles (paused prop, paused under reduced motion). Tool glyphs from Simple Icons via the reference; OpenAI as text. 127 tests pass.
+- 2026-11-23: Stack updated from the owner's resume (Technical Skills) at their request: languages first (TypeScript, Python, Dart, SQL), 21 tools, languages and runtimes on the inner orbit, a new polyglot line marked TODO copy. OpenAI and AWS show as text (not in Simple Icons). 127 tests pass.

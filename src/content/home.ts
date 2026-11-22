@@ -229,18 +229,33 @@ export const principles = {
   ],
 } as const;
 
+// Tools from the owner's resume (Technical Skills), languages first: the team works across them.
 export const stack = {
   number: "04",
   label: "Stack",
   title: "The tools we trust.",
+  // TODO copy: owner to approve
+  line: "We're polyglot: we pick the language the problem needs, not the one we happen to know.",
   tools: [
     "TypeScript",
+    "Python",
+    "Dart",
+    "SQL",
     "React",
     "Next.js",
     "Node.js",
+    "NestJS",
+    "FastAPI",
+    "React Native",
     "Expo",
+    "Flutter",
     "PostgreSQL",
+    "MongoDB",
+    "Redis",
+    "Docker",
     "Kubernetes",
+    "Terraform",
+    "AWS",
     "Anthropic API",
     "OpenAI API",
   ],
