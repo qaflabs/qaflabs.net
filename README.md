@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# qaflabs.net
 
-## Getting Started
+The marketing site for Qaf Labs, a software company that designs and builds web, mobile, desktop, AI, and e-commerce products.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router) with Cache Components, the React Compiler, and Turbopack. This version differs from older Next.js docs; read the guides in `node_modules/next/dist/docs/` before changing app code.
+- React 19 and TypeScript.
+- Tailwind CSS 4, loaded through `@tailwindcss/turbopack` (see `next.config.ts`).
+- Geist and Geist Mono through `next/font/google`.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things are
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | What it holds |
+| --- | --- |
+| `src/app/` | App Router routes, the root layout, and global CSS. |
+| `public/brand/` | The logo kit: SVGs, PNGs, and favicons. Read `public/brand/README.md` before using the logo. |
+| `docs/design/landing/` | The approved landing page design: a runnable reference page, screenshots of every section, and the spec. |
+| `docs/prompts/` | Prompts for coding agents. `build-landing-page.md` builds the landing page. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Brand rules in short
 
-## Learn More
+- Three colors only: ink `#0B0B0F`, paper `#F6F5F1`, and vermilion `#FF4A1C`, plus their transparencies.
+- Use the logo SVGs as they are. Never retype the wordmark or redraw, recolor, rotate, or separate the mark.
+- No client logos, testimonials, or statistics on the site until real ones exist.
 
-To learn more about Next.js, take a look at the following resources:
+## Build the landing page
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open Claude Code in this folder and paste the contents of `docs/prompts/build-landing-page.md`. The prompt works in gated phases and stops for review after each one.

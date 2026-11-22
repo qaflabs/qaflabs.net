@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Qaf Labs: Where structure meets craft</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#0B0B0F}
+html{scroll-behavior:smooth}
+a{color:#F6F5F1}a:hover{color:#FFFFFF}
+a,button,summary{cursor:pointer}
+:focus-visible{outline:2px solid #FF4A1C;outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:16px;top:-80px;z-index:200;background:#F6F5F1;color:#0B0B0F;padding:12px 16px;border-radius:8px;font-weight:600;text-decoration:none}
+.skip:focus{top:16px}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.nav-links{display:flex}.nav-cta{display:inline-flex}.menu-btn{display:none}
+.navlink{color:rgb(246 245 241 / .62);text-decoration:none;transition:color .2s;padding:10px 4px}
+.navlink:hover{color:#F6F5F1}
+
+.shimmer{position:relative;overflow:hidden;isolation:isolate;background:#FF4A1C;color:#0B0B0F;box-shadow:inset 0 1px 0 rgb(255 255 255 / .35),inset 0 -8px 14px rgb(120 20 0 / .25),0 10px 40px -10px rgb(255 74 28 / .85);transition:box-shadow .3s,transform .12s,background .2s}
+.shimmer::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgb(255 255 255 / .6) 50%,transparent 70%);transform:translateX(-130%);animation:sheen 2.4s ease-in-out 1.4s 2}
+.shimmer:hover{color:#0B0B0F;box-shadow:inset 0 1px 0 rgb(255 255 255 / .45),inset 0 -6px 14px rgb(120 20 0 / .2),0 14px 56px -8px rgb(255 74 28 / 1)}
+.shimmer:active{transform:translateY(1px)}
+@keyframes sheen{to{transform:translateX(130%)}}
+
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+.hbg{position:relative;isolation:isolate;background:#121217;color:#F6F5F1;transition:transform .12s}
+.hbg::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--ang),rgb(246 245 241 / .42),rgb(246 245 241 / .42) 55%,#FF4A1C 75%,rgb(246 245 241 / .42) 95%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1}
+.hbg:hover::before{animation:ang 2.2s linear infinite}
+.hbg:hover{color:#FFFFFF}
+.hbg:active{transform:translateY(1px)}
+@keyframes ang{to{--ang:360deg}}
+
+.shiny{background:linear-gradient(100deg,rgb(246 245 241 / .62) 40%,#FFFFFF 50%,rgb(246 245 241 / .62) 60%);background-size:250% 100%;background-position:120% 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 2.6s ease-in-out .6s 2}
+@keyframes shine{to{background-position:-20% 0}}
+
+.word{display:inline-block;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.fade-in{animation:fadein 1.8s ease-out both}
+@keyframes rise{from{opacity:0;transform:translateY(18px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.beam-core{animation:beamdrop 1.4s cubic-bezier(.3,.6,.2,1) .2s both;transform-origin:bottom}
+@keyframes beamdrop{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
+
+.bbeam{position:absolute;inset:0;border-radius:inherit;border:1px solid transparent;pointer-events:none;z-index:5;-webkit-mask:linear-gradient(transparent,transparent),linear-gradient(#000,#000);mask:linear-gradient(transparent,transparent),linear-gradient(#000,#000);-webkit-mask-clip:padding-box,border-box;mask-clip:padding-box,border-box;-webkit-mask-composite:source-in;mask-composite:intersect}
+.bbeam::after{content:"";position:absolute;width:160px;aspect-ratio:1;background:linear-gradient(to left,#FFFFFF,#FF4A1C 30%,transparent);offset-path:rect(0 auto auto 0 round 16px);offset-anchor:90% 50%;animation:bb 8s linear 1.6s 3 both}
+@keyframes bb{from{offset-distance:0%}to{offset-distance:100%}}
+.check{transition:background .3s,border-color .3s}
+.status{display:inline-flex}
+.frame-cols{display:grid;grid-template-columns:minmax(0,40fr) minmax(0,36fr) minmax(0,24fr)}
+.pane-code{display:block}.pane-prev{display:flex}
+
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.s7{grid-column:span 7}.s5{grid-column:span 5}.s6{grid-column:span 6}
+.mb{position:relative;isolation:isolate;overflow:hidden;background:#0F0F14;border:1px solid rgb(246 245 241 / .08);border-radius:18px;--mx:50%;--my:0%;transition:border-color .3s,transform .3s}
+.mb::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:radial-gradient(360px circle at var(--mx) var(--my),rgb(255 74 28 / .95),rgb(255 74 28 / .25) 35%,transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s;z-index:3;pointer-events:none}
+.mb::after{content:"";position:absolute;inset:0;background:radial-gradient(520px circle at var(--mx) var(--my),rgb(255 74 28 / .09),transparent 45%);opacity:0;transition:opacity .35s;z-index:0;pointer-events:none}
+.mb:hover::before,.mb:hover::after,.mb:focus-within::before{opacity:1}
+.mb-top{position:absolute;left:10%;right:10%;top:0;height:1px;background:linear-gradient(90deg,transparent,rgb(246 245 241 / .28),transparent);z-index:2}
+.mb-amb{position:absolute;left:50%;top:-120px;width:420px;height:240px;transform:translateX(-50%);background:radial-gradient(closest-side,rgb(255 74 28 / .16),transparent);z-index:0;pointer-events:none}
+
+.seen .beam-path{animation:beam 2.2s ease-in-out 2 both}
+.beam-path{stroke-dasharray:70 700;stroke-dashoffset:770}
+@keyframes beam{from{stroke-dashoffset:770}to{stroke-dashoffset:0}}
+.note{opacity:0;transform:translateY(-14px) scale(.96)}
+.seen .note{animation:pop .55s cubic-bezier(.2,.8,.2,1.2) both}
+@keyframes pop{to{opacity:1;transform:none}}
+.tl{opacity:0}
+.seen .tl{animation:tline .01s steps(1) both}
+@keyframes tline{to{opacity:1}}
+.typed{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;width:0}
+.seen .typed{animation:type .9s steps(22) both}
+@keyframes type{to{width:var(--w)}}
+
+.spot{position:relative;isolation:isolate;overflow:hidden;background:#0F0F14;border:1px solid rgb(246 245 241 / .08);border-radius:18px;--mx:50%;--my:50%;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out,border-color .3s}
+.spot::before{content:"";position:absolute;inset:0;background:radial-gradient(340px circle at var(--mx) var(--my),rgb(255 74 28 / .2),transparent 60%);opacity:0;transition:opacity .35s;z-index:-1}
+.spot:hover{border-color:rgb(246 245 241 / .16)}
+.spot:hover::before{opacity:1}
+.pr-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+
+.ap-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:72px}
+.ap-panel{position:sticky;top:120px}
+.step-glyph{display:none}
+
+.orbit{--r1:120px;--r2:206px;width:470px;height:470px}
+.ring-a{animation:spin 60s linear infinite}
+.ring-b{animation:spin 90s linear infinite reverse}
+.ring-a .up{animation:spin 60s linear infinite reverse}
+.ring-b .up{animation:spin 90s linear infinite}
+.paused .ring-a,.paused .ring-b,.paused .up{animation-play-state:paused}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.morph{transition:width .35s cubic-bezier(.2,.7,.2,1),background .2s}
+
+@media (max-width:1000px){
+.s7,.s5,.s6{grid-column:span 6}
+.pr-grid{grid-template-columns:minmax(0,1fr)}
+.frame-cols{grid-template-columns:minmax(0,58fr) minmax(0,42fr)}
+.pane-code{display:none}
+}
+@media (max-width:900px){
+.ap-grid{grid-template-columns:minmax(0,1fr);gap:0}
+.ap-panel{display:none}
+.step-glyph{display:block}
+.orbit{--r1:84px;--r2:142px;width:330px;height:330px}
+}
+@media (max-width:860px){
+.nav-links,.nav-cta{display:none}
+.menu-btn{display:inline-flex}
+}
+@media (max-width:700px){
+.sel{transform:translate(-50%,-50%) scale(.66) !important}
+.hide-sm,.status{display:none}
+.s7,.s5,.s6{grid-column:span 12}
+.frame-cols{grid-template-columns:minmax(0,1fr)}
+.pane-prev{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.word,.rise,.fade-in,.beam-core,.shimmer::after,.shiny{animation:none}
+.shiny{color:rgb(246 245 241 / .62);background:none}
+.beam-path{stroke-dasharray:none;stroke-dashoffset:0}
+.seen .beam-path{animation:none}
+.note,.tl{opacity:1;transform:none}.seen .note,.seen .tl{animation:none}
+.typed{width:var(--w)}.seen .typed{animation:none}
+.ring-a,.ring-b,.up{animation:none}
+.bbeam::after{animation:none;display:none}
+.spot{transform:none}
+*{transition:none !important}
+}
+</style>
+</helmet>
+<div id="top" style="position: relative; background: #0B0B0F; color: #F6F5F1; font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 17px; line-height: 1.6; overflow-x: clip">
+<a class="skip" href="#main">Skip to content</a>
+<svg aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: {{grainOpacity}}; z-index: 60; mix-blend-mode: overlay" xmlns="http://www.w3.org/2000/svg"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter><rect width="100%" height="100%" filter="url(#grain)"></rect></svg>
+
+<div aria-hidden="true" style="position: fixed; left: 0; right: 0; top: 0; height: 96px; z-index: 40; pointer-events: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); -webkit-mask-image: linear-gradient(#000 30%, transparent); mask-image: linear-gradient(#000 30%, transparent); opacity: {{pblur}}; transition: opacity .3s"></div>
+
+<header style="position: sticky; top: 0; z-index: 50; padding: {{navPad}}px 16px 0; transition: padding .35s">
+<nav aria-label="Main" style="margin: 0 auto; max-width: {{navMax}}px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 8px 8px 20px; border-radius: 999px; border: 1px solid rgb(246 245 241 / {{navBorder}}); background: rgb(14 14 19 / {{navBg}}); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 10px 40px -12px rgb(0 0 0 / {{navShadow}}); transition: max-width .45s cubic-bezier(.2,.7,.2,1), background .35s, border-color .35s, box-shadow .35s">
+<a href="#top" style="display: inline-flex; align-items: center; min-height: 44px"><img src="/_blob/5706890fb1bdf8175d56adf8c6929a48" alt="Qaf Labs, back to top" width="90" height="24" style="display: block; width: 90px; height: 24px"></a>
+<div class="nav-links" style="align-items: center; gap: 24px; font-size: 15px">
+<a class="navlink" href="#capabilities">Capabilities</a>
+<a class="navlink" href="#approach">Approach</a>
+<a class="navlink" href="#principles">Principles</a>
+<a class="navlink" href="#contact">Contact</a>
+</div>
+<a class="nav-cta shimmer" href="mailto:hello@qaflabs.net" style="align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; font-weight: 600; font-size: 15px; text-decoration: none">Start a conversation</a>
+<button class="menu-btn hbg" type="button" aria-expanded="{{menuExpanded}}" aria-controls="mobile-menu" onClick="{{openMenu}}" style="align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; font: 600 15px 'Geist', sans-serif">Menu</button>
+</nav>
+</header>
+
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" onKeyDown="{{menuKey}}" style="position: fixed; inset: 0; z-index: 120; background: #0B0B0F; display: flex; flex-direction: column; padding: 20px 24px 36px; overflow: hidden">
+<div aria-hidden="true" style="position: absolute; right: -120px; top: -160px; width: 420px; height: 420px; background: radial-gradient(closest-side, rgb(255 74 28 / .35), transparent)"></div>
+<div style="position: relative; display: flex; justify-content: space-between; align-items: center">
+<img src="/_blob/5706890fb1bdf8175d56adf8c6929a48" alt="Qaf Labs" width="90" height="24" style="display: block; width: 90px; height: 24px">
+<button class="hbg" type="button" onClick="{{closeMenu}}" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; font: 600 15px 'Geist', sans-serif">Close</button>
+</div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 4px; margin-top: 56px">
+<a class="word" href="#capabilities" onClick="{{closeMenu}}" style="font-size: 44px; font-weight: 600; letter-spacing: -0.035em; text-decoration: none; padding: 6px 0; animation-delay: .04s"><span class="mono" style="font-size: 13px; color: rgb(246 245 241 / .6); margin-right: 14px; vertical-align: middle">01</span>Capabilities</a>
+<a class="word" href="#approach" onClick="{{closeMenu}}" style="font-size: 44px; font-weight: 600; letter-spacing: -0.035em; text-decoration: none; padding: 6px 0; animation-delay: .1s"><span class="mono" style="font-size: 13px; color: rgb(246 245 241 / .6); margin-right: 14px; vertical-align: middle">02</span>Approach</a>
+<a class="word" href="#principles" onClick="{{closeMenu}}" style="font-size: 44px; font-weight: 600; letter-spacing: -0.035em; text-decoration: none; padding: 6px 0; animation-delay: .16s"><span class="mono" style="font-size: 13px; color: rgb(246 245 241 / .6); margin-right: 14px; vertical-align: middle">03</span>Principles</a>
+<a class="word" href="#contact" onClick="{{closeMenu}}" style="font-size: 44px; font-weight: 600; letter-spacing: -0.035em; text-decoration: none; padding: 6px 0; animation-delay: .22s"><span class="mono" style="font-size: 13px; color: rgb(246 245 241 / .6); margin-right: 14px; vertical-align: middle">04</span>Contact</a>
+</div>
+<a class="shimmer" href="mailto:hello@qaflabs.net" style="position: relative; margin-top: auto; display: flex; align-items: center; justify-content: center; min-height: 54px; border-radius: 999px; font-weight: 600; text-decoration: none">Start a conversation</a>
+</div>
+</sc-if>
+
+<main id="main">
+
+<section id="hero" aria-labelledby="hero-title" style="position: relative; padding: 150px 24px 0; margin-top: -76px; overflow: hidden">
+<canvas id="laser" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9"></canvas>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 100%; height: 900px; pointer-events: none; background: radial-gradient(50% 55% at {{bxPct}}% 0%, rgb(255 74 28 / 0.10), transparent 70%)"></div>
+
+<div style="position: relative; z-index: 11; max-width: 1200px; margin: 0 auto">
+<p class="rise" style="display: inline-flex; align-items: center; gap: 10px; max-width: 100%; box-sizing: border-box; margin: 0; padding: 6px 14px 6px 8px; border: 1px solid rgb(246 245 241 / 0.12); border-radius: 999px; background: rgb(18 18 23 / 0.7); font-size: 13px; animation-delay: .05s"><svg width="18" height="18" viewBox="0 0 78.51 78.51" aria-hidden="true"><path d="M7 38.51H40V71.51A7 7 0 0 1 33 78.51H7A7 7 0 0 1 0 71.51V45.51A7 7 0 0 1 7 38.51Z" fill="#FFFFFF"></path><path d="M33.39 22.56A22.56 22.56 0 1 0 78.51 22.56A22.56 22.56 0 1 0 33.39 22.56Z" fill="#FF4A1C"></path></svg><span class="mono shiny" style="letter-spacing: 0.02em">Qaf Labs · software company</span></p>
+<h1 id="hero-title" style="margin: 28px 0 0; max-width: 820px; font-size: clamp(3rem, 7.6vw, 7.25rem); font-weight: 600; letter-spacing: -0.048em; line-height: 0.95"><span class="word" style="animation-delay: .12s">Where</span> <span class="word" style="animation-delay: .2s">structure</span> <span class="word" style="animation-delay: .28s">meets</span> <span class="word" style="animation-delay: .36s; color: #FFFFFF; text-shadow: 0 0 40px rgb(255 74 28 / .45)">craft.</span></h1>
+<p class="rise" style="margin: 28px 0 0; max-width: 520px; color: rgb(246 245 241 / 0.62); text-shadow: 0 0 18px #0B0B0F, 0 0 4px #0B0B0F; font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.55; animation-delay: .5s">We design and engineer digital products across web, mobile, desktop and AI, built with rigor and finished with care.</p>
+<div class="rise" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; animation-delay: .62s">
+<a class="shimmer" href="mailto:hello@qaflabs.net" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 999px; font-weight: 600; text-decoration: none">Start a conversation</a>
+<a class="hbg" href="#capabilities" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 999px; font-weight: 600; text-decoration: none">See what we build</a>
+</div>
+</div>
+
+<div style="position: relative; z-index: 10; max-width: 1240px; margin: 110px auto 0">
+<svg aria-hidden="true" width="52" height="52" viewBox="0 0 78.51 78.51" style="position: absolute; z-index: 10; left: {{bxPct}}%; top: 0; transform: translate(-50.95%, -49.05%); filter: drop-shadow(0 0 18px rgb(255 74 28 / .6))"><path d="M7 38.51H40V71.51A7 7 0 0 1 33 78.51H7A7 7 0 0 1 0 71.51V45.51A7 7 0 0 1 7 38.51Z" fill="#FFFFFF"></path><path d="M33.39 22.56A22.56 22.56 0 1 0 78.51 22.56A22.56 22.56 0 1 0 33.39 22.56Z" fill="#FF4A1C"></path></svg>
+
+<figure id="surface" role="img" aria-label="Illustration: a button component designed on a canvas, written as code, and previewed on a phone" style="position: relative; margin: 0; height: 560px; border-radius: 16px 16px 0 0; border: 1px solid rgb(246 245 241 / .1); border-bottom: 0; background: linear-gradient(#111117, #0C0C10); overflow: hidden; box-shadow: 0 -30px 120px -40px rgb(255 74 28 / .55); -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent)">
+<span class="bbeam" aria-hidden="true"></span>
+<div style="display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 14px; border-bottom: 1px solid rgb(246 245 241 / .08); font-size: 12.5px; color: rgb(246 245 241 / .62)">
+<span class="mono" style="padding: 5px 10px; border-radius: 8px; background: rgb(246 245 241 / .07); color: #F6F5F1">Button.design</span>
+<span class="mono hide-sm" style="padding: 5px 10px">Button.tsx</span>
+<span class="mono hide-sm" style="padding: 5px 10px">Preview</span>
+<span style="margin-left: auto; align-items: center; gap: 8px; white-space: nowrap" class="mono status"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FF4A1C; box-shadow: 0 0 10px #FF4A1C"></span>main · checks passed</span>
+</div>
+<div class="frame-cols" style="height: 514px">
+<div style="position: relative; border-right: 1px solid rgb(246 245 241 / .08); background-image: radial-gradient(rgb(246 245 241 / .09) 1px, transparent 1.3px); background-size: 18px 18px">
+<p class="mono" style="position: absolute; left: 20px; top: 16px; margin: 0; font-size: 12px; color: rgb(246 245 241 / .6)">Button / Primary</p>
+<div class="sel" style="position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%)">
+<div style="position: relative; padding: 16px 30px; border-radius: 999px; background: #FF4A1C; color: #0B0B0F; font-weight: 600; font-size: 17px; white-space: nowrap; box-shadow: 0 12px 40px -12px rgb(255 74 28 / .8)">Start a conversation</div>
+<div style="position: absolute; inset: -8px; border: 1px solid #FF7A50; border-radius: 6px"></div>
+<span style="position: absolute; left: -12px; top: -12px; width: 8px; height: 8px; background: #F6F5F1; border: 1px solid #FF4A1C"></span>
+<span style="position: absolute; right: -12px; top: -12px; width: 8px; height: 8px; background: #F6F5F1; border: 1px solid #FF4A1C"></span>
+<span style="position: absolute; left: -12px; bottom: -12px; width: 8px; height: 8px; background: #F6F5F1; border: 1px solid #FF4A1C"></span>
+<span style="position: absolute; right: -12px; bottom: -12px; width: 8px; height: 8px; background: #F6F5F1; border: 1px solid #FF4A1C"></span>
+<div style="position: absolute; left: 0; right: 0; top: -40px; height: 1px; background: #FF7A50"></div>
+<span class="mono" style="position: absolute; left: 50%; top: -56px; transform: translateX(-50%); padding: 1px 6px; border-radius: 4px; background: #FF4A1C; color: #0B0B0F; font-size: 11px; font-weight: 500">px 30 · py 16</span>
+<div style="position: absolute; right: -44px; top: 0; bottom: 0; width: 1px; background: #FF7A50"></div>
+<span class="mono" style="position: absolute; right: -78px; top: 50%; transform: translateY(-50%); padding: 1px 6px; border-radius: 4px; background: #FF4A1C; color: #0B0B0F; font-size: 11px; font-weight: 500">56</span>
+</div>
+<div style="position: absolute; left: 20px; right: 20px; bottom: 22px; display: flex; flex-wrap: wrap; gap: 8px">
+<span class="mono" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid rgb(246 245 241 / .1); border-radius: 8px; font-size: 11.5px; color: rgb(246 245 241 / .62)"><span style="width: 12px; height: 12px; border-radius: 3px; background: #0B0B0F; border: 1px solid rgb(246 245 241 / .3)"></span>ink</span>
+<span class="mono" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid rgb(246 245 241 / .1); border-radius: 8px; font-size: 11.5px; color: rgb(246 245 241 / .62)"><span style="width: 12px; height: 12px; border-radius: 3px; background: #F6F5F1"></span>paper</span>
+<span class="mono" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid rgb(246 245 241 / .1); border-radius: 8px; font-size: 11.5px; color: rgb(246 245 241 / .62)"><span style="width: 12px; height: 12px; border-radius: 50%; background: #FF4A1C"></span>vermilion</span>
+<span class="mono" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid rgb(246 245 241 / .1); border-radius: 8px; font-size: 11.5px; color: rgb(246 245 241 / .62)">radius · full</span>
+</div>
+</div>
+<div class="pane-code mono" style="padding: 22px 0; border-right: 1px solid rgb(246 245 241 / .08); font-size: 13px; line-height: 1.85; color: rgb(246 245 241 / .62); overflow: hidden; white-space: pre">
+<sc-for list="{{codeLines}}" as="l" hint-placeholder-count="12"><div style="display: flex"><span style="width: 44px; flex: none; text-align: right; padding-right: 16px; color: rgb(246 245 241 / .3)">{{l.n}}</span><span><span style="color: #FF7A50">{{l.k}}</span><span style="color: #F6F5F1">{{l.t}}</span><span>{{l.r}}</span></span></div></sc-for>
+</div>
+<div class="pane-prev" style="position: relative; justify-content: center; padding-top: 34px; background: radial-gradient(60% 50% at 50% 30%, rgb(255 74 28 / .08), transparent)">
+<div style="width: 212px; height: 440px; border-radius: 34px; border: 1px solid rgb(246 245 241 / .16); background: #0B0B0F; padding: 10px; box-shadow: inset 0 0 0 4px #15151B">
+<div style="height: 100%; border-radius: 26px; background: #121217; padding: 38px 16px 16px; position: relative">
+<div style="position: absolute; left: 50%; top: 10px; width: 64px; height: 18px; border-radius: 10px; background: #0B0B0F; transform: translateX(-50%)"></div>
+<p style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05">Tell us what you're making.</p>
+<p style="margin: 10px 0 0; font-size: 12px; line-height: 1.45; color: rgb(246 245 241 / .62)">A few lines is enough to start.</p>
+<div style="margin-top: 20px; padding: 11px 0; text-align: center; border-radius: 999px; background: #FF4A1C; color: #0B0B0F; font-weight: 600; font-size: 13px; box-shadow: 0 8px 24px -8px rgb(255 74 28 / .9)">Start a conversation</div>
+<div style="margin-top: 22px; padding: 12px; border-radius: 12px; border: 1px solid rgb(246 245 241 / .08)"><div style="display: flex; gap: 6px; align-items: flex-end"><span style="width: 18px; height: 18px; border-radius: 3px 3px 3px 0; background: #F6F5F1"></span><span style="width: 20px; height: 20px; border-radius: 50%; background: #FF4A1C; margin-left: -6px; margin-bottom: 14px"></span></div><p style="margin: 10px 0 0; font-size: 11.5px; color: rgb(246 245 241 / .62)">Design and code, one source.</p></div>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+
+<div aria-hidden="true" style="position: relative; z-index: 3; overflow: hidden; padding: 22px 0 26px; margin-top: -40px">
+<div style="display: flex; align-items: center; gap: 0.42em; white-space: nowrap; font-size: clamp(3rem, 8.4vw, 8rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1.05; transform: translateX({{bandX}}px); will-change: transform">
+<sc-for list="{{bandItems}}" as="b" hint-placeholder-count="12">
+<sc-if value="{{b.outline}}" hint-placeholder-val="{{ false }}"><span style="color: transparent; -webkit-text-stroke: 1.5px rgb(246 245 241 / 0.55)">{{b.text}}</span></sc-if>
+<sc-if value="{{b.solid}}" hint-placeholder-val="{{ true }}"><span style="color: #F6F5F1">{{b.text}}</span></sc-if>
+<sc-if value="{{b.square}}" hint-placeholder-val="{{ false }}"><span style="display: inline-block; width: 0.3em; height: 0.3em; background: #F6F5F1; border-radius: 0.06em 0 0.06em 0.06em"></span></sc-if>
+<sc-if value="{{b.circle}}" hint-placeholder-val="{{ false }}"><span style="display: inline-block; width: 0.34em; height: 0.34em; background: #FF4A1C; border-radius: 50%; box-shadow: 0 0 30px rgb(255 74 28 / .6)"></span></sc-if>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 0.42em; white-space: nowrap; margin-top: 6px; font-size: clamp(3rem, 8.4vw, 8rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1.05; transform: translateX({{bandX2}}px); will-change: transform">
+<sc-for list="{{bandItems2}}" as="b" hint-placeholder-count="12">
+<sc-if value="{{b.outline}}" hint-placeholder-val="{{ false }}"><span style="color: transparent; -webkit-text-stroke: 1.5px rgb(246 245 241 / 0.55)">{{b.text}}</span></sc-if>
+<sc-if value="{{b.solid}}" hint-placeholder-val="{{ true }}"><span style="color: #F6F5F1">{{b.text}}</span></sc-if>
+<sc-if value="{{b.square}}" hint-placeholder-val="{{ false }}"><span style="display: inline-block; width: 0.3em; height: 0.3em; background: #F6F5F1; border-radius: 0.06em 0 0.06em 0.06em"></span></sc-if>
+<sc-if value="{{b.circle}}" hint-placeholder-val="{{ false }}"><span style="display: inline-block; width: 0.34em; height: 0.34em; background: #FF4A1C; border-radius: 50%; box-shadow: 0 0 30px rgb(255 74 28 / .6)"></span></sc-if>
+</sc-for>
+</div>
+</div>
+
+<section id="capabilities" class="{{bentoClass}}" aria-labelledby="cap-title" style="position: relative; z-index: 2; max-width: 1240px; margin: 0 auto; padding: clamp(88px, 11vw, 160px) 24px clamp(64px, 8vw, 120px)">
+<p style="margin: 0 0 18px; font-size: 14px; color: rgb(246 245 241 / .62)"><span class="mono" style="color: #FF7A50">01</span>  Capabilities</p>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<h2 id="cap-title" style="margin: 0; max-width: 760px; font-size: clamp(2.25rem, 4.6vw, 4rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1">One team, every surface.</h2>
+<p style="margin: 0; max-width: 380px; color: rgb(246 245 241 / .62)">We design the first screen and deploy the production server.</p>
+</div>
+
+<div class="bento" style="margin-top: 56px">
+
+<article class="mb s7" onPointerMove="{{track}}">
+<span class="mb-top"></span><span class="mb-amb"></span>
+<div aria-hidden="true" style="position: relative; z-index: 1; height: 300px; padding: 28px 28px 0; overflow: hidden">
+<div style="height: 100%; border-radius: 12px 12px 0 0; border: 1px solid rgb(246 245 241 / .12); border-bottom: 0; background: #0B0B0F; overflow: hidden; box-shadow: 0 -20px 60px -30px rgb(255 74 28 / .5)">
+<div style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 12px; background: #15151B; border-bottom: 1px solid rgb(246 245 241 / .08)">
+<span style="width: 9px; height: 9px; border-radius: 50%; background: rgb(246 245 241 / .18)"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: rgb(246 245 241 / .18)"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: rgb(246 245 241 / .18)"></span>
+<span class="mono" style="margin: 0 auto; padding: 3px 40px; border-radius: 6px; background: rgb(246 245 241 / .06); font-size: 11px; color: rgb(246 245 241 / .6)">app.yourcompany.com</span>
+</div>
+<div style="display: flex; height: calc(100% - 36px)">
+<div style="width: 132px; flex: none; padding: 14px 12px; border-right: 1px solid rgb(246 245 241 / .07); font-size: 12px; color: rgb(246 245 241 / .6); display: flex; flex-direction: column; gap: 9px">
+<span style="color: #F6F5F1; display: flex; align-items: center; gap: 7px"><span style="width: 6px; height: 6px; background: #FF4A1C; border-radius: 50%"></span>Overview</span><span>Projects</span><span>Releases</span><span>Team</span><span>Settings</span>
+</div>
+<div style="flex: 1; min-width: 0; padding: 14px 16px">
+<p style="margin: 0; font-size: 14px; font-weight: 600">Overview</p>
+<svg viewBox="0 0 400 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 96px; margin-top: 10px"><defs><linearGradient id="cg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FF4A1C" stop-opacity=".35"></stop><stop offset="1" stop-color="#FF4A1C" stop-opacity="0"></stop></linearGradient></defs><path d="M0 92 C40 88 60 70 100 74 S160 40 200 50 S270 24 300 30 S360 12 400 8 V120 H0 Z" fill="url(#cg)"></path><path d="M0 92 C40 88 60 70 100 74 S160 40 200 50 S270 24 300 30 S360 12 400 8" fill="none" stroke="#FF4A1C" stroke-width="2"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 7px; margin-top: 10px; font-size: 11.5px">
+<div style="display: flex; justify-content: space-between; padding: 7px 10px; border-radius: 7px; background: rgb(246 245 241 / .04)"><span>Checkout redesign</span><span class="mono" style="color: #FF7A50">live</span></div>
+<div style="display: flex; justify-content: space-between; padding: 7px 10px; border-radius: 7px; background: rgb(246 245 241 / .04)"><span>Search, version two</span><span class="mono" style="color: rgb(246 245 241 / .6)">in review</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="position: relative; z-index: 1; padding: 22px 28px 28px">
+<p class="mono" style="margin: 0; font-size: 12.5px; color: rgb(246 245 241 / .6)">01.1 · Web apps</p>
+<h3 style="margin: 6px 0 0; font-size: 24px; font-weight: 600; letter-spacing: -0.025em">Web apps that stay fast as they grow</h3>
+<p style="margin: 6px 0 0; color: rgb(246 245 241 / .62); font-size: 15.5px">Dashboards, portals and internal tools, built on Next.js and React.</p>
+</div>
+</article>
+
+<article class="mb s5" onPointerMove="{{track}}">
+<span class="mb-top"></span><span class="mb-amb"></span>
+<div aria-hidden="true" style="position: relative; z-index: 1; height: 300px; display: flex; justify-content: center; padding-top: 28px; overflow: hidden">
+<div style="width: 196px; height: 380px; border-radius: 36px; border: 1px solid rgb(246 245 241 / .18); background: #0B0B0F; padding: 9px; box-shadow: inset 0 0 0 3px #17171D, 0 -20px 60px -24px rgb(255 74 28 / .5)">
+<div style="height: 100%; border-radius: 28px; background: #121217; padding: 36px 14px 14px; position: relative">
+<div style="position: absolute; left: 50%; top: 9px; width: 58px; height: 17px; border-radius: 10px; background: #0B0B0F; transform: translateX(-50%)"></div>
+<p style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.03em">Today</p>
+<div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px; font-size: 11.5px">
+<div style="display: flex; align-items: center; gap: 9px; padding: 9px 10px; border-radius: 10px; background: rgb(246 245 241 / .05)"><span style="width: 13px; height: 13px; border-radius: 3px; background: #FF4A1C"></span>Review onboarding</div>
+<div style="display: flex; align-items: center; gap: 9px; padding: 9px 10px; border-radius: 10px; background: rgb(246 245 241 / .05)"><span style="width: 13px; height: 13px; border-radius: 3px; border: 1.5px solid rgb(246 245 241 / .4)"></span>Ship release notes</div>
+<div style="display: flex; align-items: center; gap: 9px; padding: 9px 10px; border-radius: 10px; background: rgb(246 245 241 / .05)"><span style="width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid rgb(246 245 241 / .4)"></span>Call with design</div>
+</div>
+<div style="position: absolute; right: 14px; bottom: 96px; width: 42px; height: 42px; border-radius: 50%; background: #FF4A1C; box-shadow: 0 8px 24px -6px rgb(255 74 28 / .9)"></div>
+</div>
+</div>
+</div>
+<div style="position: relative; z-index: 1; padding: 22px 28px 28px; border-top: 1px solid rgb(246 245 241 / .06); background: #0F0F14">
+<p class="mono" style="margin: 0; font-size: 12.5px; color: rgb(246 245 241 / .6)">01.2 · Mobile apps</p>
+<h3 style="margin: 6px 0 0; font-size: 24px; font-weight: 600; letter-spacing: -0.025em">One codebase, iOS and Android</h3>
+<p style="margin: 6px 0 0; color: rgb(246 245 241 / .62); font-size: 15.5px">Native-feeling apps built with React Native and Expo.</p>
+</div>
+</article>
+
+<article class="mb s5" onPointerMove="{{track}}">
+<span class="mb-top"></span><span class="mb-amb"></span>
+<div aria-hidden="true" style="position: relative; z-index: 1; height: 300px; padding: 24px 18px 0">
+<svg viewBox="0 0 440 260" style="width: 100%; height: 100%">
+<g fill="none" stroke="rgb(246 245 241 / .12)" stroke-width="1.5"><path d="M70 50 C160 50 150 130 220 130"></path><path d="M70 130 L220 130"></path><path d="M70 210 C160 210 150 130 220 130"></path><path d="M220 130 L372 130"></path></g>
+<g fill="none" stroke="#FF4A1C" stroke-width="2.2" stroke-linecap="round" style="filter: drop-shadow(0 0 6px #FF4A1C)"><path class="beam-path" d="M70 50 C160 50 150 130 220 130"></path><path class="beam-path" style="animation-delay: .3s" d="M70 130 L220 130"></path><path class="beam-path" style="animation-delay: .6s" d="M70 210 C160 210 150 130 220 130"></path><path class="beam-path" style="animation-delay: 1.1s" d="M220 130 L372 130"></path></g>
+<g font-family="Geist Mono, monospace" font-size="11" fill="rgb(246 245 241 / .62)" text-anchor="middle"><text x="70" y="86">docs</text><text x="70" y="166">tickets</text><text x="70" y="246">chat</text><text x="372" y="170">answer</text></g>
+<g fill="#121217" stroke="rgb(246 245 241 / .3)" stroke-width="1.2"><rect x="52" y="32" width="36" height="36" rx="8"></rect><circle cx="70" cy="130" r="18"></circle><rect x="52" y="192" width="36" height="36" rx="8"></rect><circle cx="372" cy="130" r="20" stroke="#FF4A1C"></circle></g>
+<rect x="182" y="92" width="76" height="76" rx="20" fill="#121217" stroke="rgb(246 245 241 / .22)"></rect>
+<g transform="translate(200 110) scale(0.51)"><path d="M7 38.51H40V71.51A7 7 0 0 1 33 78.51H7A7 7 0 0 1 0 71.51V45.51A7 7 0 0 1 7 38.51Z" fill="#FFFFFF"></path><path d="M33.39 22.56A22.56 22.56 0 1 0 78.51 22.56A22.56 22.56 0 1 0 33.39 22.56Z" fill="#FF4A1C"></path></g>
+</svg>
+</div>
+<div style="position: relative; z-index: 1; padding: 22px 28px 28px">
+<p class="mono" style="margin: 0; font-size: 12.5px; color: rgb(246 245 241 / .6)">01.3 · AI products</p>
+<h3 style="margin: 6px 0 0; font-size: 24px; font-weight: 600; letter-spacing: -0.025em">AI that answers from your data</h3>
+<p style="margin: 6px 0 0; color: rgb(246 245 241 / .62); font-size: 15.5px">Models wired into your product, with evaluation and guardrails for production.</p>
+</div>
+</article>
+
+<article class="mb s7" onPointerMove="{{track}}">
+<span class="mb-top"></span><span class="mb-amb"></span>
+<div aria-hidden="true" style="position: relative; z-index: 1; height: 300px; padding: 28px 28px 0; overflow: hidden">
+<div style="height: 100%; border-radius: 12px 12px 0 0; border: 1px solid rgb(246 245 241 / .12); border-bottom: 0; background: #0B0B0F; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; height: 36px; padding: 0 14px; background: #15151B; border-bottom: 1px solid rgb(246 245 241 / .08); font-size: 12px"><span style="font-weight: 600">Inbox</span><span class="mono" style="color: rgb(246 245 241 / .6); font-size: 11px">desktop</span></div>
+<div style="display: flex; flex-direction: column; gap: 9px; padding: 14px">
+<div class="note" style="display: flex; gap: 12px; align-items: center; padding: 11px 14px; border-radius: 12px; background: #16161C; border: 1px solid rgb(246 245 241 / .07); animation-delay: .1s"><span style="width: 30px; height: 30px; border-radius: 8px; background: rgb(255 74 28 / .16); display: grid; place-items: center"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF4A1C"></span></span><span style="font-size: 13px"><b style="font-weight: 600">Build finished</b><br><span style="color: rgb(246 245 241 / .6)">Release is ready to ship</span></span></div>
+<div class="note" style="display: flex; gap: 12px; align-items: center; padding: 11px 14px; border-radius: 12px; background: #16161C; border: 1px solid rgb(246 245 241 / .07); animation-delay: .7s"><span style="width: 30px; height: 30px; border-radius: 8px; background: rgb(246 245 241 / .08); display: grid; place-items: center"><span style="width: 10px; height: 10px; border-radius: 2px; background: #F6F5F1"></span></span><span style="font-size: 13px"><b style="font-weight: 600">New comment</b><br><span style="color: rgb(246 245 241 / .6)">On the pricing page draft</span></span></div>
+<div class="note" style="display: flex; gap: 12px; align-items: center; padding: 11px 14px; border-radius: 12px; background: #16161C; border: 1px solid rgb(246 245 241 / .07); animation-delay: 1.3s"><span style="width: 30px; height: 30px; border-radius: 8px; background: rgb(246 245 241 / .08); display: grid; place-items: center"><span style="width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid #F6F5F1"></span></span><span style="font-size: 13px"><b style="font-weight: 600">Sync complete</b><br><span style="color: rgb(246 245 241 / .6)">Works offline, catches up online</span></span></div>
+</div>
+</div>
+</div>
+<div style="position: relative; z-index: 1; padding: 22px 28px 28px">
+<p class="mono" style="margin: 0; font-size: 12.5px; color: rgb(246 245 241 / .6)">01.4 · Desktop apps</p>
+<h3 style="margin: 6px 0 0; font-size: 24px; font-weight: 600; letter-spacing: -0.025em">Desktop software people keep open all day</h3>
+<p style="margin: 6px 0 0; color: rgb(246 245 241 / .62); font-size: 15.5px">Fast, offline-ready apps for macOS and Windows.</p>
+</div>
+</article>
+
+<article class="mb s6" onPointerMove="{{track}}">
+<span class="mb-top"></span><span class="mb-amb"></span>
+<div aria-hidden="true" style="position: relative; z-index: 1; height: 280px; padding: 28px; display: flex; align-items: center; justify-content: center">
+<div style="width: 100%; max-width: 360px; padding: 18px; border-radius: 16px; background: #121217; border: 1px solid rgb(246 245 241 / .1); box-shadow: 0 30px 60px -30px rgb(255 74 28 / .45)">
+<div style="display: flex; gap: 14px; align-items: center"><span style="width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, #2A2A33, #18181E); display: grid; place-items: center"><span style="width: 18px; height: 18px; border-radius: 50%; background: #FF4A1C"></span></span><span style="font-size: 14px; flex: 1"><b style="font-weight: 600">Linen overshirt</b><br><span style="color: rgb(246 245 241 / .6)">Size M</span></span><span style="display: inline-flex; align-items: center; border: 1px solid rgb(246 245 241 / .14); border-radius: 999px; font-size: 13px"><span style="width: 28px; text-align: center; color: rgb(246 245 241 / .6)">−</span><span class="mono" style="width: 18px; text-align: center">1</span><span style="width: 28px; text-align: center; color: rgb(246 245 241 / .6)">+</span></span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgb(246 245 241 / .08)"><span style="font-size: 13px; color: rgb(246 245 241 / .6)">Order total</span><span class="mono" style="font-size: 22px; font-weight: 500; color: #F6F5F1">${{ticker}}</span></div>
+<div style="margin-top: 14px; padding: 12px 0; text-align: center; border-radius: 999px; background: #FF4A1C; color: #0B0B0F; font-weight: 600; font-size: 14px">Pay now</div>
+</div>
+</div>
+<div style="position: relative; z-index: 1; padding: 0 28px 28px">
+<p class="mono" style="margin: 0; font-size: 12.5px; color: rgb(246 245 241 / .6)">01.5 · E-commerce</p>
+<h3 style="margin: 6px 0 0; font-size: 24px; font-weight: 600; letter-spacing: -0.025em">Checkouts built for how people buy</h3>
+<p style="margin: 6px 0 0; color: rgb(246 245 241 / .62); font-size: 15.5px">Storefronts, carts and payments that hold up on launch day.</p>
+</div>
+</article>
+
+<article class="mb s6" onPointerMove="{{track}}">
+<span class="mb-top"></span><span class="mb-amb"></span>
+<div aria-hidden="true" style="position: relative; z-index: 1; height: 280px; padding: 28px">
+<div class="mono" style="height: 100%; border-radius: 12px; border: 1px solid rgb(246 245 241 / .12); background: #0B0B0F; overflow: hidden; font-size: 13px">
+<div style="height: 32px; display: flex; align-items: center; padding: 0 14px; border-bottom: 1px solid rgb(246 245 241 / .08); color: rgb(246 245 241 / .6); font-size: 11.5px">deploy · zsh</div>
+<div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; line-height: 1.5">
+<div><span style="color: #FF7A50">$ </span><span class="typed" style="--w: 11ch; animation-delay: .2s">pnpm build</span></div>
+<div class="tl" style="color: rgb(246 245 241 / .62); animation-delay: 1.3s">✓ compiled, types checked</div>
+<div class="tl" style="animation-delay: 1.8s"><span style="color: #FF7A50">$ </span><span class="typed" style="--w: 18ch; animation-delay: 1.9s">pnpm deploy --prod</span></div>
+<div class="tl" style="color: rgb(246 245 241 / .62); animation-delay: 3s">uploading build… done</div>
+<div class="tl" style="animation-delay: 3.6s"><span style="color: #FF4A1C; text-shadow: 0 0 10px #FF4A1C">●</span> live at app.yourcompany.com</div>
+</div>
+</div>
+</div>
+<div style="position: relative; z-index: 1; padding: 0 28px 28px">
+<p class="mono" style="margin: 0; font-size: 12.5px; color: rgb(246 245 241 / .6)">01.6 · Engineering and infrastructure</p>
+<h3 style="margin: 6px 0 0; font-size: 24px; font-weight: 600; letter-spacing: -0.025em">From commit to production, set up to last</h3>
+<p style="margin: 6px 0 0; color: rgb(246 245 241 / .62); font-size: 15.5px">CI, deploys and servers on Kubernetes, handed over so you own them.</p>
+</div>
+</article>
+
+</div>
+</section>
+
+<div aria-hidden="true" style="height: 180px; background: linear-gradient(#0B0B0F, #F6F5F1)"></div>
+<section id="manifesto" aria-label="Manifesto" style="position: relative; background: #F6F5F1; color: #0B0B0F; padding: clamp(40px, 7vw, 100px) 24px clamp(64px, 9vw, 130px); overflow: hidden">
+<div aria-hidden="true" style="position: absolute; right: -10%; top: -20%; width: 60%; height: 140%; background: radial-gradient(closest-side, rgb(255 74 28 / .10), transparent)"></div>
+<div style="position: relative; max-width: 1080px; margin: 0 auto">
+<svg width="60" height="60" viewBox="0 0 78.51 78.51" role="img" aria-label="Qaf Labs mark" style="display: block; margin-bottom: 44px"><path d="M7 38.51H40V71.51A7 7 0 0 1 33 78.51H7A7 7 0 0 1 0 71.51V45.51A7 7 0 0 1 7 38.51Z" fill="#0B0B0F"></path><path d="M33.39 22.56A22.56 22.56 0 1 0 78.51 22.56A22.56 22.56 0 1 0 33.39 22.56Z" fill="#FF4A1C"></path></svg>
+<p style="margin: 0; font-size: clamp(1.875rem, 4vw, 3.75rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.1"><span style="opacity: {{m1}}; transition: opacity .3s">Most software is built fast and forgotten faster.</span> <span style="opacity: {{m2}}; transition: opacity .3s">We build the other kind: structured enough to scale, and made with enough care that people keep using it.</span> <span style="opacity: {{m3}}; transition: opacity .3s">Engineering and design meet at one point, and that point is where we work.</span></p>
+</div>
+</section>
+<div aria-hidden="true" style="height: 180px; background: linear-gradient(#F6F5F1, #0B0B0F)"></div>
+
+<section id="approach" aria-labelledby="ap-title" style="position: relative; z-index: 2; max-width: 1240px; margin: 0 auto; padding: clamp(64px, 9vw, 130px) 24px">
+<p style="margin: 0 0 18px; font-size: 14px; color: rgb(246 245 241 / .62)"><span class="mono" style="color: #FF7A50">02</span>  Approach</p>
+<h2 id="ap-title" style="margin: 0; max-width: 760px; font-size: clamp(2.25rem, 4.6vw, 4rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1">A calm process for ambitious work.</h2>
+<div class="ap-grid" style="margin-top: 72px">
+<div style="position: relative; padding-left: 36px">
+<div aria-hidden="true" style="position: absolute; left: 6px; top: 8px; bottom: 120px; width: 1px; background: rgb(246 245 241 / .1)"></div>
+<div aria-hidden="true" style="position: absolute; left: 6px; top: 8px; width: 1px; height: {{trace}}%; max-height: calc(100% - 128px); background: linear-gradient(#FF4A1C00, #FF4A1C); transition: height .2s linear"><span style="position: absolute; left: -4px; bottom: -4px; width: 9px; height: 9px; border-radius: 50%; background: #FF4A1C; box-shadow: 0 0 14px 3px rgb(255 74 28 / .8)"></span></div>
+<ol style="list-style: none; margin: 0; padding: 0">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="5">
+<li id="{{s.id}}" style="min-height: 300px; opacity: {{s.op}}; transition: opacity .4s">
+<svg class="step-glyph" width="72" height="72" viewBox="0 0 360 360" aria-hidden="true" style="margin: 0 0 12px"><path d="M14 0H80V66A14 14 0 0 1 66 80H14A14 14 0 0 1 0 66V14A14 14 0 0 1 14 0Z" transform="{{s.sqT}}" fill="#FFFFFF"></path><circle cx="{{s.cx}}" cy="{{s.cy}}" r="45.1" fill="#FF4A1C"></circle></svg>
+<p class="mono" style="margin: 0; font-size: 13px; color: #FF7A50">{{s.n}}</p>
+<h3 style="margin: 6px 0 0; font-size: clamp(1.875rem, 3.2vw, 2.75rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05">{{s.title}}</h3>
+<p style="margin: 14px 0 0; max-width: 440px; color: rgb(246 245 241 / .62)">{{s.body}}</p>
+</li>
+</sc-for>
+</ol>
+</div>
+<div class="ap-panel" aria-hidden="true" style="align-self: start; height: 480px; border-radius: 18px; border: 1px solid rgb(246 245 241 / .1); background: #0F0F14; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 -30px 90px -50px rgb(255 74 28 / .6)">
+<div style="position: absolute; inset: 0; background-image: radial-gradient(rgb(246 245 241 / .1) 1px, transparent 1.3px); background-size: 20px 20px; -webkit-mask-image: radial-gradient(closest-side, #000, transparent); mask-image: radial-gradient(closest-side, #000, transparent)"></div>
+<span class="bbeam" aria-hidden="true"></span>
+<div style="position: absolute; left: 50%; top: 50%; width: 360px; height: 360px; transform: translate(-50%, -50%)">
+<div style="position: absolute; left: {{flareX}}px; top: {{flareY}}px; width: 280px; height: 280px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgb(255 255 255 / .85), rgb(255 110 70 / .5) 18%, rgb(255 74 28 / .12) 50%, transparent); opacity: {{flareOp}}; transition: opacity .8s"></div>
+</div>
+<svg width="360" height="360" viewBox="0 0 360 360" style="position: relative">
+<g style="transform: translate({{sqX}}px, {{sqY}}px); transition: transform .8s cubic-bezier(.2,.7,.2,1)"><path d="M14 0H80V66A14 14 0 0 1 66 80H14A14 14 0 0 1 0 66V14A14 14 0 0 1 14 0Z" fill="#FFFFFF"></path></g>
+<g style="transform: translate({{ciX}}px, {{ciY}}px); transition: transform .8s cubic-bezier(.2,.7,.2,1)"><circle cx="0" cy="0" r="45.1" fill="#FF4A1C"></circle></g>
+</svg>
+<p class="mono" style="position: absolute; left: 22px; bottom: 16px; margin: 0; font-size: 12.5px; color: rgb(246 245 241 / .62)">{{stepLabel}}</p>
+</div>
+</div>
+</section>
+
+<section id="principles" aria-labelledby="pr-title" style="position: relative; z-index: 2; max-width: 1240px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) 24px clamp(64px, 9vw, 130px)">
+<p style="margin: 0 0 18px; font-size: 14px; color: rgb(246 245 241 / .62)"><span class="mono" style="color: #FF7A50">03</span>  Principles</p>
+<h2 id="pr-title" style="margin: 0; max-width: 760px; font-size: clamp(2.25rem, 4.6vw, 4rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1">How we hold the work.</h2>
+<div class="pr-grid" style="margin-top: 56px">
+<sc-for list="{{principles}}" as="p" hint-placeholder-count="3">
+<article class="spot" onPointerMove="{{tilt}}" onPointerLeave="{{untilt}}" style="padding: 32px; min-height: 280px; display: flex; flex-direction: column">
+<svg width="44" height="44" viewBox="0 0 78.51 78.51" aria-hidden="true" style="transform: rotate({{p.rot}}deg)"><path d="M7 38.51H40V71.51A7 7 0 0 1 33 78.51H7A7 7 0 0 1 0 71.51V45.51A7 7 0 0 1 7 38.51Z" fill="{{p.sq}}"></path><path d="M33.39 22.56A22.56 22.56 0 1 0 78.51 22.56A22.56 22.56 0 1 0 33.39 22.56Z" fill="{{p.ci}}"></path></svg>
+<h3 style="margin: auto 0 0; padding-top: 48px; font-size: clamp(1.75rem, 2.6vw, 2.25rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05">{{p.title}}</h3>
+<p style="margin: 12px 0 0; color: rgb(246 245 241 / .62)">{{p.body}}</p>
+</article>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 48px; margin-top: clamp(88px, 11vw, 150px)">
+<div style="flex: 1 1 320px; max-width: 440px">
+<p style="margin: 0 0 14px; font-size: 14px; color: rgb(246 245 241 / .62)"><span class="mono" style="color: #FF7A50">04</span>  Stack</p>
+<h3 style="margin: 0; font-size: clamp(2rem, 3.4vw, 3rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.02">The tools we trust.</h3>
+<ul style="margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{toolNames}}" as="t" hint-placeholder-count="9"><li class="mono" style="padding: 5px 10px; border: 1px solid rgb(246 245 241 / .1); border-radius: 999px; font-size: 12px; color: rgb(246 245 241 / .62)">{{t}}</li></sc-for>
+</ul>
+<button class="hbg" type="button" aria-pressed="{{pausedStr}}" onClick="{{togglePause}}" style="margin-top: 26px; min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; font: 600 15px 'Geist', sans-serif">{{pauseLabel}}</button>
+</div>
+<div class="orbit {{orbitClass}}" aria-hidden="true" style="position: relative; flex: none; margin: 0 auto">
+<div style="position: absolute; inset: 0; background: radial-gradient(closest-side, rgb(255 74 28 / .14), transparent 60%)"></div>
+<div style="position: absolute; inset: calc(50% - var(--r1)); border: 1px solid rgb(246 245 241 / .09); border-radius: 50%"></div>
+<div style="position: absolute; inset: calc(50% - var(--r2)); border: 1px dashed rgb(246 245 241 / .09); border-radius: 50%"></div>
+<svg width="72" height="72" viewBox="0 0 78.51 78.51" style="position: absolute; left: calc(50% - 36px); top: calc(50% - 36px); filter: drop-shadow(0 0 22px rgb(255 74 28 / .55))"><path d="M7 38.51H40V71.51A7 7 0 0 1 33 78.51H7A7 7 0 0 1 0 71.51V45.51A7 7 0 0 1 7 38.51Z" fill="#FFFFFF"></path><path d="M33.39 22.56A22.56 22.56 0 1 0 78.51 22.56A22.56 22.56 0 1 0 33.39 22.56Z" fill="#FF4A1C"></path></svg>
+<div class="ring-a" style="position: absolute; inset: 0">
+<sc-for list="{{ringA}}" as="t" hint-placeholder-count="4">
+<div style="position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate({{t.deg}}deg) translateX(var(--r1)) rotate({{t.neg}}deg)"><div class="up" style="position: absolute"><span style="position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; border-radius: 14px; border: 1px solid rgb(246 245 241 / .12); background: #121217; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24"><path d="{{t.d}}" fill="rgb(246 245 241 / .7)"></path></svg></span></div></div>
+</sc-for>
+</div>
+<div class="ring-b" style="position: absolute; inset: 0">
+<sc-for list="{{ringB}}" as="t" hint-placeholder-count="5">
+<div style="position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate({{t.deg}}deg) translateX(var(--r2)) rotate({{t.neg}}deg)"><div class="up" style="position: absolute"><span style="position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; border-radius: 14px; border: 1px solid rgb(246 245 241 / .12); background: #121217; display: grid; place-items: center"><sc-if value="{{t.hasIcon}}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24"><path d="{{t.d}}" fill="rgb(246 245 241 / .7)"></path></svg></sc-if><sc-if value="{{t.isText}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 9.5px; color: rgb(246 245 241 / .7)">{{t.label}}</span></sc-if></span></div></div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact" aria-labelledby="cta-title" style="position: relative; z-index: 2; overflow: hidden; padding: 0 24px clamp(96px, 12vw, 160px); text-align: center">
+<div aria-hidden="true" style="position: relative; height: 300px; max-width: 1100px; margin: 0 auto">
+<div style="position: absolute; left: 50%; top: 40px; width: min(980px, 100%); height: 320px; transform: translateX(-50%); filter: blur(18px)"><div style="width: 100%; height: 100%; clip-path: polygon(32% 0, 68% 0, 100% 100%, 0 100%); background: linear-gradient(rgb(255 74 28 / .5), rgb(255 74 28 / .12) 55%, transparent)"></div></div>
+<div style="position: absolute; left: 50%; top: 10px; width: 520px; max-width: 80%; height: 90px; transform: translateX(-50%); border-radius: 50%; background: #FF4A1C; filter: blur(46px); opacity: .55"></div>
+<div style="position: absolute; left: 50%; top: 40px; width: 300px; max-width: 60%; height: 60px; transform: translateX(-50%); border-radius: 50%; background: #FFB199; filter: blur(26px); opacity: .6"></div>
+<div style="position: absolute; left: 50%; top: 39px; width: 560px; max-width: 86%; height: 2px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, #FFD3C4, #FFFFFF, #FFD3C4, transparent); box-shadow: 0 0 18px 2px rgb(255 74 28 / .8)"></div>
+</div>
+<h2 id="cta-title" style="position: relative; margin: -150px auto 0; max-width: 900px; font-size: clamp(2.75rem, 6.8vw, 6rem); font-weight: 600; letter-spacing: -0.048em; line-height: 0.98">Tell us what you're making.</h2>
+<p style="position: relative; margin: 24px auto 0; max-width: 520px; color: rgb(246 245 241 / .62); font-size: 18px">A few lines about the product and where it stands is enough to start.</p>
+<div style="position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 40px">
+<a class="shimmer" href="mailto:hello@qaflabs.net" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 32px; border-radius: 999px; font-weight: 600; text-decoration: none">Start a conversation</a>
+<button class="hbg morph" type="button" onClick="{{copyEmail}}" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; width: {{copyW}}px; border-radius: 999px; border: 0; font: 600 17px 'Geist', sans-serif"><sc-if value="{{copied}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#FF4A1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if>{{copyLabel}}</button>
+</div>
+<p aria-live="polite" style="position: relative; margin: 16px 0 0; min-height: 1.6em; font-size: 15px; color: rgb(246 245 241 / .62)">{{copyMsg}}</p>
+</section>
+
+</main>
+
+<footer style="position: relative; z-index: 2; overflow: hidden; border-top: 1px solid rgb(246 245 241 / .08)">
+<div aria-hidden="true" style="position: absolute; left: 50%; bottom: -260px; width: 900px; height: 420px; transform: translateX(-50%); background: radial-gradient(closest-side, rgb(255 74 28 / .22), transparent)"></div>
+<div style="position: relative; max-width: 1240px; margin: 0 auto; padding: 72px 24px 36px">
+<img src="/_blob/5706890fb1bdf8175d56adf8c6929a48" alt="Qaf Labs" width="1633" height="438" style="display: block; width: clamp(260px, 56vw, 720px); height: auto">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; margin-top: 56px">
+<a href="mailto:hello@qaflabs.net" style="font-size: 18px; font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center">hello@qaflabs.net</a>
+<nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 0 22px; font-size: 15px">
+<a class="navlink" href="#capabilities">Capabilities</a><a class="navlink" href="#approach">Approach</a><a class="navlink" href="#principles">Principles</a>
+</nav>
+<p class="mono" style="margin: 0; font-size: 13px; color: rgb(246 245 241 / .6)">© 2026 Qaf Labs</p>
+</div>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"beam":{"editor":"range","default":1,"min":0.3,"max":1.6,"step":0.05,"section":"Light"},"grain":{"editor":"boolean","default":true,"section":"Texture"},"$preview":{"width":1440,"height":8000}}'>
+const QAF_ICONS = {"typescript": "M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z", "react": "M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z", "nextdotjs": "M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z", "expo": "M0 20.084c.043.53.23 1.063.718 1.778.58.849 1.576 1.315 2.303.567.49-.505 5.794-9.776 8.35-13.29a.761.761 0 011.248 0c2.556 3.514 7.86 12.785 8.35 13.29.727.748 1.723.282 2.303-.567.57-.835.728-1.42.728-2.046 0-.426-8.26-15.798-9.092-17.078-.8-1.23-1.044-1.498-2.397-1.542h-1.032c-1.353.044-1.597.311-2.398 1.542C8.267 3.991.33 18.758 0 19.77Z", "nodedotjs": "M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z", "postgresql": "M23.5594 14.7228a.5269.5269 0 0 0-.0563-.1191c-.139-.2632-.4768-.3418-1.0074-.2321-1.6533.3411-2.2935.1312-2.5256-.0191 1.342-2.0482 2.445-4.522 3.0411-6.8297.2714-1.0507.7982-3.5237.1222-4.7316a1.5641 1.5641 0 0 0-.1509-.235C21.6931.9086 19.8007.0248 17.5099.0005c-1.4947-.0158-2.7705.3461-3.1161.4794a9.449 9.449 0 0 0-.5159-.0816 8.044 8.044 0 0 0-1.3114-.1278c-1.1822-.0184-2.2038.2642-3.0498.8406-.8573-.3211-4.7888-1.645-7.2219.0788C.9359 2.1526.3086 3.8733.4302 6.3043c.0409.818.5069 3.334 1.2423 5.7436.4598 1.5065.9387 2.7019 1.4334 3.582.553.9942 1.1259 1.5933 1.7143 1.7895.4474.1491 1.1327.1441 1.8581-.7279.8012-.9635 1.5903-1.8258 1.9446-2.2069.4351.2355.9064.3625 1.39.3772a.0569.0569 0 0 0 .0004.0041 11.0312 11.0312 0 0 0-.2472.3054c-.3389.4302-.4094.5197-1.5002.7443-.3102.064-1.1344.2339-1.1464.8115-.0025.1224.0329.2309.0919.3268.2269.4231.9216.6097 1.015.6331 1.3345.3335 2.5044.092 3.3714-.6787-.017 2.231.0775 4.4174.3454 5.0874.2212.5529.7618 1.9045 2.4692 1.9043.2505 0 .5263-.0291.8296-.0941 1.7819-.3821 2.5557-1.1696 2.855-2.9059.1503-.8707.4016-2.8753.5388-4.1012.0169-.0703.0357-.1207.057-.1362.0007-.0005.0697-.0471.4272.0307a.3673.3673 0 0 0 .0443.0068l.2539.0223.0149.001c.8468.0384 1.9114-.1426 2.5312-.4308.6438-.2988 1.8057-1.0323 1.5951-1.6698zM2.371 11.8765c-.7435-2.4358-1.1779-4.8851-1.2123-5.5719-.1086-2.1714.4171-3.6829 1.5623-4.4927 1.8367-1.2986 4.8398-.5408 6.108-.13-.0032.0032-.0066.0061-.0098.0094-2.0238 2.044-1.9758 5.536-1.9708 5.7495-.0002.0823.0066.1989.0162.3593.0348.5873.0996 1.6804-.0735 2.9184-.1609 1.1504.1937 2.2764.9728 3.0892.0806.0841.1648.1631.2518.2374-.3468.3714-1.1004 1.1926-1.9025 2.1576-.5677.6825-.9597.5517-1.0886.5087-.3919-.1307-.813-.5871-1.2381-1.3223-.4796-.839-.9635-2.0317-1.4155-3.5126zm6.0072 5.0871c-.1711-.0428-.3271-.1132-.4322-.1772.0889-.0394.2374-.0902.4833-.1409 1.2833-.2641 1.4815-.4506 1.9143-1.0002.0992-.126.2116-.2687.3673-.4426a.3549.3549 0 0 0 .0737-.1298c.1708-.1513.2724-.1099.4369-.0417.156.0646.3078.26.3695.4752.0291.1016.0619.2945-.0452.4444-.9043 1.2658-2.2216 1.2494-3.1676 1.0128zm2.094-3.988-.0525.141c-.133.3566-.2567.6881-.3334 1.003-.6674-.0021-1.3168-.2872-1.8105-.8024-.6279-.6551-.9131-1.5664-.7825-2.5004.1828-1.3079.1153-2.4468.079-3.0586-.005-.0857-.0095-.1607-.0122-.2199.2957-.2621 1.6659-.9962 2.6429-.7724.4459.1022.7176.4057.8305.928.5846 2.7038.0774 3.8307-.3302 4.7363-.084.1866-.1633.3629-.2311.5454zm7.3637 4.5725c-.0169.1768-.0358.376-.0618.5959l-.146.4383a.3547.3547 0 0 0-.0182.1077c-.0059.4747-.054.6489-.115.8693-.0634.2292-.1353.4891-.1794 1.0575-.11 1.4143-.8782 2.2267-2.4172 2.5565-1.5155.3251-1.7843-.4968-2.0212-1.2217a6.5824 6.5824 0 0 0-.0769-.2266c-.2154-.5858-.1911-1.4119-.1574-2.5551.0165-.5612-.0249-1.9013-.3302-2.6462.0044-.2932.0106-.5909.019-.8918a.3529.3529 0 0 0-.0153-.1126 1.4927 1.4927 0 0 0-.0439-.208c-.1226-.4283-.4213-.7866-.7797-.9351-.1424-.059-.4038-.1672-.7178-.0869.067-.276.1831-.5875.309-.9249l.0529-.142c.0595-.16.134-.3257.213-.5012.4265-.9476 1.0106-2.2453.3766-5.1772-.2374-1.0981-1.0304-1.6343-2.2324-1.5098-.7207.0746-1.3799.3654-1.7088.5321a5.6716 5.6716 0 0 0-.1958.1041c.0918-1.1064.4386-3.1741 1.7357-4.4823a4.0306 4.0306 0 0 1 .3033-.276.3532.3532 0 0 0 .1447-.0644c.7524-.5706 1.6945-.8506 2.802-.8325.4091.0067.8017.0339 1.1742.081 1.939.3544 3.2439 1.4468 4.0359 2.3827.8143.9623 1.2552 1.9315 1.4312 2.4543-1.3232-.1346-2.2234.1268-2.6797.779-.9926 1.4189.543 4.1729 1.2811 5.4964.1353.2426.2522.4522.2889.5413.2403.5825.5515.9713.7787 1.2552.0696.087.1372.1714.1885.245-.4008.1155-1.1208.3825-1.0552 1.717-.0123.1563-.0423.4469-.0834.8148-.0461.2077-.0702.4603-.0994.7662zm.8905-1.6211c-.0405-.8316.2691-.9185.5967-1.0105a2.8566 2.8566 0 0 0 .135-.0406 1.202 1.202 0 0 0 .1342.103c.5703.3765 1.5823.4213 3.0068.1344-.2016.1769-.5189.3994-.9533.6011-.4098.1903-1.0957.333-1.7473.3636-.7197.0336-1.0859-.0807-1.1721-.151zm.5695-9.2712c-.0059.3508-.0542.6692-.1054 1.0017-.055.3576-.112.7274-.1264 1.1762-.0142.4368.0404.8909.0932 1.3301.1066.887.216 1.8003-.2075 2.7014a3.5272 3.5272 0 0 1-.1876-.3856c-.0527-.1276-.1669-.3326-.3251-.6162-.6156-1.1041-2.0574-3.6896-1.3193-4.7446.3795-.5427 1.3408-.5661 2.1781-.463zm.2284 7.0137a12.3762 12.3762 0 0 0-.0853-.1074l-.0355-.0444c.7262-1.1995.5842-2.3862.4578-3.4385-.0519-.4318-.1009-.8396-.0885-1.2226.0129-.4061.0666-.7543.1185-1.0911.0639-.415.1288-.8443.1109-1.3505.0134-.0531.0188-.1158.0118-.1902-.0457-.4855-.5999-1.938-1.7294-3.253-.6076-.7073-1.4896-1.4972-2.6889-2.0395.5251-.1066 1.2328-.2035 2.0244-.1859 2.0515.0456 3.6746.8135 4.8242 2.2824a.908.908 0 0 1 .0667.1002c.7231 1.3556-.2762 6.2751-2.9867 10.5405zm-8.8166-6.1162c-.025.1794-.3089.4225-.6211.4225a.5821.5821 0 0 1-.0809-.0056c-.1873-.026-.3765-.144-.5059-.3156-.0458-.0605-.1203-.178-.1055-.2844.0055-.0401.0261-.0985.0925-.1488.1182-.0894.3518-.1226.6096-.0867.3163.0441.6426.1938.6113.4186zm7.9305-.4114c.0111.0792-.049.201-.1531.3102-.0683.0717-.212.1961-.4079.2232a.5456.5456 0 0 1-.075.0052c-.2935 0-.5414-.2344-.5607-.3717-.024-.1765.2641-.3106.5611-.352.297-.0414.6111.0088.6356.1851z", "kubernetes": "M10.204 14.35l.007.01-.999 2.413a5.171 5.171 0 0 1-2.075-2.597l2.578-.437.004.005a.44.44 0 0 1 .484.606zm-.833-2.129a.44.44 0 0 0 .173-.756l.002-.011L7.585 9.7a5.143 5.143 0 0 0-.73 3.255l2.514-.725.002-.009zm1.145-1.98a.44.44 0 0 0 .699-.337l.01-.005.15-2.62a5.144 5.144 0 0 0-3.01 1.442l2.147 1.523.004-.002zm.76 2.75l.723.349.722-.347.18-.78-.5-.623h-.804l-.5.623.179.779zm1.5-3.095a.44.44 0 0 0 .7.336l.008.003 2.134-1.513a5.188 5.188 0 0 0-2.992-1.442l.148 2.615.002.001zm10.876 5.97l-5.773 7.181a1.6 1.6 0 0 1-1.248.594l-9.261.003a1.6 1.6 0 0 1-1.247-.596l-5.776-7.18a1.583 1.583 0 0 1-.307-1.34L2.1 5.573c.108-.47.425-.864.863-1.073L11.305.513a1.606 1.606 0 0 1 1.385 0l8.345 3.985c.438.209.755.604.863 1.073l2.062 8.955c.108.47-.005.963-.308 1.34zm-3.289-2.057c-.042-.01-.103-.026-.145-.034-.174-.033-.315-.025-.479-.038-.35-.037-.638-.067-.895-.148-.105-.04-.18-.165-.216-.216l-.201-.059a6.45 6.45 0 0 0-.105-2.332 6.465 6.465 0 0 0-.936-2.163c.052-.047.15-.133.177-.159.008-.09.001-.183.094-.282.197-.185.444-.338.743-.522.142-.084.273-.137.415-.242.032-.024.076-.062.11-.089.24-.191.295-.52.123-.736-.172-.216-.506-.236-.745-.045-.034.027-.08.062-.111.088-.134.116-.217.23-.33.35-.246.25-.45.458-.673.609-.097.056-.239.037-.303.033l-.19.135a6.545 6.545 0 0 0-4.146-2.003l-.012-.223c-.065-.062-.143-.115-.163-.25-.022-.268.015-.557.057-.905.023-.163.061-.298.068-.475.001-.04-.001-.099-.001-.142 0-.306-.224-.555-.5-.555-.275 0-.499.249-.499.555l.001.014c0 .041-.002.092 0 .128.006.177.044.312.067.475.042.348.078.637.056.906a.545.545 0 0 1-.162.258l-.012.211a6.424 6.424 0 0 0-4.166 2.003 8.373 8.373 0 0 1-.18-.128c-.09.012-.18.04-.297-.029-.223-.15-.427-.358-.673-.608-.113-.12-.195-.234-.329-.349-.03-.026-.077-.062-.111-.088a.594.594 0 0 0-.348-.132.481.481 0 0 0-.398.176c-.172.216-.117.546.123.737l.007.005.104.083c.142.105.272.159.414.242.299.185.546.338.743.522.076.082.09.226.1.288l.16.143a6.462 6.462 0 0 0-1.02 4.506l-.208.06c-.055.072-.133.184-.215.217-.257.081-.546.11-.895.147-.164.014-.305.006-.48.039-.037.007-.09.02-.133.03l-.004.002-.007.002c-.295.071-.484.342-.423.608.061.267.349.429.645.365l.007-.001.01-.003.129-.029c.17-.046.294-.113.448-.172.33-.118.604-.217.87-.256.112-.009.23.069.288.101l.217-.037a6.5 6.5 0 0 0 2.88 3.596l-.09.218c.033.084.069.199.044.282-.097.252-.263.517-.452.813-.091.136-.185.242-.268.399-.02.037-.045.095-.064.134-.128.275-.034.591.213.71.248.12.556-.007.69-.282v-.002c.02-.039.046-.09.062-.127.07-.162.094-.301.144-.458.132-.332.205-.68.387-.897.05-.06.13-.082.215-.105l.113-.205a6.453 6.453 0 0 0 4.609.012l.106.192c.086.028.18.042.256.155.136.232.229.507.342.84.05.156.074.295.145.457.016.037.043.09.062.129.133.276.442.402.69.282.247-.118.341-.435.213-.71-.02-.039-.045-.096-.065-.134-.083-.156-.177-.261-.268-.398-.19-.296-.346-.541-.443-.793-.04-.13.007-.21.038-.294-.018-.022-.059-.144-.083-.202a6.499 6.499 0 0 0 2.88-3.622c.064.01.176.03.213.038.075-.05.144-.114.28-.104.266.039.54.138.87.256.154.06.277.128.448.173.036.01.088.019.13.028l.009.003.007.001c.297.064.584-.098.645-.365.06-.266-.128-.537-.423-.608zM16.4 9.701l-1.95 1.746v.005a.44.44 0 0 0 .173.757l.003.01 2.526.728a5.199 5.199 0 0 0-.108-1.674A5.208 5.208 0 0 0 16.4 9.7zm-4.013 5.325a.437.437 0 0 0-.404-.232.44.44 0 0 0-.372.233h-.002l-1.268 2.292a5.164 5.164 0 0 0 3.326.003l-1.27-2.296h-.01zm1.888-1.293a.44.44 0 0 0-.27.036.44.44 0 0 0-.214.572l-.003.004 1.01 2.438a5.15 5.15 0 0 0 2.081-2.615l-2.6-.44-.004.005z", "anthropic": "M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"};
+const LASER_FRAG = "#version 300 es\nprecision highp float;\nout vec4 outColor;\nuniform vec2 uResolution;\nuniform float uDpr;\nuniform float uScale;\nuniform float uTime;\nuniform float uBeamX;\nuniform vec4 uSurface;\nuniform float uRadius;\nuniform vec3 uIntro;\nuniform vec4 uPour;\nuniform vec2 uRun;\nuniform vec4 uLens;\nuniform sampler2D uReveal;\nuniform vec4 uRevealMap;\nuniform vec2 uRevealInfo;\nuniform float uAtmosphere;\nuniform vec4 uAmount;\nuniform vec4 uShape;\nuniform vec4 uExtra;\nuniform float uTheme;\nuniform vec3 uTint[16];\n\n#define BEAM uTint[0]\n#define LEFT uTint[1]\n#define RIGHT uTint[2]\n#define CYAN uTint[3]\n#define PINK uTint[4]\n#define LILAC uTint[5]\n#define SKY uTint[6]\n#define PURPLE uTint[7]\n#define DEEP uTint[8]\n#define MIST uTint[9]\n#define NAVY uTint[10]\n#define WARM uTint[11]\n#define EMBER uTint[12]\n#define WHITE uTint[13]\n#define HAZE uTint[14]\n#define LAVENDER uTint[15]\n\nfloat hash(vec2 p) {\n  p = fract(p * vec2(123.34, 456.21));\n  p += dot(p, p + 45.32);\n  return fract(p.x * p.y);\n}\n\nfloat noise(vec2 p) {\n  vec2 i = floor(p);\n  vec2 f = fract(p);\n  vec2 u = f * f * (3.0 - 2.0 * f);\n  return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);\n}\n\nfloat fbm(vec2 p) {\n  float v = 0.0;\n  float a = 0.5;\n  mat2 m = mat2(1.6, 1.2, -1.2, 1.6);\n  for (int i = 0; i < 5; i++) {\n    v += a * noise(p);\n    p = m * p;\n    a *= 0.5;\n  }\n  return v;\n}\n\nfloat sq(float x) {\n  return x * x;\n}\n\nfloat roundBox(vec2 p, vec2 b, float r) {\n  vec2 q = abs(p) - b + r;\n  return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;\n}\n\nvec3 spill(float e, float fall, float strength, float front, float t, out vec3 glow) {\n  glow = vec3(0.0);\n  if (strength < 0.0005) return vec3(0.0);\n  float f = max(fall, 0.0);\n  float d = max(e, 0.0);\n  float u = d / (6.0 + 0.28 * f);\n  float start = smoothstep(-6.0, 12.0, fall);\n  float fade = exp(-sq(max(f - 125.0, 0.0) / 40.0));\n  float streak = 0.88 + 0.24 * noise(vec2(u * 6.0, f / 22.0 - t * 1.7));\n  float bright = pow(strength, 1.5);\n  float soft = sqrt(strength);\n  float warmth = smoothstep(90.0, 130.0, f);\n  vec3 coreK = mix(WHITE, WARM, warmth * exp(-d / 9.0));\n  float core = mix(9.0, 2.6, warmth) * exp(-sq(d / (3.5 + 0.04 * f))) * exp(-sq(max(f - 130.0, 0.0) / 38.0));\n  float wall = 24.0 * exp(-sq(d / 1.1)) * exp(-sq(max(f - 100.0, 0.0) / 30.0));\n  float bandCenter = 0.7 - 0.3 * smoothstep(30.0, 110.0, f);\n  float offset = u - bandCenter;\n  float decay = (1.05 - bandCenter) / 1.31;\n  float profile = offset < 0.0 ? exp(-sq(offset / 0.3)) : exp(-offset / decay);\n  profile *= 1.0 - smoothstep(1.0, 1.4, u);\n  vec3 bandA = mix(CYAN, PINK, smoothstep(50.0, 75.0, f));\n  bandA = mix(bandA, LILAC, smoothstep(100.0, 125.0, f));\n  vec3 bandB = mix(SKY, PURPLE, smoothstep(50.0, 75.0, f));\n  vec3 fanK = mix(bandA, bandB, smoothstep(0.06, 0.18, offset));\n  fanK = mix(fanK, DEEP, smoothstep(0.22, 0.42, offset));\n  vec3 thread = WHITE * wall * bright + coreK * core * streak * bright;\n  glow += fanK * 4.5 * profile * fade * streak * bright;\n  glow += MIST * 0.7 * exp(-max(u - 1.0, 0.0) / 0.9) * smoothstep(0.7, 1.2, u) * fade * soft;\n  glow += EMBER * 0.35 * exp(-sq((f - 165.0) / 22.0)) * exp(-d / 25.0) * bright;\n  float lag = u * (6.0 + 0.28 * f) * 0.35;\n  float reveal = 1.0 - smoothstep(front - 70.0, front + 8.0, f + lag);\n  glow *= start * reveal;\n  return thread * start * reveal;\n}\n\nvec3 easeLight(vec3 light, float amount) {\n  return -log(max(1.0 - amount * (1.0 - exp(-light)), vec3(0.0001)));\n}\n\nvoid main() {\n  vec2 frag = vec2(gl_FragCoord.x, uResolution.y * uDpr - gl_FragCoord.y) / uDpr;\n  vec2 p = frag / uScale;\n  float t = uTime;\n  float bx = uBeamX / uScale;\n  float sl = uSurface.x / uScale;\n  float sy = uSurface.y / uScale;\n  float sr = uSurface.z / uScale;\n  float sb = uSurface.w / uScale;\n  float radius = uRadius / uScale;\n  float dx = p.x - bx;\n  float adx = abs(dx);\n  float h = sy - p.y;\n  float hp = max(h, 0.0);\n  float above = smoothstep(-0.5, 0.5, h);\n  float side = smoothstep(-24.0, 24.0, dx);\n  vec3 sideK = mix(mix(LAVENDER, LEFT, smoothstep(40.0, 140.0, adx)), RIGHT, side);\n  float beamWidth = uShape.x;\n  float flare = uShape.y;\n  float spread = 250.0 * uShape.z;\n  float reachL = max(bx - sl, 1.0);\n  float reachR = max(sr - bx, 1.0);\n  float reach = dx < 0.0 ? reachL : reachR;\n  float layerLen = clamp(0.29 * reach, 20.0, 100.0) * sqrt(uShape.z);\n  float run = uRun.x;\n  float runMask = 1.0 - smoothstep(run - 34.0, run + 6.0, adx);\n  float bead = exp(-sq((adx - run + 16.0) / (18.0 + 0.04 * run))) * uRun.y;\n  float flowMask = (1.0 - smoothstep(0.75 * spread, 1.1 * spread, adx)) * runMask;\n  float edgeMask = (1.0 - smoothstep(0.8 * spread, 1.25 * spread, adx)) * runMask;\n  float bloom = uIntro.y;\n  vec2 center = vec2((sl + sr) * 0.5, (sy + sb) * 0.5);\n  vec2 halfSize = vec2((sr - sl) * 0.5, (sb - sy) * 0.5);\n  float sd = roundBox(p - center, halfSize, radius);\n  float outline = max(sd, 0.0);\n  float below = max(p.y - sy - radius, 0.0);\n  float hug = smoothstep(-0.5, 0.5, sd) * exp(-sq(below / 14.0));\n  float hugWide = smoothstep(-0.5, 0.5, sd) * exp(-sq(below / 40.0));\n\n  vec3 col = vec3(0.0);\n\n  float breathe = 1.0 + uExtra.x * (0.12 * sin(t * 1.5708) + 0.08 * (noise(vec2(t * 0.5, 3.0)) - 0.5));\n\n  float front = uIntro.x / uScale;\n  float drop = smoothstep(front + 10.0, front - 110.0, p.y);\n  float falling = 1.0 - smoothstep(sy - 24.0, sy, front);\n  float top = mix(0.3, 1.0, smoothstep(0.0, 0.3 * sy, p.y));\n  float beamCore = 24.0 * exp(-adx / (2.0 * beamWidth));\n  float beamHalo = 1.3 * exp(-adx / (6.0 * beamWidth)) + 0.3 * exp(-adx / (22.0 * beamWidth));\n  vec3 haloK = mix(BEAM, sideK, exp(-hp / 80.0));\n  col += (BEAM * beamCore + haloK * beamHalo) * top * above * drop;\n  float head = exp(-sq((p.y - front) / 24.0)) * falling;\n  col += mix(WHITE, BEAM, 0.35) * head * (7.0 * exp(-adx / (2.6 * beamWidth)) + 1.0 * exp(-adx / (14.0 * beamWidth)));\n\n  float psi = adx * (outline + 1.0);\n  float rise = max(hp - 17.9 * flare, 0.0);\n  float skirtAmp = 16.6 * (exp(-sq(rise / (11.8 * flare))) + 0.3 * exp(-rise / (60.0 * flare)));\n  float skirtSpread = mix(134.0, 155.0, side) * breathe * flare * flare * mix(0.35, 1.0, min(bloom, 1.0)) * max(bloom, 1.0);\n  float skirt = skirtAmp * exp(-psi / skirtSpread) * exp(-sq(adx / (max(layerLen, 60.0 * sqrt(uShape.z)) * 1.48))) * hug;\n  col += sideK * skirt * flowMask * min(bloom, 1.0);\n\n  float layer = 12.0 * exp(-adx / layerLen) * exp(-outline / (0.19 * layerLen)) * (1.0 + 0.4 * bead);\n  col += sideK * layer * hug * flowMask * min(bloom, 1.0);\n  float washMask = smoothstep(sl - 60.0, sl + 6.0, p.x) * (1.0 - smoothstep(sr - 6.0, sr + 45.0, p.x));\n  float wash = 1.4 * exp(-adx / 100.0) * exp(-outline / 30.0);\n  col += mix(BEAM, sideK, 0.25) * wash * hugWide * washMask * flowMask * min(bloom, 1.0);\n  float highWash = 0.7 * exp(-adx / 140.0) * exp(-outline / 60.0);\n  col += mix(BEAM, NAVY, 0.5) * highWash * hugWide * washMask * runMask * min(bloom, 1.0);\n\n  float sideSign = dx < 0.0 ? 0.0 : 1.0;\n  float along = 0.5 * log((hp + 1.0) / (adx + 1.0));\n  float lineScale = 6.0;\n  float lp = log(max(psi, 1.0) / (120.0 * flare * flare)) * lineScale;\n  float lineIndex = floor(lp) + sideSign * 97.0;\n  float wobble = 0.22 * (noise(vec2(lineIndex * 3.7, t * 0.4 + along)) - 0.5);\n  float lf = fract(lp + wobble) - 0.5;\n  float gradient = lineScale * length(vec2(hp + 1.0, adx)) / max(psi, 1.0) / uScale;\n  float halfWidth = max(0.35 * gradient, 0.0001);\n  float drawWidth = max(halfWidth, 0.6 * gradient);\n  float lineShape = exp(-lf * lf / (drawWidth * drawWidth)) * (halfWidth / drawWidth);\n  float lineOn = step(0.3, hash(vec2(lineIndex, 1.3)));\n  float lineFlow = smoothstep(0.25, 0.85, noise(vec2(lineIndex * 5.3 + 2.0, along * 3.0 + t * 1.1)));\n  float flareArea = 120.0 * flare * flare;\n  float lineEnvelope = smoothstep(0.85 * flareArea, 1.4 * flareArea, psi) * (1.0 - smoothstep(3.2 * flareArea, 7.5 * flareArea, psi));\n  lineEnvelope *= exp(-adx / (layerLen * 1.5)) * hug * flowMask * (1.0 - smoothstep(35.0 * flare, 80.0 * flare, hp));\n  float lineBright = mix(0.35, 1.0, hash(vec2(lineIndex, 4.0)));\n  col += mix(sideK, WHITE, 0.6) * lineShape * lineOn * lineFlow * lineEnvelope * lineBright * 2.6 * uAmount.w * min(bloom, 1.0);\n\n  float edgeGlow = 22.8 * exp(-sq(adx / (150.0 * uShape.z))) * edgeMask * (1.0 + 0.9 * bead);\n  float onTop = 1.0 - smoothstep(sy + radius, sy + radius + 10.0, p.y);\n  float edgeLine = (exp(-sq(max(sd, 0.0) / 0.9)) + 0.12 * exp(-max(sd, 0.0) / 3.0)) * edgeGlow * onTop;\n  col += mix(sideK, WHITE, 0.6) * edgeLine * min(bloom, 1.0);\n\n  float pour = uShape.w;\n  float baseline = exp(-sq(130.0 / 150.0));\n  float strengthR = exp(-sq(reachR / (150.0 * uShape.z))) * (1.0 - smoothstep(0.8 * spread, 1.25 * spread, reachR)) / baseline * pour;\n  float strengthL = exp(-sq(reachL / (150.0 * uShape.z))) * (1.0 - smoothstep(0.8 * spread, 1.25 * spread, reachL)) / baseline * pour;\n  float fallY = p.y - sy - 0.3 * radius;\n  float rightHalf = smoothstep(center.x - 4.0, center.x + 4.0, p.x);\n  float haloR = exp(-length(p - vec2(sr - 0.3 * radius, sy + 0.3 * radius)) / 40.0) * sqrt(strengthR);\n  float haloL = exp(-length(p - vec2(sl + 0.3 * radius, sy + 0.3 * radius)) / 40.0) * sqrt(strengthL);\n  vec3 glowR;\n  vec3 glowL;\n  col += spill(sd, fallY, strengthR, uPour.y, t, glowR) * rightHalf;\n  col += spill(sd, fallY, strengthL, uPour.x, t, glowL) * (1.0 - rightHalf);\n  col += easeLight(glowR * rightHalf + NAVY * 0.9 * haloR, uPour.w);\n  col += easeLight(glowL * (1.0 - rightHalf) + NAVY * 0.9 * haloL, uPour.z);\n\n  vec2 toLens = frag - uLens.xy;\n  float lens = exp(-dot(toLens, toLens) / sq(uLens.z)) * uLens.w;\n  col *= 1.0 + 0.35 * lens * hug;\n  float fogAmount = uAmount.y * uAtmosphere;\n  float near = exp(-adx / 150.0);\n  float envelope = near * (0.3 + 0.4 * exp(-hp / 50.0) + 1.2 * exp(-p.y / 120.0));\n  if (fogAmount > 0.001 && h > -2.0 && envelope * max(0.25, 6.0 * exp(-adx / 50.0)) > 0.002) {\n    vec2 fq = vec2(dx / 1.7, h) / 85.0 + vec2(t * 0.012, -t * 0.03) + uExtra.zw;\n    vec2 fw = vec2(fbm(fq * 1.3 + vec2(1.7, 9.2) + t * 0.03), fbm(fq * 1.3 + vec2(8.3, 2.8) - t * 0.025));\n    float cloud = fbm(fq + 1.4 * fw);\n    float density = smoothstep(0.5, 0.78, cloud);\n    float lit = exp(-adx / 50.0);\n    float fogMask = smoothstep(-2.0, 20.0, h);\n    float reached = smoothstep(front + 80.0, front - 40.0, p.y);\n    vec3 fog = (HAZE * 0.45 + BEAM * 6.0 * lit * reached) * density * envelope * fogMask;\n    float surfaceLit = exp(-adx / (layerLen * 1.3)) * exp(-outline / 28.0) * hugWide * flowMask * washMask * min(bloom, 1.0);\n    fog += sideK * 2.2 * surfaceLit * (smoothstep(0.38, 0.72, cloud) - 0.35) * fogMask;\n    float smoke = smoothstep(0.3, 0.75, cloud);\n    fog += BEAM * 0.35 * exp(-adx / (22.0 * beamWidth)) * (0.35 + 0.9 * smoke) * fogMask * top * drop;\n    col += fog * fogAmount * (1.0 + 1.2 * lens) * mix(1.0, 0.45, uTheme);\n  }\n\n  if (uRevealInfo.y > 0.001 && uLens.w > 0.002) {\n    vec2 toReveal = frag - uLens.xy;\n    float reveal = exp(-dot(toReveal, toReveal) / sq(uRevealInfo.x)) * uLens.w;\n    vec2 uv = frag * uRevealMap.xy + uRevealMap.zw;\n    float onImage = step(0.0, uv.x) * step(uv.x, 1.0) * step(0.0, uv.y) * step(uv.y, 1.0);\n    vec4 ui = texture(uReveal, uv);\n    float ink = max(ui.r, max(ui.g, ui.b)) * onImage;\n    float lit = clamp(col.b * 0.9, 0.0, 1.0) * (1.0 - smoothstep(0.9, 2.2, col.b));\n    float clearance = smoothstep(60.0 * sqrt(beamWidth), 150.0 * sqrt(beamWidth), adx);\n    col += mix(BEAM, WHITE, 0.4) * ink * reveal * lit * clearance * uRevealInfo.y * 2.2;\n  }\n\n  float haze = col.b;\n  float dotGrid = 1.0 - smoothstep(0.16, 0.32, length(fract(frag / 3.0) - 0.5));\n  col += BEAM * dotGrid * clamp(haze, 0.0, 1.5) * (1.0 - smoothstep(1.5, 4.0, haze)) * (0.18 + 0.3 * lens) * uExtra.y;\n  if (lens > 0.002) {\n    vec2 drift = frag - vec2(0.0, t * 14.0);\n    vec2 sparkCell = floor(drift / 7.0);\n    vec2 sparkPos = (sparkCell + 0.2 + 0.6 * vec2(hash(sparkCell + 5.1), hash(sparkCell + 2.3))) * 7.0;\n    float sparkDist = length(drift - sparkPos);\n    float sparkOn = step(0.8, hash(sparkCell + 8.8));\n    float sparkTwinkle = 0.5 + 0.5 * sin(t * 5.0 + hash(sparkCell + 3.7) * 6.283);\n    col += WHITE * exp(-sparkDist * sparkDist / 0.35) * sparkOn * sparkTwinkle * lens * clamp(haze * 1.5, 0.0, 1.0) * 1.6 * uAmount.z;\n  }\n\n  float dustAmount = uAmount.z;\n  if (dustAmount > 0.001) {\n    float dustLp = log(max(psi, 1.0) / (120.0 * flare * flare)) * 2.2;\n    vec2 flowCell = vec2(dustLp / 1.1, (along + t * 0.22) / 0.06);\n    vec2 cellId = floor(flowCell) + vec2(sideSign * 131.0, 0.0);\n    vec2 cellJitter = vec2(hash(cellId + 1.7), hash(cellId + 8.3));\n    vec2 particleFlow = (floor(flowCell) + 0.1 + cellJitter * 0.8) * vec2(1.1, 0.06);\n    float particlePsi = 120.0 * flare * flare * exp(particleFlow.x / 2.2);\n    float particleAlong = particleFlow.y - t * 0.22;\n    float particleX = sqrt(particlePsi * exp(-2.0 * particleAlong)) - 1.0;\n    float particleH = sqrt(particlePsi * exp(2.0 * particleAlong)) - 1.0;\n    float particleDist = length(vec2(adx - particleX, hp - particleH)) * uScale;\n    float particleOn = step(0.62, hash(cellId + 3.1));\n    float particleTwinkle = 0.5 + 0.5 * sin(t * 5.0 + hash(cellId + 9.2) * 6.283);\n    float dustZone = exp(-sq(log(max(psi, 1.0) / (200.0 * flare * flare)) / 0.55)) * hug * flowMask * smoothstep(0.0, 6.0, outline);\n    col += WHITE * exp(-particleDist * particleDist / 0.3) * particleOn * particleTwinkle * dustZone * 3.0 * dustAmount * min(bloom, 1.0);\n\n    vec2 glitterCell = vec2(dx / 3.0, (p.y - t * 26.0) / 9.0);\n    vec2 glitterId = floor(glitterCell);\n    vec2 glitterJitter = vec2(hash(glitterId + 4.4), hash(glitterId + 2.9));\n    vec2 glitterPos = (glitterId + 0.15 + glitterJitter * 0.7) * vec2(3.0, 9.0);\n    float glitterDist = length(vec2(dx, p.y - t * 26.0) - glitterPos) * uScale;\n    float glitterOn = step(0.7, hash(glitterId + 6.6));\n    float glitterTwinkle = 0.5 + 0.5 * sin(t * 6.0 + hash(glitterId + 1.1) * 6.283);\n    float glitterZone = exp(-adx / (5.0 * beamWidth)) * smoothstep(1.5, 4.0, adx / beamWidth) * above * smoothstep(25.0, 70.0, hp) * top * drop;\n    col += WHITE * exp(-glitterDist * glitterDist / 0.25) * glitterOn * glitterTwinkle * glitterZone * 2.2 * dustAmount * uAtmosphere;\n  }\n\n  col *= uAmount.x * (1.0 + uIntro.z * 0.9 * exp(-length(vec2(dx, h * 1.6)) / 70.0));\n  col *= smoothstep(-0.75, 0.25, sd * uScale);\n\n  vec3 emit = 1.0 - exp(-col * mix(1.0, 0.6, uTheme));\n  float peak = max(emit.r, max(emit.g, emit.b));\n  if (uTheme > 0.5) {\n    float low = min(emit.r, min(emit.g, emit.b));\n    float chroma = peak - low;\n    vec3 hue = (emit - low) / max(chroma, 0.0001);\n    float alpha = clamp(pow(chroma, 1.35) * 1.3, 0.0, 1.0) * 0.9;\n    outColor = vec4((hue * 0.82 + 0.06) * alpha, alpha);\n  } else {\n    outColor = vec4(emit, peak);\n  }\n}";
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, paused: false, copy: '', y: 0, active: 0, seen: false, mp: 0, trace: 0, ticker: 0 };
+    this.ticking = false;
+    this.onScroll = () => {
+      if (this.ticking) return;
+      this.ticking = true;
+      requestAnimationFrame(() => { this.ticking = false; this.measure(); });
+    };
+  }
+  componentDidMount() {
+    this.reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+    this.measure();
+    this.startRays();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.io) this.io.disconnect();
+    if (this.tick) clearInterval(this.tick);
+    if (this.laserMove) window.removeEventListener('pointermove', this.laserMove);
+    if (this.laserResize) window.removeEventListener('resize', this.laserResize);
+    if (this.ro) this.ro.disconnect();
+  }
+  bx() { return (window.innerWidth || 1440) < 760 ? 0.9 : 0.68; }
+  startRays() {
+    const container = document.getElementById('hero');
+    const canvas = document.getElementById('laser');
+    if (!container || !canvas) return;
+    const gl = canvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
+    if (!gl) return;
+    const VERT = '#version 300 es\nin vec2 aPosition;\nvoid main(){gl_Position=vec4(aPosition,0.0,1.0);}';
+    const mk = (t, src) => { const sh = gl.createShader(t); gl.shaderSource(sh, src); gl.compileShader(sh); return sh; };
+    const program = gl.createProgram();
+    gl.attachShader(program, mk(gl.VERTEX_SHADER, VERT));
+    gl.attachShader(program, mk(gl.FRAGMENT_SHADER, LASER_FRAG));
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+    const names = ['uResolution', 'uDpr', 'uScale', 'uTime', 'uBeamX', 'uSurface', 'uRadius', 'uIntro', 'uPour', 'uRun', 'uLens', 'uReveal', 'uRevealMap', 'uRevealInfo', 'uAtmosphere', 'uAmount', 'uShape', 'uExtra', 'uTheme', 'uTint'];
+    const u = {}; names.forEach((n) => { u[n] = gl.getUniformLocation(program, n); });
+    const vao = gl.createVertexArray(); gl.bindVertexArray(vao);
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(program, 'aPosition'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    gl.bindVertexArray(null);
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+
+    // Hue shifts kept within the vermilion family so the light never leaves the brand palette.
+    const TINTS = [[0, 1], [-8, 0.77], [8, 0.95], [-14, 0.79], [10, 0.77], [6, 0.81], [-6, 0.92], [4, 0.96], [2, 1.01], [1, 0.68], [1, 1.15], [18, 0.51], [22, 0.28], [-4, 0.13], [-2, 0.32], [5, 0.81]];
+    const fromHsv = (hue, sat) => { const h = (((hue % 360) + 360) % 360) / 60; const c = sat; const x = c * (1 - Math.abs((h % 2) - 1)); const m = 1 - c; const r = h < 1 ? [c, x, 0] : h < 2 ? [x, c, 0] : h < 3 ? [0, c, x] : h < 4 ? [0, x, c] : h < 5 ? [x, 0, c] : [c, 0, x]; return [r[0] + m, r[1] + m, r[2] + m]; };
+    const tints = new Float32Array(48);
+    TINTS.forEach((t, i) => { tints.set(fromHsv(13 + t[0], Math.min(1, 0.89 * t[1])), i * 3); });
+
+    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    const easeOut = (x) => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
+    const spring = (time) => { const o = 8, z = 0.62, d = o * Math.sqrt(1 - z * z); return 1 - Math.exp(-z * o * time) * (Math.cos(d * time) + ((z * o) / d) * Math.sin(d * time)); };
+    const reduce = this.reduce;
+    const INTRO_DROP = 1.25, INTRO_END = 5, RUN_FOR = 14;
+    const st = { time: 0, intro: reduce ? INTRO_END : 0, w: 1, h: 1, ratio: 1, alive: 0, pointer: { x: 0, y: 0, inside: false }, lens: { x: 0, y: 0, vx: 0, vy: 0, s: 0, placed: false } };
+    let raf = 0, last = 0, visible = true;
+
+    const resize = () => {
+      const w = Math.max(1, container.clientWidth), h = Math.max(1, container.clientHeight);
+      const base = Math.min(window.devicePixelRatio || 1, 1.5);
+      const longest = Math.max(w, h) * base;
+      const ratio = longest > 2048 ? (base * 2048) / longest : base;
+      canvas.width = Math.max(1, Math.round(w * ratio)); canvas.height = Math.max(1, Math.round(h * ratio));
+      st.w = w; st.h = h; st.ratio = canvas.width / w;
+    };
+    const surfaceRect = () => {
+      const el = document.getElementById('surface');
+      const box = container.getBoundingClientRect();
+      if (el) { const r = el.getBoundingClientRect(); if (r.width > 0) return { left: r.left - box.left, top: r.top - box.top, right: r.right - box.left, bottom: r.bottom - box.top, radius: 16, real: true }; }
+      return { left: -st.w * 2, top: st.h, right: st.w * 3, bottom: st.h * 3, radius: 0, real: false };
+    };
+    const render = () => {
+      const width = st.w, height = st.h;
+      const scale = clamp(Math.min(width / 585, height / 507), 0.6, 1.55);
+      const sf = surfaceRect();
+      let beamX = this.bx() * width;
+      beamX = clamp(beamX, sf.left + sf.radius + 6, sf.right - sf.radius - 6);
+      const spread = 1.4;
+      const startY = -0.15 * height, span = sf.top - startY + 0.3 * height, it = st.intro, settled = it >= INTRO_END;
+      const front = settled ? sf.top + 0.3 * height : startY + span * Math.pow(clamp(it / INTRO_DROP, 0, 1), 1.3);
+      const impact = INTRO_DROP * Math.pow(Math.max(0, sf.top - startY) / span, 1 / 1.3);
+      const tau = it - impact;
+      const bloom = settled ? 1 : tau <= 0 ? 0 : spring(tau);
+      const flash = settled || tau <= 0 ? 0 : Math.exp(-tau / 0.35) * (1 - Math.exp(-tau / 0.05));
+      const runRange = spread * 250 * 1.3 + 80;
+      const runFront = settled ? 100000 : tau <= 0 ? -40 : runRange * (1 - Math.exp(-1.15 * tau));
+      const bead = settled || tau <= 0 ? 0 : Math.exp(-1.15 * tau) * (1 - Math.exp(-tau / 0.08));
+      const pour = (reach) => { if (settled) return [1000, 1]; if (tau <= 0) return [-reach, 0]; const target = Math.min(reach, runRange * 0.97); const arrival = -Math.log(1 - target / runRange) / 1.15; const el = tau - arrival; const e = clamp((el + 0.15) / 0.8, 0, 1); const fill = e * e * e * (e * (e * 6 - 15) + 10); if (el <= 0) return [runFront - target, fill]; return [1.15 * (runRange - target) * el + 260 * el * el, fill]; };
+      const L = pour((beamX - sf.left) / scale), R = pour((sf.right - beamX) / scale);
+      const atmosphere = settled ? 1 : tau <= 0 ? 0.3 * easeOut(it / INTRO_DROP) : 0.3 + 0.7 * (1 - Math.exp(-1.3 * tau));
+      const k = this.props.beam ?? 1;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(program);
+      gl.uniform2f(u.uResolution, width, height); gl.uniform1f(u.uDpr, st.ratio); gl.uniform1f(u.uScale, scale); gl.uniform1f(u.uTime, st.time);
+      gl.uniform1f(u.uBeamX, beamX); gl.uniform4f(u.uSurface, sf.left, sf.top, sf.right, sf.bottom); gl.uniform1f(u.uRadius, sf.radius);
+      gl.uniform3f(u.uIntro, front, bloom, flash); gl.uniform4f(u.uPour, L[0], R[0], L[1], R[1]); gl.uniform2f(u.uRun, runFront, bead);
+      gl.uniform4f(u.uLens, st.lens.x, st.lens.y, 95 * scale, st.lens.s);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(u.uReveal, 0);
+      gl.uniform4f(u.uRevealMap, 1, 1, 0, 0); gl.uniform2f(u.uRevealInfo, 220, 0);
+      gl.uniform1f(u.uAtmosphere, atmosphere);
+      gl.uniform4f(u.uAmount, 1.45 * k, 0.22, 0.9, 1.2);
+      gl.uniform4f(u.uShape, 1.35, 1.4, spread, 1.0);
+      gl.uniform4f(u.uExtra, 0.8, 0.9, 34.34 + 3 * 7.31, 11.58 + 3 * 3.17);
+      gl.uniform1f(u.uTheme, 0); gl.uniform3fv(u.uTint, tints);
+      gl.bindVertexArray(vao); gl.drawArrays(gl.TRIANGLES, 0, 3); gl.bindVertexArray(null);
+    };
+    const frame = (now) => {
+      raf = 0;
+      if (!visible || document.hidden) return;
+      const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60; last = now;
+      st.alive += dt;
+      const moving = !reduce && st.alive < RUN_FOR;
+      if (moving) st.time += dt;
+      const introducing = st.intro < INTRO_END; if (introducing) st.intro = Math.min(INTRO_END, st.intro + dt);
+      const p = st.pointer, l = st.lens, active = p.inside && !reduce;
+      if (active && !l.placed) { l.x = p.x; l.y = p.y; l.vx = 0; l.vy = 0; l.placed = true; }
+      l.vx += (120 * (p.x - l.x) - 19 * l.vx) * dt; l.vy += (120 * (p.y - l.y) - 19 * l.vy) * dt; l.x += l.vx * dt; l.y += l.vy * dt;
+      const goal = active ? 1 : 0; l.s += (goal - l.s) * (1 - Math.exp(-dt / (goal > l.s ? 0.3 : 0.55)));
+      if (l.s < 0.001 && !active) l.placed = false;
+      render();
+      const settling = Math.abs(l.s - goal) > 0.002 || Math.hypot(l.vx, l.vy) > 0.5;
+      if (moving || introducing || settling) raf = requestAnimationFrame(frame); else last = 0;
+    };
+    const wake = () => { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(frame); };
+    this.laserMove = (e) => { const r = container.getBoundingClientRect(); const x = e.clientX - r.left, y = e.clientY - r.top; st.pointer.x = x; st.pointer.y = y; st.pointer.inside = x >= 0 && y >= 0 && x <= r.width && y <= r.height; wake(); };
+    window.addEventListener('pointermove', this.laserMove, { passive: true });
+    this.laserResize = () => { resize(); if (!raf) render(); };
+    window.addEventListener('resize', this.laserResize);
+    if ('ResizeObserver' in window) { this.ro = new ResizeObserver(this.laserResize); this.ro.observe(container); }
+    if ('IntersectionObserver' in window) { this.io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible) wake(); }); this.io.observe(container); }
+    resize(); render(); wake();
+  }
+  measure() {
+    const vh = window.innerHeight || 800;
+    let active = 0;
+    for (let i = 0; i < 5; i++) { const el = document.getElementById('step-' + i); if (el && el.getBoundingClientRect().top < vh * 0.55) active = i; }
+    const cap = document.getElementById('capabilities');
+    const seen = this.state.seen || (cap ? cap.getBoundingClientRect().top < vh * 0.75 : true);
+    if (seen && !this.state.seen) this.startTicker();
+    const man = document.getElementById('manifesto');
+    let mp = 1;
+    if (man && !this.reduce) { const r = man.getBoundingClientRect(); mp = Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.9 + r.height * 0.4))); }
+    const ap = document.getElementById('approach');
+    let trace = 0;
+    if (ap) { const r = ap.getBoundingClientRect(); trace = Math.max(0, Math.min(100, ((vh * 0.55 - r.top - 220) / Math.max(1, r.height - 400)) * 100)); }
+    this.setState({ y: window.scrollY || 0, active, seen, mp, trace });
+  }
+  startTicker() {
+    if (this.reduce) { this.setState({ ticker: 128 }); return; }
+    let i = 0; const n = 36;
+    this.tick = setInterval(() => { i++; const e = 1 - Math.pow(1 - i / n, 3); this.setState({ ticker: 128 * e }); if (i >= n) { clearInterval(this.tick); this.tick = null; } }, 28);
+  }
+  renderVals() {
+    const s = this.state;
+    const clamp = (v) => Math.max(0, Math.min(1, v));
+    const reveal = (v) => (0.45 + 0.55 * clamp(v)).toFixed(3);
+    const scrolled = s.y > 40;
+    const pos = [[40, 240, 300, 60], [40, 150, 300, 120], [80, 170, 260, 110], [95, 170, 232, 128], [100, 170, 211.92, 138.08]];
+    const p = pos[s.active] || pos[0];
+    const stepData = [
+      ['Discover', 'We learn the problem, the people who have it, and the limits we have to work inside.'],
+      ['Design', 'We shape the product in screens you can click, before code makes every change expensive.'],
+      ['Engineer', 'We build it in small, reviewed pieces, with tests on the paths that matter most.'],
+      ['Ship', 'We release it to real users and watch what they actually do with it.'],
+      ['Evolve', 'We keep improving it from what real usage tells us, not from guesses.']
+    ];
+    const steps = stepData.map((d, i) => ({ id: 'step-' + i, n: '0' + (i + 1), title: d[0], body: d[1], op: s.active === i ? '1' : '0.4', sqT: 'translate(' + pos[i][0] + ' ' + pos[i][1] + ')', cx: String(pos[i][2]), cy: String(pos[i][3]) }));
+    const words = ['WEB APPS', 'MOBILE', 'DESKTOP', 'AI PRODUCTS', 'E-COMMERCE', 'DESIGN SYSTEMS'];
+    const mkBand = (offset) => { const out = []; for (let k = 0; k < 3; k++) { words.forEach((w, i) => { const o = (i + offset) % 2 === 1; out.push({ text: w, outline: o, solid: !o, square: false, circle: false }); const sq = (i + offset) % 2 === 0; out.push({ text: '', outline: false, solid: false, square: sq, circle: !sq }); }); } return out; };
+    const code = [
+      ['', 'import', ' { cn }', ' from "@/lib/utils"'],
+      ['', '', '', ''],
+      ['', 'export function', ' Button', '({ children }: Props) {'],
+      ['', '  return', ' (', ''],
+      ['', '', '    <button', ''],
+      ['', '', '', '      className={cn('],
+      ['', '', '', '        "rounded-full px-[30px] py-4",'],
+      ['', '', '', '        "bg-vermilion text-ink",'],
+      ['', '', '', '        "font-semibold shadow-glow",'],
+      ['', '', '', '        "focus-visible:ring-2"'],
+      ['', '', '', '      )}'],
+      ['', '', '    >', ''],
+      ['', '', '', '      {children}'],
+      ['', '', '    </button>', ''],
+      ['', '  ', ')', ''],
+      ['', '', '}', '']
+    ].map((r, i) => ({ n: String(i + 1), k: r[1], t: r[2], r: r[3] }));
+    const I = QAF_ICONS;
+    const ringA = [['typescript', 0], ['react', 90], ['nextdotjs', 180], ['nodedotjs', 270]].map((a) => ({ d: I[a[0]], deg: String(a[1]), neg: String(-a[1]) }));
+    const ringB = [['expo', 36], ['postgresql', 108], ['kubernetes', 180], ['anthropic', 252], ['OpenAI', 324]].map((a) => ({ d: I[a[0]] || '', hasIcon: !!I[a[0]], isText: !I[a[0]], label: a[0], deg: String(a[1]), neg: String(-a[1]) }));
+    const principles = [
+      { title: 'Craft over volume.', body: 'We take on fewer projects and finish each one properly.', rot: 0, sq: '#FFFFFF', ci: '#FF4A1C' },
+      { title: 'Engineering decisions are design decisions.', body: 'The data model, the load time and the error states are part of what people feel.', rot: 90, sq: '#FFFFFF', ci: '#FF4A1C' },
+      { title: 'Built to last.', body: 'Code your next team can read, on infrastructure you own.', rot: 180, sq: '#FFFFFF', ci: '#FF4A1C' }
+    ];
+    const beam = this.props.beam ?? 1;
+    const grain = this.props.grain ?? true;
+    const focusMenu = () => setTimeout(() => { const m = document.querySelector('#mobile-menu a'); if (m) m.focus(); }, 30);
+    const focusBtn = () => setTimeout(() => { const b = document.querySelector('.menu-btn'); if (b) b.focus(); }, 30);
+    return {
+      grainOpacity: grain ? '0.06' : '0',
+      raysOpacity: Math.min(1, beam).toFixed(2),
+      bxPct: String(Math.round(this.bx() * 100)),
+      navMax: scrolled ? '880' : '1240', navPad: scrolled ? '12' : '16',
+      navBg: scrolled ? '0.72' : '0', navBorder: scrolled ? '0.12' : '0', navShadow: scrolled ? '0.5' : '0', pblur: scrolled ? '1' : '0',
+      menuOpen: s.menuOpen, menuExpanded: s.menuOpen ? 'true' : 'false',
+      openMenu: () => { this.setState({ menuOpen: true }); focusMenu(); },
+      closeMenu: () => { this.setState({ menuOpen: false }); focusBtn(); },
+      menuKey: (e) => {
+        if (e.key === 'Escape') { this.setState({ menuOpen: false }); focusBtn(); return; }
+        if (e.key === 'Tab') { const f = Array.from(document.querySelectorAll('#mobile-menu a, #mobile-menu button')); if (!f.length) return; const a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
+      },
+      codeLines: code,
+      bandX: this.reduce ? '0' : (40 - s.y * 0.3).toFixed(1),
+      bandX2: this.reduce ? '-600' : (-1400 + s.y * 0.3).toFixed(1),
+      bandItems: mkBand(0), bandItems2: mkBand(1),
+      bentoClass: s.seen ? 'seen' : '',
+      track: (e) => { const el = e.currentTarget; const r = el.getBoundingClientRect(); el.style.setProperty('--mx', (e.clientX - r.left) + 'px'); el.style.setProperty('--my', (e.clientY - r.top) + 'px'); },
+      ticker: s.ticker.toFixed(2),
+      m1: reveal(s.mp * 3), m2: reveal(s.mp * 3 - 1), m3: reveal(s.mp * 3 - 2),
+      steps, trace: s.trace.toFixed(1),
+      sqX: String(p[0]), sqY: String(p[1]), ciX: String(p[2]), ciY: String(p[3]),
+      flareX: '180', flareY: '170', flareOp: s.active === 4 ? '1' : '0',
+      stepLabel: '0' + (s.active + 1) + ' / 05  ' + stepData[s.active][0],
+      principles,
+      tilt: (e) => { const el = e.currentTarget; const r = el.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height; el.style.setProperty('--mx', (x * 100) + '%'); el.style.setProperty('--my', (y * 100) + '%'); if (!this.reduce && (window.innerWidth || 0) > 1000) { el.style.setProperty('--ry', ((x - 0.5) * 10).toFixed(2) + 'deg'); el.style.setProperty('--rx', ((0.5 - y) * 10).toFixed(2) + 'deg'); } },
+      untilt: (e) => { const el = e.currentTarget; el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); },
+      toolNames: ['TypeScript', 'React', 'Next.js', 'Node.js', 'Expo', 'PostgreSQL', 'Kubernetes', 'Anthropic API', 'OpenAI API'],
+      ringA, ringB,
+      orbitClass: s.paused ? 'paused' : '', pausedStr: s.paused ? 'true' : 'false', pauseLabel: s.paused ? 'Play orbit' : 'Pause orbit',
+      togglePause: () => this.setState({ paused: !s.paused }),
+      copied: s.copy === 'ok', copyW: s.copy === 'ok' ? '150' : '176',
+      copyLabel: s.copy === 'ok' ? 'Copied' : 'Copy email',
+      copyMsg: s.copy === 'ok' ? 'hello@qaflabs.net is on your clipboard.' : (s.copy === 'fail' ? 'Copy failed. The address is hello@qaflabs.net.' : ''),
+      copyEmail: () => {
+        const done = (v) => { this.setState({ copy: v }); if (v === 'ok') setTimeout(() => this.setState({ copy: '' }), 2400); };
+        try { navigator.clipboard.writeText('hello@qaflabs.net').then(() => done('ok'), () => done('fail')); } catch (err) { done('fail'); }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
