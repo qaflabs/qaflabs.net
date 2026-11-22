@@ -16,3 +16,7 @@
 - [ ] Card titles and lines carry the copy-approval marker
 - [ ] Tests: six cards present; status rows single-line at 390; column count at 1440, 900 and 390; axe clean
 - [ ] Screenshots next to `desktop-03`, `desktop-04`, `mobile-03`, `mobile-04`; Delivery Gate reported
+
+## Comments
+
+- 2026-11-23: Implemented with ticket 08. Magic Bento edited (demo visuals and @hugeicons removed, 12-col spans at full width, 2 then 1 column below 1000px and 700px). Safari and iPhone render live children; Safari sidebar hides below 700px so status rows stay on one line. 95 tests pass.

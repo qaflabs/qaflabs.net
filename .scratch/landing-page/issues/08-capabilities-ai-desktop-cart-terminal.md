@@ -14,3 +14,7 @@
 - [ ] Reduced motion: every card shows its end state
 - [ ] Tests: stepper increments and decrements the total and is keyboard operable; reduced motion shows end states; axe clean
 - [ ] Screenshots next to the capabilities references; Delivery Gate reported
+
+## Comments
+
+- 2026-11-23: Implemented with ticket 07. Animated Beam (two runs, starts in view), Animated List (starts in view), Quantity Stepper + Number Ticker (live total, $128 placeholder price from the reference), Terminal (title bar, no dots). Added an SSR-safe reduced-motion hook after a hydration mismatch under reduced motion. 95 tests pass.

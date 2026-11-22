@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { motion, useReducedMotion, type MotionStyle, type Transition } from "motion/react"
+import { motion, type MotionStyle, type Transition } from "motion/react"
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -71,7 +72,7 @@ export const BorderBeam = ({
   borderWidth = 1,
   runs = 3,
 }: BorderBeamProps) => {
-  const reduced = useReducedMotion()
+  const reduced = usePrefersReducedMotion()
   const [done, setDone] = useState(false)
   if (reduced || done) return null
 

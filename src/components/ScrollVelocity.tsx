@@ -5,12 +5,12 @@ import {
   motion,
   useAnimationFrame,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
   useVelocity
 } from 'motion/react';
+import { usePrefersReducedMotion } from '@/lib/use-prefers-reduced-motion'
 import { cn } from '@/lib/utils';
 
 // Brand edits (ADR 0002): `scrollOnly` moves rows only while the page scrolls (no autoplay),
@@ -158,7 +158,7 @@ function VelocityText({
     velocityMapping?.output || [0, 5],
     { clamp: false }
   );
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   const copyRef = useRef<HTMLSpanElement>(null);
   const copyWidth = useElementWidth(copyRef);

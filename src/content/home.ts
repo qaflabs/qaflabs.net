@@ -122,6 +122,54 @@ export const capabilities = {
   ],
 } as const;
 
+// Illustration text inside the capability cards; placeholders, not real products (see spec).
+export const capabilityVisuals = {
+  illustrationLabel: "Illustration",
+  web: {
+    url: "app.yourcompany.com",
+    nav: ["Overview", "Projects", "Releases", "Team", "Settings"],
+    heading: "Overview",
+    rows: [
+      { name: "Checkout redesign", status: "live" },
+      { name: "Search, version two", status: "in review" },
+    ],
+  },
+  mobile: {
+    heading: "Today",
+    tasks: [
+      { label: "Review onboarding", done: true },
+      { label: "Ship release notes", done: false },
+      { label: "Call with design", done: false },
+    ],
+  },
+  ai: { inputs: ["docs", "tickets", "chat"], output: "answer" },
+  desktop: {
+    title: "Inbox",
+    tag: "desktop",
+    notes: [
+      { title: "Build finished", line: "Release is ready to ship" },
+      { title: "New comment", line: "On the pricing page draft" },
+      { title: "Sync complete", line: "Works offline, catches up online" },
+    ],
+  },
+  commerce: {
+    label: "Illustration: a shopping cart",
+    item: "Linen overshirt",
+    variant: "Size M",
+    unitPrice: 128,
+    totalLabel: "Order total",
+    pay: "Pay now",
+  },
+  infra: {
+    title: "deploy · zsh",
+    build: "pnpm build",
+    built: "✓ compiled, types checked",
+    deploy: "pnpm deploy --prod",
+    uploaded: "uploading build… done",
+    live: "live at app.yourcompany.com",
+  },
+} as const;
+
 export const manifesto = {
   label: "Manifesto",
   sentences: [

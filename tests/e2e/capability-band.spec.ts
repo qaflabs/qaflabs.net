@@ -10,7 +10,7 @@ test.describe("capability band", () => {
   test("is hidden from assistive technology", async ({ page }) => {
     await page.goto("/");
     await expect(band(page)).toHaveAttribute("aria-hidden", "true");
-    await expect(page.getByRole("heading", { name: "WEB APPS" })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "WEB APPS", exact: true })).toHaveCount(0);
   });
 
   test("does not move without scrolling", async ({ page }) => {

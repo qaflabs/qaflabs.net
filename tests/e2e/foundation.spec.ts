@@ -99,6 +99,20 @@ test.describe("foundation", () => {
     expect(errors).toEqual([]);
   });
 
+  test.describe("reduced motion", () => {
+    test.use({ reducedMotion: "reduce" });
+    test("hydrates without errors", async ({ page }) => {
+      const errors: string[] = [];
+      page.on("console", (msg) => {
+        if (msg.type() === "error") errors.push(msg.text());
+      });
+      page.on("pageerror", (err) => errors.push(err.message));
+      await page.goto("/");
+      await page.waitForLoadState("networkidle");
+      expect(errors).toEqual([]);
+    });
+  });
+
   test("axe finds no violations", async ({ page }) => {
     await page.goto("/");
     const results = await new AxeBuilder({ page }).analyze();
