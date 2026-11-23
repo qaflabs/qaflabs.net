@@ -1,16 +1,10 @@
-// Fixed to the viewport so the noise filter paints once instead of across the full page height.
+// A pre-rendered noise tile on its own layer: a live SVG filter with a blend mode re-renders on
+// every scroll frame and dropped Safari to about 15fps.
 export function Grain() {
   return (
-    <svg
+    <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[60] h-full w-full opacity-[0.06] mix-blend-overlay"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <filter id="grain">
-        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={2} stitchTiles="stitch" />
-        <feColorMatrix type="saturate" values="0" />
-      </filter>
-      <rect width="100%" height="100%" filter="url(#grain)" />
-    </svg>
+      className="pointer-events-none fixed inset-0 z-[60] bg-[url('/textures/grain.png')] bg-size-[160px_160px] opacity-[0.05] will-change-transform"
+    />
   );
 }

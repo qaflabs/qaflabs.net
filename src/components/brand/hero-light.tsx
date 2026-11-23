@@ -48,6 +48,9 @@ export function HeroLight({ surfaceId }: HeroLightProps) {
       pulse={0.8}
       speed={1}
       timeLimit={CLOCK_SECONDS}
+      // The glow is soft, so 1x density looks the same on Retina at a quarter of the pixel work.
+      dpr={1}
+      pauseOnScroll
     />
   );
 }

@@ -66,6 +66,27 @@ test.describe("navigation", () => {
     await expect(dialog.getByRole("link", { name: "Approach" })).not.toBeVisible();
   });
 
+  test("closing the menu leaves nothing covering the page", async ({ page }, info) => {
+    test.skip(info.project.name !== "mobile", "menu is the mobile pattern");
+    await page.goto("/");
+    await page.evaluate(() => window.scrollTo(0, 1200));
+    for (const close of ["button", "escape"] as const) {
+      await page.getByRole("button", { name: "Menu" }).click();
+      const dialog = page.getByRole("dialog", { name: "Menu" });
+      await expect(dialog).toBeVisible();
+      if (close === "button") await dialog.getByRole("button", { name: "Close" }).click();
+      else await page.keyboard.press("Escape");
+      await expect
+        .poll(() =>
+          page.evaluate(() => {
+            const hit = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2);
+            return hit?.closest(".sm-scope") === null;
+          }),
+        )
+        .toBe(true);
+    }
+  });
+
   test("mobile menu links close the menu and reach their section", async ({ page }, info) => {
     test.skip(info.project.name !== "mobile", "menu is the mobile pattern");
     await page.goto("/");

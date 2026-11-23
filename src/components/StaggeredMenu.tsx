@@ -475,7 +475,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             return arr.map((c, i) => (
               <div
                 key={i}
-                className="sm-prelayer absolute top-0 right-0 h-full w-full translate-x-0"
+                className="sm-prelayer absolute top-0 right-0 h-full w-full"
                 style={{ background: c }}
               />
             ));
@@ -629,8 +629,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 .sm-scope .sm-line { display: none !important; }
 .sm-scope .staggered-menu-panel { position: absolute; top: 0; right: 0; width: clamp(260px, 38vw, 420px); height: 100%; background: radial-gradient(420px circle at calc(100% + 120px) -160px, rgb(255 74 28 / 0.35), transparent 50%), #0b0b0f; display: flex; flex-direction: column; padding: 24px 24px 36px; overflow-y: auto; z-index: 10; }
 .sm-scope [data-position='left'] .staggered-menu-panel { right: auto; left: 0; }
-.sm-scope .staggered-menu-panel, .sm-scope .sm-prelayer { transform: translateX(100%); }
-.sm-scope [data-position='left'] .staggered-menu-panel, .sm-scope [data-position='left'] .sm-prelayer { transform: translateX(-100%); }
 .sm-scope .sm-prelayers { position: absolute; top: 0; right: 0; bottom: 0; width: clamp(260px, 38vw, 420px); pointer-events: none; z-index: 5; }
 .sm-scope [data-position='left'] .sm-prelayers { right: auto; left: 0; }
 .sm-scope .sm-prelayer { position: absolute; top: 0; right: 0; height: 100%; width: 100%; transform: translateX(0); }

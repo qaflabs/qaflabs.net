@@ -4,7 +4,8 @@ import { useEffect, useLayoutEffect, useRef, type HTMLAttributes, type RefObject
 import { cn } from '@/lib/utils';
 
 // Brand edits (ADR 0002): every tint stays within ~22 degrees of the base hue (no cyan, pink or green),
-// vermilion defaults, and `timeLimit` freezes the clock while the cursor lens keeps working.
+// vermilion defaults, `timeLimit` freezes the clock (the cursor lens keeps working), and
+// `pauseOnScroll` holds the frame while the page scrolls so scrolling never waits on the shader.
 export interface LaserFlowProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'> {
   surfaceRef?: RefObject<HTMLElement | null>;
   beamPosition?: number;
@@ -30,6 +31,7 @@ export interface LaserFlowProps extends Omit<HTMLAttributes<HTMLDivElement>, 'co
   theme?: 'dark' | 'light';
   paused?: boolean;
   timeLimit?: number;
+  pauseOnScroll?: boolean;
   dpr?: number;
 }
 
@@ -58,6 +60,7 @@ type Settings = {
   theme: 'dark' | 'light';
   paused: boolean;
   timeLimit: number;
+  pauseOnScroll: boolean;
   dpr?: number;
 };
 
@@ -508,6 +511,7 @@ export const LaserFlow = ({
   theme = 'dark',
   paused = false,
   timeLimit = Infinity,
+  pauseOnScroll = false,
   dpr,
   ...rest
 }: LaserFlowProps) => {
@@ -540,6 +544,7 @@ export const LaserFlow = ({
     theme,
     paused,
     timeLimit,
+    pauseOnScroll,
     dpr
   };
   const settingsRef = useRef(settings);
@@ -837,6 +842,11 @@ export const LaserFlow = ({
     const frame = (now: number) => {
       raf = 0;
       if (!alive || !visible || document.hidden) return;
+      if (now < scrollingUntil) {
+        last = 0;
+        raf = requestAnimationFrame(frame);
+        return;
+      }
       if (!ready) {
         if (!gl.isContextLost() && !linked()) {
           raf = requestAnimationFrame(frame);
@@ -906,6 +916,13 @@ export const LaserFlow = ({
       wake();
     };
 
+    let scrollingUntil = 0;
+    const onScroll = () => {
+      if (!settingsRef.current.pauseOnScroll) return;
+      scrollingUntil = performance.now() + 150;
+      wake();
+    };
+
     const onVisibility = () => {
       last = 0;
       wake();
@@ -922,6 +939,7 @@ export const LaserFlow = ({
     });
     intersection.observe(container);
     window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
     document.documentElement.addEventListener('pointerleave', onPointerLeave);
     document.addEventListener('visibilitychange', onVisibility);
 
@@ -942,6 +960,7 @@ export const LaserFlow = ({
       resizeObserver.disconnect();
       intersection.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('scroll', onScroll);
       document.documentElement.removeEventListener('pointerleave', onPointerLeave);
       document.removeEventListener('visibilitychange', onVisibility);
       gl.deleteTexture(revealTexture);
