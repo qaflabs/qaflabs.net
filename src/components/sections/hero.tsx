@@ -33,7 +33,7 @@ export function Hero() {
           {hero.subheadline}
         </p>
         <div className="mt-7 flex flex-wrap gap-2.5 md:mt-10 md:gap-3">
-          <ShimmerButton href={mailto} className="min-h-11 px-6 text-[15px] font-semibold md:min-h-[54px] md:px-[30px] md:text-base">
+          <ShimmerButton href={mailto} className="min-h-10 px-6 py-2 text-[15px] leading-[22px] font-semibold after:absolute after:inset-x-0 after:-inset-y-[3px] after:content-[''] md:min-h-[54px] md:px-[30px] md:py-3 md:text-base md:leading-normal md:after:hidden">
             {hero.primaryCta}
           </ShimmerButton>
           <HoverBorderGradient

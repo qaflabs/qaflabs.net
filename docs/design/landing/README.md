@@ -44,7 +44,7 @@ Only these three colors and their alphas appear on the page.
 
 Computed contrast: paper on ink 18.0:1. Vermilion on ink 5.84:1. Ink on vermilion 5.84:1, so primary buttons use ink text. Paper on vermilion is 3.08:1, so never put paper text on vermilion below 24px.
 
-Type: Geist (600 for headings, 400 for body) and Geist Mono for labels, section numbers, and code. The brand README names Geist SemiBold for the wordmark. Sizes follow huly.io's steps (owner decision) and live as tokens in `globals.css`, each running from its 390px size to its 1280px size: hero headline and capability band 32 → 84px (`text-display`), contact heading 32 → 72px (`text-closing`), section headings 30 → 56px (`text-heading`), manifesto 24 → 44px (`text-statement`), step and principle titles 20 → 32px (`text-title`), card titles 18 → 20px (`text-title-sm`), hero sub-text 15 → 18px (`text-lead`), body 15px on phones and 16px from 768px. Hero tracking `-0.048em`, line height 0.95; section heading tracking `-0.04em`.
+Type: Geist (600 for headings, 400 for body) and Geist Mono for labels, section numbers, and code. The brand README names Geist SemiBold for the wordmark. Sizes follow huly.io's steps (owner decision) and live as tokens in `globals.css`, each running from its 390px size to its 1280px size: hero headline and capability band 34 → 84px (`text-display`), contact heading 32 → 72px (`text-closing`), section headings 30 → 56px (`text-heading`), manifesto 24 → 44px (`text-statement`), step and principle titles 20 → 32px (`text-title`), card titles 18 → 20px (`text-title-sm`), hero sub-text 16 → 18px (`text-lead`), body 15px on phones and 16px from 768px. Hero tracking `-0.048em`, line height 0.95; section heading tracking `-0.04em`.
 
 Radii: 999px for buttons and pills, 18px for cards, 16px for frames, 12px for inner windows.
 
@@ -59,7 +59,7 @@ Each section lists the library component the build uses. The reference page imit
 - **Aceternity Resizable Navbar.** Full width and transparent at the top. After 40px of scroll it shrinks to an 880px pill with an ink background at 72%, a hairline border, and a shadow.
 - **Magic UI Progressive Blur** under it, shown only after scroll.
 - Logo (`public/brand/svg/qaf-labs-logo-on-dark.svg`, 24px tall), four anchors (`#capabilities`, `#approach`, `#principles`, `#contact`), and the primary button.
-- Below 860px: a menu icon (two lines, on a dark disc so it reads over the beam) opens a full-screen menu (**React Bits Staggered Menu** motion). It traps focus, closes on Escape, and returns focus to the menu icon. Its Close is an × in the same spot.
+- Below 860px: a **Menu** button opens a full-screen menu (**React Bits Staggered Menu** motion). It traps focus, closes on Escape, and returns focus to the Menu button.
 
 Screens: `desktop-01-hero.jpg`, `mobile-01-hero.jpg`.
 
@@ -70,7 +70,7 @@ Screens: `desktop-01-hero.jpg`, `mobile-01-hero.jpg`.
 - **Magic UI Animated Shiny Text** in a pill: `Qaf Labs · software company`.
 - **React Bits Split Text** headline, per word: "Where structure meets craft." The word "craft." carries a soft vermilion text glow.
 - Sub-headline in `--muted`, at most 520px wide.
-- **Magic UI Shimmer Button** (vermilion fill, ink text, glow) for **Start a conversation** (`mailto:`). **Aceternity Hover Border Gradient** for **See what we build** (`#capabilities`). Below 768px the hero keeps only Start a conversation and drops the eyebrow, as huly.io keeps one call to action on phones (owner decision).
+- **Magic UI Shimmer Button** (vermilion fill, ink text, glow) for **Start a conversation** (`mailto:`). **Aceternity Hover Border Gradient** for **See what we build** (`#capabilities`). Below 768px the hero keeps only Start a conversation (40px tall, 44px tap area) and drops the eyebrow, as huly.io keeps one call to action on phones (owner decision).
 - The hero frame is an illustration of how Qaf Labs works, not a product screenshot. Three panes: a design canvas with the primary button selected and redlined, the `Button.tsx` code for it, and a phone preview. **Magic UI Border Beam** travels its edge three times, then stops. The frame fades out at the bottom.
 - The frame keeps its 1240px three-pane layout at every width and zooms to fit, so phones see the whole frame like a screenshot, as huly.io shows its app (owner decision).
 
