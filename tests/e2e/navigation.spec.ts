@@ -87,6 +87,51 @@ test.describe("navigation", () => {
     }
   });
 
+  test("the panel slides in from the right instead of snapping in", async ({ page }, info) => {
+    test.skip(info.project.name !== "mobile", "menu is the mobile pattern");
+    await page.goto("/");
+    await page.locator("#staggered-menu-panel").waitFor({ state: "attached" });
+    // Sample the panel and the menu layer every frame for the length of the open.
+    const frames = page.evaluate(
+      () =>
+        new Promise<{ left: number; scrollLeft: number }[]>((resolve) => {
+          const out: { left: number; scrollLeft: number }[] = [];
+          const start = performance.now();
+          const tick = (now: number) => {
+            const panel = document.getElementById("staggered-menu-panel");
+            const layer = document.querySelector(".sm-scope");
+            out.push({ left: panel?.getBoundingClientRect().left ?? 0, scrollLeft: layer?.scrollLeft ?? 0 });
+            if (now - start < 1200) requestAnimationFrame(tick);
+            else resolve(out);
+          };
+          requestAnimationFrame(tick);
+        }),
+    );
+    await page.getByRole("button", { name: "Menu" }).click();
+    const samples = await frames;
+    expect(samples.every((s) => s.scrollLeft === 0)).toBe(true);
+    const width = page.viewportSize()?.width ?? 0;
+    const between = samples.filter((s) => s.left > 1 && s.left < width - 1);
+    expect(between.length).toBeGreaterThan(2);
+    expect(samples.at(-1)?.left).toBe(0);
+  });
+
+  test("reopening while the menu closes leaves it open on screen", async ({ page }, info) => {
+    test.skip(info.project.name !== "mobile", "menu is the mobile pattern");
+    await page.goto("/");
+    const menuButton = page.getByRole("button", { name: "Menu" });
+    await menuButton.click();
+    const dialog = page.getByRole("dialog", { name: "Menu" });
+    await expect(dialog).toBeVisible();
+    await dialog.getByRole("button", { name: "Close" }).click();
+    await page.waitForTimeout(100);
+    await menuButton.click();
+    await expect
+      .poll(() => page.locator("#staggered-menu-panel").evaluate((el) => el.getBoundingClientRect().left))
+      .toBe(0);
+    await expect(dialog.getByRole("link", { name: "Approach" })).toBeInViewport();
+  });
+
   test("mobile menu links close the menu and reach their section", async ({ page }, info) => {
     test.skip(info.project.name !== "mobile", "menu is the mobile pattern");
     await page.goto("/");
@@ -103,7 +148,7 @@ test.describe("navigation", () => {
     await page.goto("/");
     const viewport = page.viewportSize()?.width ?? 0;
     const panel = page.locator("#staggered-menu-panel");
-    // The menu loads on first open; before that there is no panel at all.
+    // Phones mount the closed menu at idle; wider screens never load it.
     if ((await panel.count()) === 0) return;
     const x = await panel.evaluate((el) => el.getBoundingClientRect().x);
     expect(x).toBeGreaterThanOrEqual(viewport);

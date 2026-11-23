@@ -10,8 +10,10 @@ import { mailto, site } from "@/config/site";
 import { nav as copy } from "@/content/home";
 import { setScrollLocked } from "@/lib/smooth-scroll";
 
-// The menu (and GSAP) loads on the first open, so it never weighs on the first paint.
+// The menu (and GSAP) loads after the page settles, so it never weighs on the first paint.
 const StaggeredMenu = lazy(() => import("@/components/StaggeredMenu"));
+// Matches the breakpoint where the Menu button shows.
+const MENU_QUERY = "(max-width: 860px)";
 
 const navItems = site.nav.map((item) => ({ name: item.label, link: item.href }));
 const menuItems = site.nav.map((item) => ({
@@ -46,6 +48,18 @@ export function Navbar() {
 
   // Activity hides this page instead of unmounting it, so reset the transient menu state on hide.
   useLayoutEffect(() => () => setMenuOpen(false), []);
+
+  // Mount the closed menu at idle on phones, so the first tap plays the animation instead of loading it.
+  useEffect(() => {
+    if (!window.matchMedia(MENU_QUERY).matches) return;
+    const load = () => setMenuLoaded(true);
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(load, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(load, 2000);
+    return () => clearTimeout(id);
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;

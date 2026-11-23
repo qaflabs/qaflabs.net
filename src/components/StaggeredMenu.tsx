@@ -13,7 +13,8 @@ export interface StaggeredMenuSocialItem {
   link: string;
 }
 // Brand edits (ADR 0002): controlled `open`, Escape and focus trap, inert when closed,
-// reduced motion jumps to end states, ink and vermilion styling, no `any` casts.
+// reduced motion jumps to end states, ink and vermilion styling, no `any` casts, no busy lock,
+// focus without scrolling the clipped layer.
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export interface StaggeredMenuProps {
@@ -88,7 +89,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const colorTweenRef = useRef<gsap.core.Tween | null>(null);
 
   const toggleBtnRef = useRef<HTMLButtonElement | null>(null);
-  const busyRef = useRef(false);
 
   const itemEntranceTweenRef = useRef<gsap.core.Tween | null>(null);
 
@@ -217,19 +217,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     return tl;
   }, [position]);
 
+  // No busy lock: a lock dropped a reopen tapped mid-close and left the menu open but off screen.
   const playOpen = useCallback(() => {
-    if (busyRef.current) return;
-    busyRef.current = true;
     const tl = buildOpenTimeline();
-    if (tl) {
-      tl.eventCallback('onComplete', () => {
-        busyRef.current = false;
-      });
-      if (reducedRef.current) tl.progress(1);
-      else tl.play(0);
-    } else {
-      busyRef.current = false;
-    }
+    if (!tl) return;
+    if (reducedRef.current) tl.progress(1);
+    else tl.play(0);
   }, [buildOpenTimeline]);
 
   const playClose = useCallback(() => {
@@ -264,8 +257,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link')) as HTMLElement[];
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
-
-        busyRef.current = false;
       }
     });
   }, [position]);
@@ -400,7 +391,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   useEffect(() => {
     if (!open) return;
     const panel = panelRef.current;
-    panel?.querySelector<HTMLElement>(FOCUSABLE)?.focus();
+    // The panel is still off screen here; a plain focus() scrolls the layer and the panel snaps in.
+    panel?.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
 
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -450,7 +442,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
   return (
     <div
-      className={`sm-scope z-[120] ${isFixed ? 'pointer-events-none fixed inset-0 overflow-hidden' : 'w-full h-full'}`}
+      className={`sm-scope z-[120] ${isFixed ? 'pointer-events-none fixed inset-0 overflow-clip' : 'w-full h-full'}`}
     >
       <div
         className={
