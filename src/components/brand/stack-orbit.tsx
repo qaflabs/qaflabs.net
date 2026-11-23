@@ -43,7 +43,7 @@ export function StackOrbit() {
     <div className="mt-[clamp(88px,11vw,150px)] flex flex-wrap items-center justify-between gap-12">
       <div className="max-w-[440px] flex-[1_1_320px]">
         <SectionLabel number={stack.number} label={stack.label} />
-        <h3 id="stack-title" className="mt-3.5 text-[clamp(2rem,3.4vw,3rem)] leading-[1.02] font-semibold tracking-[-0.04em]">
+        <h3 id="stack-title" className="mt-3.5 text-heading leading-[1.02] font-semibold tracking-[-0.04em]">
           {stack.title}
         </h3>
         <p className="mt-3.5 text-muted">{stack.line}</p>

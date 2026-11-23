@@ -14,7 +14,7 @@ interface HeroHeadlineProps {
 // After this point the visitor has already read the headline, so moving it would be noise.
 const LATEST_START_MS = 300;
 const className =
-  "mt-7 block max-w-[820px] text-[clamp(3rem,7.6vw,7.25rem)] leading-[0.95] font-semibold tracking-[-0.048em]";
+  "mt-7 block max-w-[820px] text-display leading-[0.95] font-semibold tracking-[-0.048em]";
 
 export function HeroHeadline({ id, text, children }: HeroHeadlineProps) {
   return (

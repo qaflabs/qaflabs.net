@@ -13,7 +13,7 @@ export function Principles() {
       <SectionLabel number={principles.number} label={principles.label} />
       <h2
         id="principles-title"
-        className="mt-[18px] max-w-[760px] text-[clamp(2.25rem,4.6vw,4rem)] leading-none font-semibold tracking-[-0.04em]"
+        className="mt-[18px] max-w-[760px] text-heading leading-none font-semibold tracking-[-0.04em]"
       >
         {principles.title}
       </h2>

@@ -14,7 +14,7 @@ export function Contact() {
       <LampContainer>
         <h2
           id="contact-title"
-          className="mx-auto max-w-[900px] text-[clamp(2.75rem,6.8vw,6rem)] leading-[0.98] font-semibold tracking-[-0.048em]"
+          className="mx-auto max-w-[900px] text-closing leading-[0.98] font-semibold tracking-[-0.048em]"
         >
           {contact.title}
         </h2>

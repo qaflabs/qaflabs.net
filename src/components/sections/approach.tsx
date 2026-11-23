@@ -12,7 +12,7 @@ export function Approach() {
       <SectionLabel number={approach.number} label={approach.label} />
       <h2
         id="approach-title"
-        className="mt-5 max-w-[760px] text-[clamp(2.25rem,4.6vw,4rem)] leading-none font-semibold tracking-[-0.04em]"
+        className="mt-5 max-w-[760px] text-heading leading-none font-semibold tracking-[-0.04em]"
       >
         {approach.title}
       </h2>

@@ -637,7 +637,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 .sm-scope .sm-socials-link { font-size: 1.2rem; font-weight: 500; color: #f6f5f1; text-decoration: none; position: relative; padding: 2px 0; display: inline-block; transition: color 0.3s ease, opacity 0.3s ease; }
 .sm-scope .sm-socials-link:hover { color: var(--sm-accent, #ff7a50); }
 .sm-scope .sm-panel-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-.sm-scope .sm-panel-item { position: relative; color: #f6f5f1; font-weight: 600; font-size: 44px; line-height: 1.1; letter-spacing: -0.035em; display: inline-flex; align-items: center; min-height: 44px; padding: 6px 0; text-decoration: none; transition: color 0.2s; }
+.sm-scope .sm-panel-item { position: relative; color: #f6f5f1; font-weight: 600; font-size: 36px; line-height: 1.1; letter-spacing: -0.035em; display: inline-flex; align-items: center; min-height: 44px; padding: 6px 0; text-decoration: none; transition: color 0.2s; }
 .sm-scope .sm-panel-itemLabel { display: inline-block; will-change: transform; transform-origin: 50% 100%; }
 .sm-scope .sm-panel-item:hover { color: #ff7a50; }
 .sm-scope .sm-panel-list[data-numbering] { counter-reset: smItem; }

@@ -42,7 +42,7 @@ export function CapabilityBand() {
         velocity={-60}
         numCopies={3}
         velocityMapping={{ input: [0, 1000], output: [0, 5] }}
-        scrollerClassName="text-[clamp(3rem,8.4vw,8rem)] leading-[1.05] font-semibold tracking-[-0.045em]"
+        scrollerClassName="text-display leading-[1.05] font-semibold tracking-[-0.045em]"
         parallaxClassName="[&+&]:mt-1.5"
       />
     </div>

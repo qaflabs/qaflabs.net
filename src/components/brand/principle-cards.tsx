@@ -20,7 +20,7 @@ export function PrincipleCards() {
             >
               {/* The supplied mark, unrotated on every card (ADR 0001). */}
               <Image src="/brand/svg/qaf-labs-mark-on-dark.svg" alt="" width={44} height={44} unoptimized />
-              <h3 className="mt-auto pt-12 text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.05] font-semibold tracking-[-0.035em]">
+              <h3 className="mt-auto pt-12 text-title leading-[1.05] font-semibold tracking-[-0.035em]">
                 {item.title}
               </h3>
               <p className="mt-3 text-muted">{item.line}</p>

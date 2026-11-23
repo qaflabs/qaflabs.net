@@ -13,7 +13,7 @@ export function Capabilities() {
       <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
         <h2
           id="capabilities-title"
-          className="max-w-[760px] text-[clamp(2.25rem,4.6vw,4rem)] leading-none font-semibold tracking-[-0.04em]"
+          className="max-w-[760px] text-heading leading-none font-semibold tracking-[-0.04em]"
         >
           {capabilities.title}
         </h2>

@@ -11,7 +11,7 @@ interface ManifestoTextProps {
 }
 
 const outer = "m-0";
-const inner = "text-[clamp(1.875rem,4vw,3.75rem)] leading-[1.1] font-semibold tracking-[-0.035em]";
+const inner = "text-statement leading-[1.1] font-semibold tracking-[-0.035em]";
 
 export function ManifestoText({ text }: ManifestoTextProps) {
   return (

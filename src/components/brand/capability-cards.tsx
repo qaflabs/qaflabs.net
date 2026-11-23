@@ -42,8 +42,8 @@ function CardText({ number, kind, title, line }: CardTextProps) {
       <p className="font-mono text-[12.5px] text-muted">
         {number} · {kind}
       </p>
-      <h3 className="mt-1.5 text-2xl font-semibold tracking-[-0.025em]">{title}</h3>
-      <p className="mt-1.5 text-[15.5px] text-muted">{line}</p>
+      <h3 className="mt-1.5 text-title-sm leading-[1.25] font-semibold tracking-[-0.025em]">{title}</h3>
+      <p className="mt-1.5 text-[15px] text-muted">{line}</p>
     </div>
   );
 }

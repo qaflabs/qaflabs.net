@@ -108,7 +108,7 @@ function Step({ item, index, active }: StickyScrollStep) {
       {/* Only the title dims: the body keeps full muted contrast on every step. */}
       <h3
         className={cn(
-          "mt-1.5 text-[clamp(1.875rem,3.2vw,2.75rem)] leading-[1.05] font-semibold tracking-[-0.035em] transition-opacity duration-400 max-[901px]:opacity-100",
+          "mt-1.5 text-title leading-[1.05] font-semibold tracking-[-0.035em] transition-opacity duration-400 max-[901px]:opacity-100",
           { "opacity-45": !active },
         )}
       >

@@ -44,7 +44,7 @@ Only these three colors and their alphas appear on the page.
 
 Computed contrast: paper on ink 18.0:1. Vermilion on ink 5.84:1. Ink on vermilion 5.84:1, so primary buttons use ink text. Paper on vermilion is 3.08:1, so never put paper text on vermilion below 24px.
 
-Type: Geist (600 for headings, 400 for body) and Geist Mono for labels, section numbers, and code. The brand README names Geist SemiBold for the wordmark. Hero headline `clamp(3rem, 7.6vw, 7.25rem)`, tracking `-0.048em`, line height 0.95. Section headings `clamp(2.25rem, 4.6vw, 4rem)`, tracking `-0.04em`.
+Type: Geist (600 for headings, 400 for body) and Geist Mono for labels, section numbers, and code. The brand README names Geist SemiBold for the wordmark. Sizes follow huly.io's steps (owner decision) and live as tokens in `globals.css`, each running from its 390px size to its 1280px size: hero headline and capability band 36 → 84px (`text-display`), contact heading 32 → 72px (`text-closing`), section headings 30 → 56px (`text-heading`), manifesto 24 → 44px (`text-statement`), step and principle titles 22 → 32px (`text-title`), card titles 18 → 20px (`text-title-sm`), body 16px. Hero tracking `-0.048em`, line height 0.95; section heading tracking `-0.04em`.
 
 Radii: 999px for buttons and pills, 18px for cards, 16px for frames, 12px for inner windows.
 
