@@ -160,10 +160,18 @@ function AiVisual() {
   const hub = useRef<HTMLDivElement>(null);
   const answer = useRef<HTMLDivElement>(null);
   const seen = useInView(container, { once: true, amount: 0.5 });
-  const beam = { containerRef: container, toRef: hub, duration: 2.2, pathOpacity: 0.12, pathWidth: 1.5 };
+  // 2.2px vermilion strokes with a glow, as in the reference diagram.
+  const beam = {
+    containerRef: container,
+    toRef: hub,
+    duration: 2.2,
+    pathOpacity: 0.12,
+    pathWidth: 2.2,
+    className: "[filter:drop-shadow(0_0_6px_rgb(255_74_28/0.9))]",
+  };
 
   return (
-    <div ref={container} className="relative flex h-full items-center justify-between px-6 sm:px-10">
+    <div ref={container} className="relative mx-auto flex h-full max-w-[440px] items-center justify-between px-[34px]">
       <div className="flex flex-col gap-4">
         <Node nodeRef={docs} label={v.ai.inputs[0]} />
         <Node nodeRef={tickets} label={v.ai.inputs[1]} round />

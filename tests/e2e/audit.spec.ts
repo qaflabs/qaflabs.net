@@ -21,6 +21,8 @@ test.describe("page audit", () => {
   });
 
   test("every control shows the vermilion focus ring by keyboard", async ({ page }) => {
+    // Walks the whole page and tabs through every control, which is slow under a parallel run.
+    test.setTimeout(60_000);
     await page.goto("/");
     await visitAll(page);
     const seen = new Set<string>();
