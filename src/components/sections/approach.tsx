@@ -7,7 +7,7 @@ export function Approach() {
     <section
       id="approach"
       aria-labelledby="approach-title"
-      className="relative z-[2] mx-auto max-w-[1240px] px-6 py-[clamp(64px,9vw,130px)]"
+      className="relative z-[2] mx-auto max-w-[1240px] px-5 md:px-6 py-[clamp(64px,9vw,130px)]"
     >
       <SectionLabel number={approach.number} label={approach.label} />
       <h2

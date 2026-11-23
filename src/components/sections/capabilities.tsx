@@ -7,7 +7,7 @@ export function Capabilities() {
     <section
       id="capabilities"
       aria-labelledby="capabilities-title"
-      className="relative z-[2] mx-auto max-w-[1240px] px-6 pt-[clamp(88px,11vw,160px)] pb-[clamp(64px,8vw,120px)]"
+      className="relative z-[2] mx-auto max-w-[1240px] px-5 md:px-6 pt-[clamp(88px,11vw,160px)] pb-[clamp(64px,8vw,120px)]"
     >
       <SectionLabel number={capabilities.number} label={capabilities.label} />
       <div className="mt-5 flex flex-wrap items-end justify-between gap-6">

@@ -9,7 +9,7 @@ export function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="relative z-[2] overflow-x-clip px-6 pb-[clamp(96px,12vw,160px)] text-center"
+      className="relative z-[2] overflow-x-clip px-5 md:px-6 pb-[clamp(96px,12vw,160px)] text-center"
     >
       <LampContainer>
         <h2

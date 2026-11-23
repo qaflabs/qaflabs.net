@@ -88,7 +88,7 @@ function PreviewPane() {
 
 export function HeroFrame() {
   return (
-    <div className="relative z-10 mx-auto mt-[110px] max-w-[1240px]">
+    <div className="relative z-10 mx-auto mt-[72px] max-w-[1240px] md:mt-[110px]">
       {/* The light sits behind the mark; the mark file itself carries no filter (ADR 0001). */}
       <div
         aria-hidden="true"

@@ -10,7 +10,7 @@ import { hero } from "@/content/home";
 
 export function Hero() {
   return (
-    <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden px-6 pt-[150px]">
+    <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden px-5 pt-[104px] md:px-6 md:pt-[150px]">
       <HeroLight surfaceId="hero-frame" />
       <div
         aria-hidden="true"
@@ -18,7 +18,7 @@ export function Hero() {
       />
       {/* Below 760px the text stops at 82% so no line reaches the beam at 90%. */}
       <div className="relative z-[11] mx-auto max-w-[1200px] max-[761px]:mr-[18%]">
-        <p className="flex w-fit max-w-full items-center gap-2.5 rounded-full border border-paper/12 bg-ink-2/70 py-1.5 pr-3.5 pl-2 font-mono text-[13px]">
+        <p className="flex w-fit max-w-full items-center gap-2.5 rounded-full border border-paper/12 bg-ink-2/70 py-1 pr-3 pl-2 font-mono text-[12px] md:py-1.5 md:pr-3.5 md:text-[13px]">
           <Image src="/brand/svg/qaf-labs-mark-on-dark.svg" alt="" width={18} height={18} unoptimized />
           <AnimatedShinyText>{hero.eyebrow}</AnimatedShinyText>
         </p>
@@ -28,17 +28,17 @@ export function Hero() {
             {hero.headlineAccent}
           </span>
         </HeroHeadline>
-        <p className="mt-7 max-w-[520px] text-[clamp(1.0625rem,1.4vw,1.25rem)] leading-[1.55] text-muted [text-shadow:0_0_18px_var(--ink),0_0_4px_var(--ink)]">
+        <p className="mt-4 max-w-[520px] text-lead leading-[1.4] text-muted md:mt-6 [text-shadow:0_0_18px_var(--ink),0_0_4px_var(--ink)]">
           {hero.subheadline}
         </p>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <ShimmerButton href={mailto} className="min-h-[54px] px-[30px] font-semibold">
+        <div className="mt-7 flex flex-wrap gap-2.5 md:mt-10 md:gap-3">
+          <ShimmerButton href={mailto} className="min-h-11 px-6 text-[15px] font-semibold md:min-h-[54px] md:px-[30px] md:text-base">
             {hero.primaryCta}
           </ShimmerButton>
           <HoverBorderGradient
             as="a"
             href="#capabilities"
-            className="inline-flex min-h-[52px] items-center px-[30px] font-semibold"
+            className="inline-flex min-h-11 items-center px-6 text-[15px] font-semibold md:min-h-[52px] md:px-[30px] md:text-base"
           >
             {hero.secondaryCta}
           </HoverBorderGradient>

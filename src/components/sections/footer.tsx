@@ -9,7 +9,7 @@ export function Footer() {
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-[260px] left-1/2 h-[420px] w-[900px] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(255_74_28/0.22),transparent)]"
       />
-      <div className="relative mx-auto max-w-[1240px] px-6 pt-[72px] pb-9">
+      <div className="relative mx-auto max-w-[1240px] px-5 md:px-6 pt-[72px] pb-9">
         <Image
           src="/brand/svg/qaf-labs-logo-on-dark.svg"
           alt={site.name}

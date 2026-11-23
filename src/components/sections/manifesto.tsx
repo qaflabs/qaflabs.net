@@ -9,7 +9,7 @@ export function Manifesto() {
       <section
         id="manifesto"
         aria-label={manifesto.label}
-        className="relative overflow-hidden bg-paper px-6 pt-[clamp(40px,7vw,100px)] pb-[clamp(64px,9vw,130px)] text-ink"
+        className="relative overflow-hidden bg-paper px-5 md:px-6 pt-[clamp(40px,7vw,100px)] pb-[clamp(64px,9vw,130px)] text-ink"
       >
         <div
           aria-hidden="true"

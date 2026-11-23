@@ -8,7 +8,7 @@ export function Principles() {
     <section
       id="principles"
       aria-labelledby="principles-title"
-      className="relative z-[2] mx-auto max-w-[1240px] px-6 pt-[clamp(40px,6vw,80px)] pb-[clamp(64px,9vw,130px)]"
+      className="relative z-[2] mx-auto max-w-[1240px] px-5 md:px-6 pt-[clamp(40px,6vw,80px)] pb-[clamp(64px,9vw,130px)]"
     >
       <SectionLabel number={principles.number} label={principles.label} />
       <h2

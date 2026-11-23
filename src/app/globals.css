@@ -47,12 +47,13 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   /* Type scale fitted to huly.io's steps: each runs linearly from its 390px size to its 1280px size. */
-  --text-display: clamp(2.25rem, 0.94rem + 5.39vw, 5.25rem);
+  --text-display: clamp(2rem, 0.575rem + 5.84vw, 5.25rem);
   --text-closing: clamp(2rem, 0.91rem + 4.49vw, 4.5rem);
   --text-heading: clamp(1.875rem, 1.16rem + 2.92vw, 3.5rem);
   --text-statement: clamp(1.5rem, 0.95rem + 2.25vw, 2.75rem);
-  --text-title: clamp(1.375rem, 1.1rem + 1.12vw, 2rem);
+  --text-title: clamp(1.25rem, 0.92rem + 1.35vw, 2rem);
   --text-title-sm: clamp(1.125rem, 1.07rem + 0.22vw, 1.25rem);
+  --text-lead: clamp(0.9375rem, 0.855rem + 0.337vw, 1.125rem);
 
   --radius-window: 12px;
   --radius-frame: 16px;
@@ -124,8 +125,12 @@
     background: var(--ink);
     color: var(--paper);
     font-family: var(--font-sans);
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.55;
+    @media (width >= 48rem) {
+      font-size: 16px;
+      line-height: 1.6;
+    }
   }
 
   a[href],
