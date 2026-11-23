@@ -70,7 +70,7 @@ Screens: `desktop-01-hero.jpg`, `mobile-01-hero.jpg`.
 - **Magic UI Animated Shiny Text** in a pill: `Qaf Labs · software company`.
 - **React Bits Split Text** headline, per word: "Where structure meets craft." The word "craft." carries a soft vermilion text glow.
 - Sub-headline in `--muted`, at most 520px wide.
-- **Magic UI Shimmer Button** (vermilion fill, ink text, glow) for **Start a conversation** (`mailto:`). **Aceternity Hover Border Gradient** for **See what we build** (`#capabilities`). Below 768px the hero keeps only Start a conversation (40px tall, 44px tap area) and drops the eyebrow, as huly.io keeps one call to action on phones (owner decision).
+- **Magic UI Shimmer Button** (vermilion fill, ink text, glow) for **Start a conversation** (`mailto:`). **Aceternity Hover Border Gradient** for **See what we build** (`#capabilities`). Below 768px the hero keeps only Start a conversation and drops the eyebrow, as huly.io keeps one call to action on phones (owner decision).
 - The hero frame is an illustration of how Qaf Labs works, not a product screenshot. Three panes: a design canvas with the primary button selected and redlined, the `Button.tsx` code for it, and a phone preview. **Magic UI Border Beam** travels its edge three times, then stops. The frame fades out at the bottom.
 - The frame keeps its 1240px three-pane layout at every width and zooms to fit, so phones see the whole frame like a screenshot, as huly.io shows its app (owner decision).
 
