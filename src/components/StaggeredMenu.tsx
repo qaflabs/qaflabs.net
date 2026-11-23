@@ -466,7 +466,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           aria-hidden="true"
         >
           {(() => {
-            const raw = colors && colors.length ? colors.slice(0, 4) : ['#1e1e22', '#35353c'];
+            const raw = colors && colors.length ? colors.slice(0, 4) : ['#ff4a1c', '#121217'];
             const arr = [...raw];
             if (arr.length >= 3) {
               const mid = Math.floor(arr.length / 2);

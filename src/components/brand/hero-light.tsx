@@ -9,7 +9,7 @@ interface HeroLightProps {
   surfaceId: string;
 }
 
-const NARROW = "(max-width: 759px)";
+const NARROW = "(max-width: 760px)";
 // The beam settles after its intro; past this it holds still and only answers the cursor.
 const CLOCK_SECONDS = 14;
 

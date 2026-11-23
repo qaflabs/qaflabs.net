@@ -7,7 +7,7 @@ import { principles } from "@/content/home";
 
 export function PrincipleCards() {
   return (
-    <ul className="mt-14 grid list-none grid-cols-3 gap-4 p-0 max-[1000px]:grid-cols-1">
+    <ul className="mt-14 grid list-none grid-cols-3 gap-4 p-0 max-[1001px]:grid-cols-1">
       {principles.items.map((item) => (
         <li key={item.title}>
           <TiltCard maxTilt={5} containerClassName="h-full" className="h-full">

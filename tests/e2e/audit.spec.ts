@@ -42,6 +42,56 @@ test.describe("page audit", () => {
     expect(seen.size).toBeGreaterThan(8);
   });
 
+  test("every control offers at least a 44px tap target", async ({ page }) => {
+    await page.goto("/");
+    await visitAll(page);
+    // Let entrance animations (bento cells, morphs) settle before measuring.
+    await page.waitForTimeout(1500);
+    const small = await page.evaluate(() =>
+      // Pointer targets only: the stepper's spinbutton readout is driven by arrow keys, its buttons by touch.
+      Array.from(document.querySelectorAll<HTMLElement>("a[href], button"))
+        .filter((el) => el.offsetParent !== null && !el.closest("[inert], [aria-hidden='true']"))
+        .map((el) => {
+          const box = el.getBoundingClientRect();
+          // Small visual buttons may carry a larger hit area on ::after.
+          const after = getComputedStyle(el, "::after");
+          const hitW = after.content !== "none" ? parseFloat(after.width) || 0 : 0;
+          const hitH = after.content !== "none" ? parseFloat(after.height) || 0 : 0;
+          return { label: (el.textContent ?? el.getAttribute("aria-label") ?? "").trim().slice(0, 30), w: Math.max(box.width, hitW), h: Math.max(box.height, hitH) };
+        })
+        .filter((t) => t.w < 44 || t.h < 44)
+        .map((t) => `${t.label} ${Math.round(t.w)}x${Math.round(t.h)}`),
+    );
+    expect(small).toEqual([]);
+  });
+
+  test("clicking through every control logs no errors", async ({ page, context }, info) => {
+    test.skip(info.project.name !== "desktop", "one click-through");
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    const errors: string[] = [];
+    page.on("console", (msg) => {
+      if (msg.type() === "error") errors.push(msg.text());
+    });
+    page.on("pageerror", (err) => errors.push(err.message));
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Main" });
+    for (const name of ["Capabilities", "Approach", "Principles", "Contact"]) {
+      await nav.getByRole("link", { name }).click();
+      await page.waitForTimeout(700);
+    }
+    await page.locator("#hero").getByRole("link", { name: "See what we build" }).click();
+    const quantity = page.getByRole("spinbutton", { name: "Quantity" });
+    await quantity.scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: "Increase quantity" }).click({ force: true });
+    await page.getByRole("button", { name: "Decrease quantity" }).click({ force: true });
+    await page.getByRole("button", { name: "Pause orbit" }).click();
+    await page.getByRole("button", { name: "Resume orbit" }).click();
+    await page.locator("#contact").getByRole("button", { name: "Copy email" }).click();
+    await page.locator("footer").getByRole("link", { name: "Approach" }).click();
+    await page.waitForTimeout(800);
+    expect(errors).toEqual([]);
+  });
+
   test("only brand hues appear across the page", async ({ page }) => {
     await page.goto("/");
     await visitAll(page);

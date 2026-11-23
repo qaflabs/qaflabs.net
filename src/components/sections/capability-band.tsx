@@ -1,5 +1,6 @@
 import ScrollVelocity from "@/components/ScrollVelocity";
 import { capabilityBand } from "@/content/home";
+import { cn } from "@/lib/utils";
 
 interface RowProps {
   offset: 0 | 1;
@@ -12,11 +13,14 @@ function Row({ offset }: RowProps) {
         const odd = (i + offset) % 2 === 1;
         return (
           <span key={word} className="flex items-center gap-[0.42em]">
-            {odd ? (
-              <span className="text-transparent [-webkit-text-stroke:1.5px_rgb(246_245_241/0.55)]">{word}</span>
-            ) : (
-              <span className="text-paper">{word}</span>
-            )}
+            <span
+              className={cn({
+                "text-transparent [-webkit-text-stroke:1.5px_rgb(246_245_241/0.55)]": odd,
+                "text-paper": !odd,
+              })}
+            >
+              {word}
+            </span>
             {odd ? (
               <span className="inline-block size-[0.34em] rounded-full bg-vermilion shadow-[0_0_30px_rgb(255_74_28/0.6)]" />
             ) : (

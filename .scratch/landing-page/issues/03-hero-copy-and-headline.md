@@ -17,4 +17,4 @@
 
 ## Comments
 
-- 2026-11-22: Implemented. Split Text edited (server children, never hidden, mask rise, skips after 1s, reverts after intro). Shine runs twice. 41 tests pass. Known: the craft. glow is clipped by word masks for under a second during the rise.
+- 2026-11-22: Implemented. Split Text edited (server children, never hidden, mask rise, skips after 300ms (Q5); since Split Text is lazy-loaded, the rise rarely plays on slow phones and the headline simply appears, reverts after intro). Shine runs twice. 41 tests pass. Known: the craft. glow is clipped by word masks for under a second during the rise.

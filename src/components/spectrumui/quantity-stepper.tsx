@@ -1,6 +1,7 @@
 "use client"
 
-// Brand edits (ADR 0002): motion/react instead of framer-motion, paper and vermilion palette, no dark: variants.
+// Brand edits (ADR 0002): motion/react instead of framer-motion, paper and vermilion palette, no dark: variants,
+// 44px hit areas on the step buttons.
 
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import {
@@ -260,7 +261,9 @@ export function QuantityStepper({
   )
 
   const buttonClasses = cn(
-    "flex shrink-0 touch-manipulation items-center justify-center rounded-full text-muted transition-colors",
+    "relative flex shrink-0 touch-manipulation items-center justify-center rounded-full text-muted transition-colors",
+    // A 44px hit area around the small visual button.
+    "after:absolute after:top-1/2 after:left-1/2 after:size-11 after:-translate-1/2 after:content-['']",
     "hover:bg-paper/[0.08] hover:text-paper",
     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-vermilion focus-visible:ring-0 focus-visible:ring-vermilion",
     button,

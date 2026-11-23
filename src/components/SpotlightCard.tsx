@@ -39,24 +39,16 @@ type Settings = {
   grain: number;
 };
 
-const THEMES: Record<'dark' | 'light', Palette> = {
-  dark: {
-    surface: 'var(--card)',
-    border: 'var(--line)',
-    shadow: 'none',
-    light: '#ff4a1c',
-    fill: 1,
-    edge: 1
-  },
-  light: {
-    surface: '#ffffff',
-    border: 'rgba(24, 24, 27, 0.1)',
-    shadow: '0 1px 2px rgba(24, 24, 27, 0.04), 0 18px 40px -20px rgba(24, 24, 27, 0.16)',
-    light: '#18181b',
-    fill: 0.28,
-    edge: 0.7
-  }
+// No light theme on this site; both keys use the brand palette.
+const DARK: Palette = {
+  surface: 'var(--card)',
+  border: 'var(--line)',
+  shadow: 'none',
+  light: '#ff4a1c',
+  fill: 1,
+  edge: 1
 };
+const THEMES: Record<'dark' | 'light', Palette> = { dark: DARK, light: DARK };
 
 const SHAPES: SpotlightShape[] = ['circle', 'beam'];
 

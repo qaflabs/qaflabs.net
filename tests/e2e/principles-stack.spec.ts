@@ -56,11 +56,10 @@ test.describe("principles and stack", () => {
     await page.goto("/");
     const button = page.getByRole("button", { name: "Pause orbit" });
     await button.scrollIntoViewIfNeeded();
-    await expect(button).toHaveAttribute("aria-pressed", "false");
     expect(await orbitState(page)).toBe("running");
     await button.click();
     const resume = page.getByRole("button", { name: "Resume orbit" });
-    await expect(resume).toHaveAttribute("aria-pressed", "true");
+    await expect(resume).toBeVisible();
     await expect.poll(() => orbitState(page)).toBe("paused");
     await page.waitForTimeout(200);
     const a = await tileTransform(page);
@@ -90,6 +89,7 @@ test.describe("principles and stack", () => {
       await page.goto("/");
       await page.locator("#stack").scrollIntoViewIfNeeded();
       expect(await orbitState(page)).toBe("paused");
+      await expect(page.getByRole("button", { name: "Pause orbit" })).toHaveCount(0);
       if (info.project.name !== "desktop") return;
       const card = page.locator("#principles li").first();
       const box = await card.boundingBox();

@@ -29,6 +29,17 @@ test.describe("approach", () => {
     await expect(mark).toHaveCSS("opacity", "1");
   });
 
+  test.describe("reduced motion", () => {
+    test.use({ reducedMotion: "reduce" });
+    test("the panel holds its end state", async ({ page }, info) => {
+      test.skip(info.project.name !== "desktop", "the panel is hidden below 900px");
+      await page.goto("/");
+      await scrollToStep(page, "Discover");
+      const mark = panel(page).locator("img[src*='qaf-labs-mark-on-dark']");
+      await expect(mark).toHaveCSS("opacity", "1");
+    });
+  });
+
   test("panel is hidden and each step shows its drawing below 900px", async ({ page }, info) => {
     test.skip(info.project.name !== "mobile", "narrow layout");
     await page.goto("/");

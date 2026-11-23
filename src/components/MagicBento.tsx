@@ -11,7 +11,7 @@ import {
   type ReactNode
 } from 'react';
 
-// Brand edits (ADR 0002): demo visuals and @hugeicons removed, items required, spans honoured only at
+// Brand edits (ADR 0002): brand dark theme, demo visuals and @hugeicons removed, items required, spans honoured only at
 // full column count (one-per-row below), auto-height rows, no settings write during render.
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
@@ -111,54 +111,31 @@ interface CardState {
 
 type Spring = ['rx' | 'ry' | 'tx' | 'ty', 'vrx' | 'vry' | 'vtx' | 'vty'];
 
-const THEMES: Record<'dark' | 'light', Record<string, string | number>> = {
-  dark: {
-    '--mb-surface': 'linear-gradient(180deg, #1a1820 0%, #121116 100%)',
-    '--mb-edge': 'rgba(255, 255, 255, 0.07)',
-    '--mb-highlight': 'rgba(255, 255, 255, 0.06)',
-    '--mb-shadow': '0 24px 48px -28px rgba(0, 0, 0, 0.85), 0 8px 18px -12px rgba(0, 0, 0, 0.6)',
-    '--mb-tile': 'linear-gradient(180deg, #3a3644 0%, #27242f 100%)',
-    '--mb-tile-edge': 'rgba(255, 255, 255, 0.07)',
-    '--mb-tile-highlight': 'rgba(255, 255, 255, 0.12)',
-    '--mb-tile-shadow': '0 4px 10px -4px rgba(0, 0, 0, 0.7)',
-    '--mb-well': 'rgba(255, 255, 255, 0.03)',
-    '--mb-well-edge': 'rgba(255, 255, 255, 0.06)',
-    '--mb-ink': '#f4f4f5',
-    '--mb-muted': 'rgba(244, 244, 245, 0.6)',
-    '--mb-faint': 'rgba(244, 244, 245, 0.3)',
-    '--mb-line': 'rgba(244, 244, 245, 0.1)',
-    '--mb-secondary': '#a1a1aa',
-    '--mb-secondary-ink': '#121016',
-    '--mb-cursor-stroke': 'rgba(18, 16, 22, 0.9)',
-    '--mb-ring': 'rgba(18, 16, 22, 0.85)',
-    '--mb-focus': 'rgba(244, 244, 245, 0.5)',
-    '--mb-glow-alpha': 0.85,
-    '--mb-spot-alpha': 0.07
-  },
-  light: {
-    '--mb-surface': 'linear-gradient(180deg, #ffffff 0%, #f7f7f9 100%)',
-    '--mb-edge': 'rgba(24, 24, 27, 0.08)',
-    '--mb-highlight': 'rgba(255, 255, 255, 1)',
-    '--mb-shadow': '0 24px 48px -30px rgba(24, 24, 27, 0.28), 0 8px 18px -14px rgba(24, 24, 27, 0.16)',
-    '--mb-tile': 'linear-gradient(180deg, #ffffff 0%, #f6f6f8 100%)',
-    '--mb-tile-edge': 'rgba(24, 24, 27, 0.08)',
-    '--mb-tile-highlight': 'rgba(255, 255, 255, 1)',
-    '--mb-tile-shadow': '0 4px 10px -5px rgba(24, 24, 27, 0.22)',
-    '--mb-well': 'rgba(24, 24, 27, 0.025)',
-    '--mb-well-edge': 'rgba(24, 24, 27, 0.06)',
-    '--mb-ink': '#18181b',
-    '--mb-muted': 'rgba(24, 24, 27, 0.6)',
-    '--mb-faint': 'rgba(24, 24, 27, 0.3)',
-    '--mb-line': 'rgba(24, 24, 27, 0.08)',
-    '--mb-secondary': '#71717a',
-    '--mb-secondary-ink': '#ffffff',
-    '--mb-cursor-stroke': '#ffffff',
-    '--mb-ring': '#ffffff',
-    '--mb-focus': 'rgba(24, 24, 27, 0.4)',
-    '--mb-glow-alpha': 0.5,
-    '--mb-spot-alpha': 0.035
-  }
+const DARK_THEME: Record<string, string | number> = {
+  '--mb-surface': 'var(--card)',
+  '--mb-edge': 'var(--line)',
+  '--mb-highlight': 'var(--line)',
+  '--mb-shadow': 'none',
+  '--mb-tile': 'var(--ink-2)',
+  '--mb-tile-edge': 'var(--line)',
+  '--mb-tile-highlight': 'rgb(246 245 241 / 0.12)',
+  '--mb-tile-shadow': 'none',
+  '--mb-well': 'rgb(246 245 241 / 0.03)',
+  '--mb-well-edge': 'rgb(246 245 241 / 0.06)',
+  '--mb-ink': 'var(--paper)',
+  '--mb-muted': 'var(--muted)',
+  '--mb-faint': 'rgb(246 245 241 / 0.3)',
+  '--mb-line': 'rgb(246 245 241 / 0.1)',
+  '--mb-secondary': 'var(--muted)',
+  '--mb-secondary-ink': 'var(--ink)',
+  '--mb-cursor-stroke': 'rgb(11 11 15 / 0.9)',
+  '--mb-ring': 'rgb(11 11 15 / 0.85)',
+  '--mb-focus': 'var(--vermilion)',
+  '--mb-glow-alpha': 0.85,
+  '--mb-spot-alpha': 0.07
 };
+// The site has no light theme, so the light key reuses the brand dark values.
+const THEMES: Record<'dark' | 'light', Record<string, string | number>> = { dark: DARK_THEME, light: DARK_THEME };
 
 const INK: Record<'dark' | 'light', number[]> = { dark: [244, 244, 245], light: [24, 24, 27] };
 const MIN_CELL = 150;
@@ -232,52 +209,6 @@ const STYLE = `
 @supports (transition-timing-function: linear(0,1)){.magic-bento{--mb-spring: linear( 0,0.0603,0.2033,0.3821,0.5633,0.7258,0.8584,0.9574,1.0242,1.0634,1.0809,1.0828,1.0747,1.0613,1.046,1.0313,1.0186,1.0085,1.0012,0.9965,0.994,0.9931,0.9933,0.9941,0.9953,0.9966,0.9978,0.9988,1 )}}
 .magic-bento[data-intro] .magic-bento__cell{opacity: 0;transform: translate3d(0,16px,0) scale(0.97)}
 .magic-bento[data-intro] .magic-bento__cell[data-state='in']{opacity: 1;transform: none;transition: opacity 420ms cubic-bezier(0.22,1,0.36,1) var(--mb-delay),transform 760ms var(--mb-spring) var(--mb-delay)}
-@container (max-height: 78px){.magic-bento__setting ~ .magic-bento__setting{display: none}}
-@container (max-height: 60px){.magic-bento__hub{display: none}}
-@container (max-height: 38px){.magic-bento__shield,.magic-bento__chart,.magic-bento__bars{visibility: hidden}}
-.magic-bento__switch{position: relative;width: 26px;height: 16px;flex: none;margin-left: auto;border-radius: 8px;background: rgb(var(--mb-accent-rgb));transition: background-color 220ms ease}
-.magic-bento__switch::after{content: '';position: absolute;top: 2px;left: 2px;width: 12px;height: 12px;border-radius: 50%;background: var(--mb-accent-ink);box-shadow: 0 1px 2px rgba(0,0,0,0.3);transform: translateX(10px);transition: transform 320ms var(--mb-spring)}
-.magic-bento__switch[data-off]{background: var(--mb-line)}
-.magic-bento__switch[data-off]::after{background: var(--mb-ink);transform: none}
-.magic-bento[data-motion] .magic-bento__chart-line{stroke-dasharray: 1;animation: magic-bento-draw 1100ms cubic-bezier(0.65,0,0.35,1) calc(var(--mb-delay) + 220ms) both paused}
-.magic-bento[data-motion] .magic-bento__chart-area{animation: magic-bento-fade 700ms ease calc(var(--mb-delay) + 700ms) both paused}
-.magic-bento[data-motion] .magic-bento__bar{animation: magic-bento-grow 760ms var(--mb-spring) calc(var(--mb-delay) + 200ms + var(--i) * 55ms) both paused}
-.magic-bento[data-motion] .magic-bento__cursor{animation: magic-bento-pop 420ms var(--mb-spring) calc(var(--mb-delay) + 600ms + var(--i) * 160ms) both paused,var(--path) 9s ease-in-out calc(var(--i) * -3s) infinite paused}
-.magic-bento[data-motion] .magic-bento__selection{animation: magic-bento-select 900ms cubic-bezier(0.65,0,0.35,1) calc(var(--mb-delay) + 760ms) both paused}
-.magic-bento[data-motion] .magic-bento__caret{animation: magic-bento-blink 1.1s steps(1) infinite paused}
-.magic-bento[data-motion] .magic-bento__pending{animation: magic-bento-wait 1ms linear calc(var(--mb-delay) + 360ms + var(--i) * 520ms) both paused}
-.magic-bento[data-motion] .magic-bento__spinner{animation: magic-bento-run 520ms linear calc(var(--mb-delay) + 360ms + var(--i) * 520ms) both paused,magic-bento-spin 700ms linear infinite paused}
-.magic-bento[data-motion] .magic-bento__done{animation: magic-bento-check 420ms var(--mb-spring) calc(var(--mb-delay) + 880ms + var(--i) * 520ms) both paused}
-.magic-bento[data-motion] .magic-bento__step-time{animation: magic-bento-fade 300ms ease calc(var(--mb-delay) + 880ms + var(--i) * 520ms) both paused}
-.magic-bento[data-motion] .magic-bento__rail-fill{animation: magic-bento-rail calc(var(--n) * 520ms) linear calc(var(--mb-delay) + 360ms) both paused}
-.magic-bento[data-motion] .magic-bento__hub-node{animation: magic-bento-pop 520ms var(--mb-spring) calc(var(--mb-delay) + 200ms + var(--i) * 70ms) both paused}
-.magic-bento[data-motion] .magic-bento__hub-links line{stroke-dasharray: 1;animation: magic-bento-draw 700ms cubic-bezier(0.65,0,0.35,1) calc(var(--mb-delay) + 360ms) both paused}
-.magic-bento[data-motion] .magic-bento__card[data-active] .magic-bento__packet{animation: magic-bento-packet 1.8s cubic-bezier(0.45,0,0.55,1) calc(var(--i) * 0.45s) infinite}
-.magic-bento[data-motion] .magic-bento__switch{animation: magic-bento-switch-track 420ms ease calc(var(--mb-delay) + 520ms + var(--i) * 200ms) both paused}
-.magic-bento[data-motion] .magic-bento__switch::after{animation: magic-bento-switch-knob 520ms var(--mb-spring) calc(var(--mb-delay) + 520ms + var(--i) * 200ms) both paused}
-.magic-bento[data-motion] .magic-bento__switch[data-off],.magic-bento[data-motion] .magic-bento__switch[data-off]::after{animation: none}
-.magic-bento[data-motion] .magic-bento__cell[data-state='in'] :is( .magic-bento__chart-line,.magic-bento__chart-area,.magic-bento__bar,.magic-bento__selection,.magic-bento__pending,.magic-bento__spinner,.magic-bento__done,.magic-bento__step-time,.magic-bento__rail-fill,.magic-bento__hub-node,.magic-bento__hub-links line,.magic-bento__switch ){animation-play-state: running}
-.magic-bento[data-motion] .magic-bento__cell[data-state='in'] .magic-bento__switch::after{animation-play-state: running}
-.magic-bento[data-motion] .magic-bento__cell[data-state='in'] .magic-bento__cursor{animation-play-state: running,paused}
-.magic-bento[data-motion] .magic-bento__cell[data-state='in'] .magic-bento__card[data-active] .magic-bento__cursor{animation-play-state: running,running}
-.magic-bento[data-motion] .magic-bento__card[data-active] .magic-bento__caret{animation-play-state: running}
-.magic-bento[data-motion] .magic-bento__cell[data-state='in'] .magic-bento__spinner{animation-play-state: running,running}
-@keyframes magic-bento-draw{from{stroke-dashoffset: 1}to{stroke-dashoffset: 0}}
-@keyframes magic-bento-fade{from{opacity: 0}to{opacity: 1}}
-@keyframes magic-bento-grow{from{transform: scaleY(0)}to{transform: scaleY(1)}}
-@keyframes magic-bento-pop{from{opacity: 0;scale: 0.6}to{opacity: 1;scale: 1}}
-@keyframes magic-bento-select{from{clip-path: inset(0 100% 0 0)}to{clip-path: inset(0 0 0 0)}}
-@keyframes magic-bento-blink{0%{opacity: 1}50%{opacity: 0}}
-@keyframes magic-bento-wait{from{opacity: 1}to{opacity: 0}}
-@keyframes magic-bento-run{0%{opacity: 0}1%,92%{opacity: 1}100%{opacity: 0}}
-@keyframes magic-bento-spin{to{rotate: 360deg}}
-@keyframes magic-bento-check{from{opacity: 0;scale: 0.4}to{opacity: 1;scale: 1}}
-@keyframes magic-bento-rail{from{transform: scaleY(0)}to{transform: scaleY(1)}}
-@keyframes magic-bento-packet{0%{top: var(--y);left: var(--x);opacity: 0}15%{opacity: 1}80%{opacity: 1}100%{top: 50%;left: 50%;opacity: 0}}
-@keyframes magic-bento-switch-track{from{background-color: var(--mb-line)}to{background-color: rgb(var(--mb-accent-rgb))}}
-@keyframes magic-bento-switch-knob{from{background: var(--mb-ink);transform: none}to{background: var(--mb-accent-ink);transform: translateX(10px)}}
-@keyframes magic-bento-path-a{0%,100%{translate: 0 0}30%{translate: 46px -18px}62%{translate: 12px 26px}}
-@keyframes magic-bento-path-b{0%,100%{translate: 0 0}35%{translate: -40px 14px}70%{translate: -8px -22px}}
 `;
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));

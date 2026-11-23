@@ -31,16 +31,8 @@ interface CardShellProps {
   decorative?: boolean;
 }
 
-// Brand surface for Magic Bento: card colour, hairline edge, no default shadow or padding.
-const BENTO_STYLE = {
-  "--mb-surface": "var(--card)",
-  "--mb-edge": "var(--line)",
-  "--mb-highlight": "rgb(246 245 241 / 0.08)",
-  "--mb-shadow": "none",
-  "--mb-pad": "0px",
-  "--mb-ink": "var(--paper)",
-  "--mb-muted": "var(--muted)",
-} as CSSProperties;
+// Cards draw their own padding, so Magic Bento's default inset is removed.
+const BENTO_STYLE = { "--mb-pad": "0px" } as CSSProperties;
 
 const CHART = "M0 92 C40 88 60 70 100 74 S160 40 200 50 S270 24 300 30 S360 12 400 8";
 
@@ -78,7 +70,7 @@ function WebVisual() {
   return (
     <Safari url={v.web.url} mode="simple" className="shadow-[0_-20px_60px_-30px_rgb(255_74_28/0.5)]">
       <div className="flex h-full bg-ink">
-        <div className="flex w-[132px] flex-none flex-col gap-[9px] border-r border-paper/7 px-3 py-3.5 text-xs text-muted max-[700px]:hidden">
+        <div className="flex w-[132px] flex-none flex-col gap-[9px] border-r border-paper/7 px-3 py-3.5 text-xs text-muted max-[701px]:hidden">
           {v.web.nav.map((item, i) =>
             i === 0 ? (
               <span key={item} className="flex items-center gap-[7px] text-paper">
@@ -331,8 +323,8 @@ export function CapabilityCards() {
     <MagicBento
       items={items}
       columns={12}
-      minCell={64}
-      minPair={318}
+      minCell={64.7}
+      minPair={318.5}
       rowHeight={420}
       gap={16}
       radius={18}

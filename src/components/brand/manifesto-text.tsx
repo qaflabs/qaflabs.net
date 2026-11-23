@@ -1,6 +1,7 @@
 "use client";
 
 import { lazy, Suspense } from "react";
+import { cn } from "@/lib/utils";
 
 // Lazy so GSAP and ScrollTrigger load after the first paint; the fallback is the same paragraph.
 const ScrollReveal = lazy(() => import("@/components/ScrollReveal"));
@@ -17,7 +18,7 @@ export function ManifestoText({ text }: ManifestoTextProps) {
     <Suspense
       fallback={
         <p className={outer}>
-          <span className={`block ${inner}`}>{text}</span>
+          <span className={cn("block", inner)}>{text}</span>
         </p>
       }
     >

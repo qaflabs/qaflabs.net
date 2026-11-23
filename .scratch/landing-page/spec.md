@@ -116,7 +116,7 @@ Where the design and the brand kit disagree, the brand kit wins (ADR 0001). Wher
 **Motion**
 - One WebGL effect (Laser Flow). No endless loops: Border Beam runs three times, the shiny text twice, the AI-card beam twice. The orbit has a visible Pause orbit button.
 - Reduced motion shows end states: one still light frame, static text, no band movement, no orbit, no tilt, native scroll.
-- Lenis smooth scroll runs on GSAP's ticker and keeps ScrollTrigger in sync. It is off under reduced motion, stopped while the mobile menu is open, and drives anchor links with a navbar offset. It stays only if Sticky Scroll Reveal still pins and steps correctly with it.
+- Lenis smooth scroll loads after hydration with its own frame loop (autoRaf). It moves native scroll, so ScrollTrigger and Motion read it without a ticker bridge, and GSAP stays off the first paint. It is off under reduced motion, stopped while the mobile menu is open, and drives anchor links with a navbar offset. It stays only if Sticky Scroll Reveal still pins and steps correctly with it.
 
 **Mobile**
 - Breakpoints follow the reference: 1000px (code pane hidden), 900px (Approach panel replaced by per-step drawings), 860px (Menu replaces nav links), 760px (beam to 90%), 700px (phone pane hidden, selection scaled to 66%, single-column Capabilities).
