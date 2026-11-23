@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
+import { SocialLinks } from "@/components/brand/social-links";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { NavBody, NavItems, Navbar as ResizableNavbar } from "@/components/ui/resizable-navbar";
@@ -143,9 +144,12 @@ export function Navbar() {
             </div>
           }
           footer={
-            <ShimmerButton href={mailto} className="min-h-[54px] w-full font-semibold">
-              {copy.cta}
-            </ShimmerButton>
+            <div className="flex flex-col gap-5">
+              <SocialLinks />
+              <ShimmerButton href={mailto} className="min-h-[54px] w-full font-semibold">
+                {copy.cta}
+              </ShimmerButton>
+            </div>
           }
         />
       </div>

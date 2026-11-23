@@ -20,6 +20,7 @@ test.describe("seo and security", () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://qaflabs.net");
     const data = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? "{}");
     expect(data).toMatchObject({ "@type": "Organization", name: "Qaf Labs", url: "https://qaflabs.net", email: "hello@qaflabs.net" });
+    expect(data.sameAs).toEqual(["https://github.com/qaflabs", "https://www.facebook.com/qaflabs.net/"]);
   });
 
   test("responses carry security headers and no framework banner", async ({ request }) => {

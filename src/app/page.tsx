@@ -10,7 +10,7 @@ import { Principles } from "@/components/sections/principles";
 import { SmoothScroll } from "@/components/brand/smooth-scroll";
 import { site } from "@/config/site";
 
-// Only facts that are true today: the name, site, logo and contact address.
+// Only facts that are true today: the name, site, logo, contact address and social accounts.
 const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -18,6 +18,7 @@ const organization = {
   url: site.url,
   logo: `${site.url}/brand/png/qaf-labs-logo-2400.png`,
   email: site.email,
+  sameAs: site.socials.map((social) => social.href),
 };
 
 export default function Home() {

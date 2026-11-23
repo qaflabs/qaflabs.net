@@ -3,6 +3,11 @@ import { expect, test } from "@playwright/test";
 
 const MAILTO = "mailto:hello@qaflabs.net";
 
+const SOCIALS = [
+  ["Qaf Labs on GitHub", "https://github.com/qaflabs"],
+  ["Qaf Labs on Facebook", "https://www.facebook.com/qaflabs.net/"],
+] as const;
+
 test.describe("navigation", () => {
   test("desktop nav links reach their sections", async ({ page }, info) => {
     test.skip(info.project.name !== "desktop", "desktop nav");
@@ -170,6 +175,23 @@ test.describe("navigation", () => {
     const links = footer.getByRole("navigation", { name: "Footer" }).getByRole("link");
     await expect(links).toHaveText(["Capabilities", "Approach", "Principles"]);
     await expect(footer).toContainText("© 2026 Qaf Labs");
+  });
+
+  test("footer and mobile menu link to the social accounts in a new tab", async ({ page }, info) => {
+    await page.goto("/");
+    const scopes = [page.locator("footer")];
+    if (info.project.name === "mobile") {
+      await page.getByRole("button", { name: "Menu" }).click();
+      scopes.push(page.getByRole("dialog", { name: "Menu" }));
+    }
+    for (const scope of scopes) {
+      for (const [name, href] of SOCIALS) {
+        const link = scope.getByRole("link", { name });
+        await expect(link).toHaveAttribute("href", href);
+        await expect(link).toHaveAttribute("target", "_blank");
+        await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+      }
+    }
   });
 
   test("tap targets are at least 44px", async ({ page }) => {

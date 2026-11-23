@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SocialLinks } from "@/components/brand/social-links";
 import { mailto, site } from "@/config/site";
 import { footer } from "@/content/home";
 
@@ -29,6 +30,7 @@ export function Footer() {
               </a>
             ))}
           </nav>
+          <SocialLinks />
           <p className="font-mono text-[13px] text-muted">{footer.copyright}</p>
         </div>
       </div>
