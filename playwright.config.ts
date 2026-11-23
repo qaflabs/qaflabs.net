@@ -5,6 +5,8 @@ const PORT = 4317;
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: true,
+  // Timing-based checks (light clock, scroll, animations) get flaky when too many browsers share the CPU.
+  workers: 4,
   reporter: "list",
   use: {
     baseURL: `http://localhost:${PORT}`,
