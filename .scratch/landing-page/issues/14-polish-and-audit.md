@@ -14,3 +14,7 @@
 - [ ] TypeScript strict, lint and console clean
 - [ ] Final report: scores table (measured only), one-line click-through of every interactive element, each installed component with its section and what changed, every installed-file edit (ADR 0002), new dependencies and why, open items (copy approval, contact inbox, tools list)
 - [ ] antislop Delivery Gate passes in full with evidence
+
+## Comments
+
+- 2026-11-23: Audit done. 147 Playwright tests pass at 1440 and 390 (axe page-wide, keyboard focus ring on every control, 44px tap targets, 200% zoom at 720px, brand-hue sampling of the full page, no console errors on load, reduced-motion load and click-through). Lighthouse, local production build, median of 3: mobile Performance 94 / Accessibility 100 / Best Practices 100 / SEO 100, LCP 3.08s, CLS 0, TBT 48ms; desktop 100/100/100/100, LCP 0.65s, CLS 0. Mobile LCP misses the 2.5s target: observed LCP is the h1 at ~125ms, but the simulated mobile run counts the ~240KB of framework and navbar JS requested before it. Lazy-loading the below-fold sections did not move it and was reverted. Both code-review axes ran; findings fixed in 4e24b46. Not done: pixel-diff screenshot tests against the reference (screenshots compared by eye instead).
