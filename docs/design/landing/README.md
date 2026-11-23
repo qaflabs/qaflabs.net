@@ -66,13 +66,13 @@ Screens: `desktop-01-hero.jpg`, `mobile-01-hero.jpg`.
 ### 2. Hero
 
 - **React Bits Laser Flow** in vermilion. The beam falls at 68% of the width (90% below 760px) and splashes onto the top edge of the hero frame, then pours over its corners. Settings used in the reference: intensity 1.45, beam width 1.35, flare 1.4, spread 1.4, spill 1, fog 0.22, dust 0.9, streaks 1.2, dots 0.9, pulse 0.8, speed 1. The default tints include cyan and pink; recolor every tint to stay within about 22 degrees of vermilion's hue.
-- The Qaf Labs mark (52px) sits on the frame's top edge where the beam lands, so the light hits the point where the square and the circle touch.
+- The Qaf Labs mark (52px at full width, 28px minimum, scaling with the frame) sits on the frame's top edge where the beam lands, so the light hits the point where the square and the circle touch.
 - **Magic UI Animated Shiny Text** in a pill: `Qaf Labs · software company`.
 - **React Bits Split Text** headline, per word: "Where structure meets craft." The word "craft." carries a soft vermilion text glow.
 - Sub-headline in `--muted`, at most 520px wide.
 - **Magic UI Shimmer Button** (vermilion fill, ink text, glow) for **Start a conversation** (`mailto:`). **Aceternity Hover Border Gradient** for **See what we build** (`#capabilities`).
 - The hero frame is an illustration of how Qaf Labs works, not a product screenshot. Three panes: a design canvas with the primary button selected and redlined, the `Button.tsx` code for it, and a phone preview. **Magic UI Border Beam** travels its edge three times, then stops. The frame fades out at the bottom.
-- Below 1000px the code pane is hidden. Below 700px the phone pane is hidden and the selection scales to 66%.
+- The frame keeps its 1240px three-pane layout at every width and zooms to fit, so phones see the whole frame like a screenshot, as huly.io shows its app (owner decision).
 
 Screens: `desktop-01-hero.jpg`, `desktop-02-frame.jpg`, `mobile-01-hero.jpg`, `mobile-02-frame.jpg`.
 

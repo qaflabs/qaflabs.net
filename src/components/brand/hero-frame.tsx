@@ -16,7 +16,7 @@ function DesignPane() {
   return (
     <div className="relative h-full border-r border-line bg-[radial-gradient(rgb(246_245_241/0.09)_1px,transparent_1.3px)] bg-size-[18px_18px]">
       <p className="absolute top-4 left-5 font-mono text-xs text-muted">{heroFrame.layer}</p>
-      <div className="absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 max-[701px]:scale-[0.66]">
+      <div className="absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="relative rounded-full bg-vermilion px-[30px] py-4 text-[17px] font-semibold whitespace-nowrap text-ink shadow-[0_12px_40px_-12px_rgb(255_74_28/0.8)]">
           {heroFrame.button}
         </div>
@@ -50,7 +50,7 @@ function DesignPane() {
 
 function CodePane() {
   return (
-    <div className="overflow-hidden border-r border-line py-[22px] font-mono text-[13px] leading-[1.85] whitespace-pre text-muted max-[1001px]:hidden">
+    <div className="overflow-hidden border-r border-line py-[22px] font-mono text-[13px] leading-[1.85] whitespace-pre text-muted">
       {heroFrame.code.map(([keyword, token, rest], i) => (
         <div key={i} className="flex">
           <span className="w-11 flex-none pr-4 text-right text-paper/30">{i + 1}</span>
@@ -67,7 +67,7 @@ function CodePane() {
 
 function PreviewPane() {
   return (
-    <div className="relative flex justify-center bg-[radial-gradient(60%_50%_at_50%_30%,rgb(255_74_28/0.08),transparent)] pt-[34px] max-[701px]:hidden">
+    <div className="relative flex justify-center bg-[radial-gradient(60%_50%_at_50%_30%,rgb(255_74_28/0.08),transparent)] pt-[34px]">
       <div className="h-[440px] w-[212px] rounded-[34px] border border-paper/16 bg-ink p-2.5 shadow-[inset_0_0_0_4px_var(--ink-2)]">
         <div className="relative h-full rounded-[26px] bg-ink-2 px-4 pt-[38px] pb-4">
           <div className="absolute top-2.5 left-1/2 h-[18px] w-16 -translate-x-1/2 rounded-[10px] bg-ink" />
@@ -88,11 +88,11 @@ function PreviewPane() {
 
 export function HeroFrame() {
   return (
-    <div className="relative z-10 mx-auto mt-[72px] max-w-[1240px] md:mt-[110px]">
+    <div className="@container relative z-10 mx-auto mt-[72px] max-w-[1240px] md:mt-[110px]">
       {/* The light sits behind the mark; the mark file itself carries no filter (ADR 0001). */}
       <div
         aria-hidden="true"
-        className="absolute top-0 left-[68%] z-10 size-40 -translate-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(255_74_28/0.55),transparent)] max-[761px]:left-[90%]"
+        className="absolute top-0 left-[68%] z-10 size-[clamp(80px,12.9cqw,160px)] -translate-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(255_74_28/0.55),transparent)] max-[761px]:left-[90%]"
       />
       <Image
         src="/brand/svg/qaf-labs-mark-on-dark.svg"
@@ -101,13 +101,14 @@ export function HeroFrame() {
         height={52}
         unoptimized
         priority
-        className="absolute top-0 left-[68%] z-20 -translate-x-[50.95%] -translate-y-[49.05%] max-[761px]:left-[90%]"
+        className="absolute top-0 left-[68%] z-20 size-[clamp(28px,4.2cqw,52px)] -translate-x-[50.95%] -translate-y-[49.05%] max-[761px]:left-[90%]"
       />
+      {/* Laid out at full desktop width and zoomed to fit, like a screenshot of the whole frame. */}
       <figure
         id="hero-frame"
         role="img"
         aria-label={hero.frameLabel}
-        className="relative m-0 h-[560px] overflow-hidden rounded-t-frame border border-b-0 border-paper/10 bg-[linear-gradient(var(--ink-2),var(--card))] shadow-[0_-30px_120px_-40px_rgb(255_74_28/0.55)] mask-[linear-gradient(#000_70%,transparent)]"
+        className="relative m-0 h-[560px] w-[1240px] [zoom:min(1,tan(atan2(100cqw,1240px)))] overflow-hidden rounded-t-frame border border-b-0 border-paper/10 bg-[linear-gradient(var(--ink-2),var(--card))] shadow-[0_-30px_120px_-40px_rgb(255_74_28/0.55)] mask-[linear-gradient(#000_70%,transparent)]"
       >
         <BorderBeam size={160} duration={8} delay={1.6} />
         <div aria-hidden="true" className="contents">
@@ -117,18 +118,17 @@ export function HeroFrame() {
                 key={tab}
                 className={cn("px-2.5 py-[5px] font-mono", {
                   "rounded-lg bg-paper/7 text-paper": i === 0,
-                  "max-[701px]:hidden": i > 0,
                 })}
               >
                 {tab}
               </span>
             ))}
-            <span className="ml-auto inline-flex items-center gap-2 font-mono whitespace-nowrap max-[701px]:hidden">
+            <span className="ml-auto inline-flex items-center gap-2 font-mono whitespace-nowrap">
               <span className="size-[7px] rounded-full bg-vermilion" />
               {heroFrame.status}
             </span>
           </div>
-          <div className="grid h-[514px] grid-cols-[minmax(0,40fr)_minmax(0,36fr)_minmax(0,24fr)] max-[1001px]:grid-cols-[minmax(0,58fr)_minmax(0,42fr)] max-[701px]:grid-cols-1">
+          <div className="grid h-[514px] grid-cols-[minmax(0,40fr)_minmax(0,36fr)_minmax(0,24fr)]">
             <DesignPane />
             <CodePane />
             <PreviewPane />

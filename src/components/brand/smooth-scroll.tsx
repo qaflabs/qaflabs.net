@@ -4,9 +4,6 @@ import { useEffect } from "react";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 import { registerSmoothScroll } from "@/lib/smooth-scroll";
 
-// Clears the fixed navbar when Lenis scrolls to an anchor.
-const NAV_OFFSET = -96;
-
 export function SmoothScroll() {
   const reduced = usePrefersReducedMotion();
 
@@ -17,7 +14,8 @@ export function SmoothScroll() {
     // Loaded after hydration so it never weighs on the first paint.
     import("lenis").then(({ default: Lenis }) => {
       if (cancelled) return;
-      lenis = new Lenis({ autoRaf: true, anchors: { offset: NAV_OFFSET } });
+      // Lenis reads the page's scroll-padding-top, so anchors already clear the navbar.
+      lenis = new Lenis({ autoRaf: true, anchors: true });
       registerSmoothScroll(lenis);
     });
     return () => {

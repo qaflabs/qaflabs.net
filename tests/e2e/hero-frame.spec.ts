@@ -11,18 +11,17 @@ test.describe("hero frame", () => {
     expect(children).toBe(0);
   });
 
-  for (const [width, code, preview] of [
-    [1440, true, true],
-    [900, false, true],
-    [390, false, false],
-  ] as const) {
-    test(`panes at ${width}px: code ${code}, preview ${preview}`, async ({ page }) => {
+  // The frame keeps its desktop layout at every width and zooms to fit, like a screenshot.
+  for (const width of [1440, 900, 390]) {
+    test(`all three panes show and fit at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
       await page.goto("/");
       const frame = page.locator("#hero-frame");
-      await expect(frame.getByText("export function")).toBeVisible({ visible: code });
-      await expect(frame.getByText("A few lines is enough to start.")).toBeVisible({ visible: preview });
+      await expect(frame.getByText("export function")).toBeVisible();
+      await expect(frame.getByText("A few lines is enough to start.")).toBeVisible();
       await expect(frame.getByText("Button / Primary")).toBeVisible();
+      const box = await frame.boundingBox();
+      expect(box && box.x >= 0 && box.x + box.width <= width).toBe(true);
     });
   }
 
