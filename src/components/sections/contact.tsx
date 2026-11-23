@@ -9,7 +9,7 @@ export function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="relative z-[2] overflow-hidden px-6 pb-[clamp(96px,12vw,160px)] text-center"
+      className="relative z-[2] overflow-x-clip px-6 pb-[clamp(96px,12vw,160px)] text-center"
     >
       <LampContainer>
         <h2
@@ -18,7 +18,7 @@ export function Contact() {
         >
           {contact.title}
         </h2>
-        <p className="mx-auto mt-6 max-w-[520px] text-lg text-muted">{contact.line}</p>
+        <p className="mx-auto mt-6 max-w-[520px] text-lg text-balance text-muted">{contact.line}</p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <ShimmerButton href={mailto} className="min-h-14 px-8 font-semibold">
             {contact.primaryCta}

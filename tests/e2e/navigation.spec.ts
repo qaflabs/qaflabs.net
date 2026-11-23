@@ -26,6 +26,14 @@ test.describe("navigation", () => {
     expect(before).toBeGreaterThan(1000);
   });
 
+  test("the bar only blurs what is behind it once it becomes a pill", async ({ page }) => {
+    await page.goto("/");
+    const bar = page.locator("header .rounded-full.border").first();
+    await expect(bar).toHaveCSS("backdrop-filter", "none");
+    await page.mouse.wheel(0, 400);
+    await expect(bar).toHaveCSS("backdrop-filter", "blur(16px)");
+  });
+
   test("start a conversation opens the configured email", async ({ page }, info) => {
     test.skip(info.project.name !== "desktop", "CTA is in the menu on mobile");
     await page.goto("/");

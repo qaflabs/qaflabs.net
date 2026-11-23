@@ -19,7 +19,7 @@ test.describe("capabilities", () => {
       "AI that answers from your data",
       "Desktop software people keep open all day",
       "Checkouts built for how people buy",
-      "From commit to production, set up to last",
+      "CI, deploys and servers you own",
     ]) {
       await expect(page.getByRole("heading", { level: 3, name: title })).toBeVisible();
     }

@@ -13,7 +13,6 @@ import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion"
 import { Minus, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// ─── Types ───────────────────────────────────────────────────────────────────
 
 export interface QuantityStepperProps {
   /** Controlled value. Leave undefined for uncontrolled usage */
@@ -35,7 +34,6 @@ export interface QuantityStepperProps {
   className?: string
 }
 
-// ─── Constants ───────────────────────────────────────────────────────────────
 
 const HOLD_DELAY = 400
 const HOLD_INTERVAL = 80
@@ -90,7 +88,6 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value))
 }
 
-// ─── Component ───────────────────────────────────────────────────────────────
 
 export function QuantityStepper({
   value: valueProp,
@@ -148,7 +145,7 @@ export function QuantityStepper({
 
   useEffect(() => stopRepeat, [stopRepeat])
 
-  // Every blocked press restarts the shake from rest — the roll is forced
+  // Every blocked press restarts the shake from rest; the roll is forced
   // instant while flash > 0 (see the roll transition), so they never overlap
   useEffect(() => {
     if (flash === 0) return

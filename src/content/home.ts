@@ -4,7 +4,7 @@ export const meta = {
   title: "Qaf Labs: Where structure meets craft",
   // TODO copy: owner to approve
   description:
-    "Qaf Labs designs and engineers digital products across web, mobile, desktop and AI, built with rigor and finished with care.",
+    "Qaf Labs designs and builds web, mobile, desktop and AI products, from the first screen to the production server.",
   skipLink: "Skip to content",
 } as const;
 
@@ -21,7 +21,7 @@ export const hero = {
   headlineLead: "Where structure meets",
   headlineAccent: "craft.",
   subheadline:
-    "We design and engineer digital products across web, mobile, desktop and AI, built with rigor and finished with care.",
+    "We design and build web, mobile, desktop and AI products, from the first screen to the production server.",
   primaryCta: "Start a conversation",
   secondaryCta: "See what we build",
   frameLabel:
@@ -96,7 +96,7 @@ export const capabilities = {
       number: "01.3",
       kind: "AI products",
       title: "AI that answers from your data",
-      line: "Models wired into your product, with evaluation and guardrails for production.",
+      line: "Language models connected to your product, with evaluation and guardrails before launch.",
     },
     {
       id: "desktop",
@@ -116,8 +116,8 @@ export const capabilities = {
       id: "infra",
       number: "01.6",
       kind: "Engineering and infrastructure",
-      title: "From commit to production, set up to last",
-      line: "CI, deploys and servers on Kubernetes, handed over so you own them.",
+      title: "CI, deploys and servers you own",
+      line: "Pipelines and Kubernetes clusters, documented and handed over to your team.",
     },
   ],
 } as const;
@@ -173,8 +173,8 @@ export const capabilityVisuals = {
 export const manifesto = {
   label: "Manifesto",
   sentences: [
-    "Most software is built fast and forgotten faster.",
-    "We build the other kind: structured enough to scale, and made with enough care that people keep using it.",
+    "A lot of software ships fast and is dropped within a year.",
+    "We build software that is structured enough to grow and careful enough in the details that people keep using it.",
     "Engineering and design meet at one point, and that point is where we work.",
   ],
 } as const;
@@ -199,11 +199,11 @@ export const approach = {
     },
     {
       title: "Ship",
-      line: "We release it to real users and watch what they actually do with it.",
+      line: "We release it to real users and watch what they do with it.",
     },
     {
       title: "Evolve",
-      line: "We keep improving it from what real usage tells us, not from guesses.",
+      line: "We keep improving it based on how people use it.",
     },
   ],
 } as const;
@@ -220,7 +220,7 @@ export const principles = {
     },
     {
       title: "Engineering decisions are design decisions.",
-      line: "The data model, the load time and the error states are part of what people feel.",
+      line: "The data model, the load time and the error states are part of the product people use.",
     },
     {
       title: "Built to last.",
@@ -235,7 +235,7 @@ export const stack = {
   label: "Stack",
   title: "The tools we trust.",
   // TODO copy: owner to approve
-  line: "We're polyglot: we pick the language the problem needs, not the one we happen to know.",
+  line: "We work in several languages and pick the one each problem needs.",
   tools: [
     "TypeScript",
     "Python",

@@ -19,7 +19,20 @@
   --color-*: initial;
 }
 
+/* Lets the outline button's conic border turn smoothly. */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @theme inline {
+  --animate-border-spin: border-spin 2.2s linear infinite;
+  @keyframes border-spin {
+    to {
+      --border-angle: 360deg;
+    }
+  }
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-card: var(--card);

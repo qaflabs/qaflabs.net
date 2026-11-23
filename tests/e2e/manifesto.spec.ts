@@ -17,7 +17,7 @@ test.describe("manifesto", () => {
     const section = page.getByRole("region", { name: "Manifesto" });
     await expect(section).toHaveCSS("background-color", "rgb(246, 245, 241)");
     await expect(section.getByRole("img", { name: "Qaf Labs mark" })).toHaveAttribute("src", /qaf-labs-mark\.svg/);
-    await expect(section).toContainText("Most software is built fast and forgotten faster.");
+    await expect(section).toContainText("A lot of software ships fast and is dropped within a year.");
     await expect(section).toContainText("that point is where we work.");
   });
 

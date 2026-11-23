@@ -8,12 +8,11 @@ import { AnimatePresence, motion } from "motion/react"
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion"
 import { cn } from "@/lib/utils"
 
-// ─── Types ───────────────────────────────────────────────────────────────────
 
 export type MorphButtonState = "idle" | "loading" | "success" | "error"
 
 export interface MorphButtonProps {
-  /** Idle content of the button — usually a short action label */
+  /** Idle content of the button, usually a short action label */
   children: React.ReactNode
   /**
    * Async work to run on click when uncontrolled. The button shows loading
@@ -45,7 +44,6 @@ export interface MorphButtonProps {
   announce?: boolean
 }
 
-// ─── Constants ───────────────────────────────────────────────────────────────
 
 /** Snappy spring for micro moves: width morph, tap scale */
 const SPRING_SNAPPY = { type: "spring", stiffness: 500, damping: 30 } as const
@@ -99,7 +97,6 @@ const STATE_CLASSES: Record<MorphButtonState, string> = {
   error: "border border-vermilion-soft bg-ink-2 text-vermilion-soft",
 }
 
-// ─── Icons ───────────────────────────────────────────────────────────────────
 
 interface SpinnerIconProps {
   size: number
@@ -170,7 +167,6 @@ function DrawnIcon({ paths, size, instant }: DrawnIconProps) {
   )
 }
 
-// ─── Component ───────────────────────────────────────────────────────────────
 
 export function MorphButton({
   children,

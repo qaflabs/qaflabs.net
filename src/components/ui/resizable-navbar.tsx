@@ -75,7 +75,9 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       transition={{ duration: 0.45, ease: [0.2, 0.7, 0.2, 1] }}
       className={cn(
-        "relative mx-auto flex w-[calc(100%-32px)] flex-row items-center justify-between gap-4 rounded-full border py-2 pr-2 pl-5 backdrop-blur-[16px]",
+        "relative mx-auto flex w-[calc(100%-32px)] flex-row items-center justify-between gap-4 rounded-full border py-2 pr-2 pl-5",
+        // Blur only behind the pill: at the top it would smear the hero light around the bar.
+        { "backdrop-blur-[16px]": visible },
         className,
       )}
     >

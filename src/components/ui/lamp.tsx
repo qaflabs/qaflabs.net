@@ -4,9 +4,8 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
-// Brand edits (ADR 0002): vermilion cone, glow and filament on ink instead of cyan on slate,
-// sized as a section header (not a full screen), opens once in view and is static under
-// reduced motion; the demo default export is removed.
+// Brand edits (ADR 0002): vermilion on ink, section-sized, opens once in view (static under
+// reduced motion), demo export removed.
 interface LampContainerProps {
   children: React.ReactNode;
   className?: string;
@@ -35,10 +34,13 @@ export const LampContainer = ({ children, className }: LampContainerProps) => {
         </motion.div>
         <div className="absolute top-2.5 left-1/2 h-[90px] w-[520px] max-w-[80%] -translate-x-1/2 rounded-full bg-vermilion opacity-55 blur-[46px]" />
         <div className="absolute top-10 left-1/2 h-[60px] w-[300px] max-w-[60%] -translate-x-1/2 rounded-full bg-vermilion-soft opacity-60 blur-[26px]" />
+        {/* The filament's glow is masked with it, so neither shows hard ends. */}
         <motion.div
           {...open("20%", "min(560px, 86%)")}
-          className="absolute top-[39px] left-1/2 h-0.5 -translate-x-1/2 bg-[linear-gradient(90deg,transparent,var(--vermilion-soft),var(--paper),var(--vermilion-soft),transparent)] shadow-[0_0_18px_2px_rgb(255_74_28/0.8)]"
-        />
+          className="absolute top-[19px] left-1/2 flex h-[42px] -translate-x-1/2 items-center mask-[linear-gradient(90deg,transparent,#000_20%,#000_80%,transparent)]"
+        >
+          <div className="h-0.5 w-full bg-[linear-gradient(90deg,var(--vermilion-soft),var(--paper),var(--vermilion-soft))] shadow-[0_0_18px_2px_rgb(255_74_28/0.8)]" />
+        </motion.div>
       </div>
       <div className="relative -mt-[150px]">{children}</div>
     </div>

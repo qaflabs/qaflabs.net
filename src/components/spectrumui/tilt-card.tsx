@@ -21,7 +21,6 @@ import {
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion"
 import { cn } from "@/lib/utils"
 
-// ─── Types ───────────────────────────────────────────────────────────────────
 
 export interface TiltCardProps {
   children: React.ReactNode
@@ -50,7 +49,6 @@ export interface TiltCardItemProps {
   className?: string
 }
 
-// ─── Constants ───────────────────────────────────────────────────────────────
 
 /** Spring used while the pointer is tracking across the card */
 const TRACK_SPRING = {
@@ -73,7 +71,6 @@ const PRESS_SCALE = 0.99
 
 const TiltCardContext = createContext<{ hovered: boolean }>({ hovered: false })
 
-// ─── Components ──────────────────────────────────────────────────────────────
 
 export function TiltCard({
   children,

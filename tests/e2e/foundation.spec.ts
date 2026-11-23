@@ -14,7 +14,7 @@ test.describe("foundation", () => {
 
     const meta = (selector: string) => page.locator(selector).first();
     const description = await meta('meta[name="description"]').getAttribute("content");
-    expect(description).toMatch(/^Qaf Labs designs and engineers/);
+    expect(description).toMatch(/^Qaf Labs designs and builds/);
     await expect(meta('meta[name="theme-color"]')).toHaveAttribute("content", "#0B0B0F");
     await expect(meta('meta[property="og:title"]')).toHaveAttribute("content", TITLE);
     await expect(meta('meta[property="og:description"]')).toHaveAttribute("content", description ?? "");

@@ -115,7 +115,8 @@ export function Navbar() {
           items={menuItems}
           displaySocials={false}
           panelHeader={
-            <div className="flex items-center justify-between">
+            // Same spots as the navbar's logo and Menu button, so nothing jumps when the menu opens.
+            <div className="flex items-center justify-between pl-3">
               <Logo />
               <HoverBorderGradient
                 as="button"

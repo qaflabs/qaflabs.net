@@ -7,7 +7,6 @@ import { motion } from "motion/react"
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion"
 import { cn } from "@/lib/utils"
 
-// ─── Types ───────────────────────────────────────────────────────────────────
 
 export interface TaskCheckboxProps {
   /** Controlled checked state. Leave undefined for uncontrolled usage */
@@ -28,7 +27,6 @@ export interface TaskCheckboxProps {
   className?: string
 }
 
-// ─── Constants ───────────────────────────────────────────────────────────────
 
 /** Snappy spring for micro moves (box fill scaling in) */
 const MICRO_SPRING = { type: "spring", stiffness: 500, damping: 30 } as const
@@ -44,7 +42,7 @@ const STRIKE_DURATION = 0.25
 const UNSTRIKE_DURATION = 0.15
 const STRIKE_HEIGHT = 1.5
 
-/** Box pop on check only — overshoot is reserved for the positive moment */
+/** Box pop on check only. Overshoot is reserved for the positive moment */
 const POP_KEYFRAMES = [1, 0.9, 1.05, 1]
 const POP_DURATION = 0.4
 const POP_TIMES = [0, 0.3, 0.7, 1]
@@ -91,7 +89,6 @@ const SIZES = {
   },
 } as const
 
-// ─── Component ───────────────────────────────────────────────────────────────
 
 export function TaskCheckbox({
   checked: checkedProp,
@@ -221,7 +218,7 @@ export function TaskCheckbox({
             />
           </svg>
 
-          {/* Confetti burst — remounts per check via burstKey, unmounts on completion */}
+          {/* Confetti burst. Remounts per check via burstKey, unmounts on completion */}
           {burstKey > 0 && !shouldReduceMotion && (
             <span
               aria-hidden="true"

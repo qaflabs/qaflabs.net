@@ -10,7 +10,7 @@ test.describe("hero copy", () => {
       const hero = page.locator("#hero");
       await expect(hero.getByRole("heading", { level: 1 })).toHaveText("Where structure meets craft.");
       await expect(hero.getByRole("heading", { level: 1 })).toBeVisible();
-      await expect(hero.getByText(/^We design and engineer digital products/)).toBeVisible();
+      await expect(hero.getByText(/^We design and build web, mobile, desktop and AI products/)).toBeVisible();
       await expect(hero.getByRole("link", { name: "Start a conversation" })).toHaveAttribute(
         "href",
         "mailto:hello@qaflabs.net",
@@ -36,6 +36,18 @@ test.describe("hero copy", () => {
     await page.locator("#hero").getByRole("link", { name: "See what we build" }).click();
     await expect(page).toHaveURL(/#capabilities$/);
     await expect(page.locator("#capabilities")).toBeInViewport();
+  });
+
+  test("outline button border turns only while hovered", async ({ page }, info) => {
+    test.skip(info.project.name !== "desktop", "hover is a mouse state");
+    await page.goto("/");
+    const link = page.locator("#hero").getByRole("link", { name: "See what we build" });
+    const border = link.locator("span[aria-hidden='true']");
+    await expect(border).toHaveCSS("animation-name", "none");
+    await link.hover();
+    await expect(border).toHaveCSS("animation-name", "border-spin");
+    await page.mouse.move(0, 0);
+    await expect(border).toHaveCSS("animation-name", "none");
   });
 
   test("eyebrow shine runs a fixed number of times", async ({ page }) => {
