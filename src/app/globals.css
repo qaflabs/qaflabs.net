@@ -95,6 +95,21 @@
   html {
     color-scheme: dark;
     background: var(--ink);
+    /* Anchors and keyboard focus land below the fixed navbar instead of under it. */
+    scroll-padding-top: 96px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  a,
+  button,
+  [role="spinbutton"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {

@@ -75,7 +75,7 @@ Follow the spec section by section. Key points:
 - **Hero frame:** build the design, code, and preview panes as real markup (not an image), as in the reference. It is decorative: give the figure `role="img"` and the `aria-label` from the reference.
 - **Mobile:** follow the breakpoints in the reference CSS (1000px, 900px, 860px, 700px). Fix the two open mobile issues in the spec: keep the beam from crossing the headline at 390px, and stop the web-app card's status rows from wrapping.
 - **Copy:** use the copy from the reference page as written. It still needs owner approval, so mark each string the design added (eyebrow, capability titles and lines, Approach steps, principle lines) with `{/* TODO copy: owner to approve */}` in `home.ts`.
-- **Metadata:** title `Qaf Labs: Where structure meets craft`, a description, Open Graph and Twitter cards with `/brand/png/qaf-labs-logo-on-dark-2400.png`, favicons from `/brand/favicon/`, and `theme-color` `#0B0B0F`.
+- **Metadata:** title `Qaf Labs: Where structure meets craft`, a description, and `metadataBase` set to `https://qaflabs.net`. Open Graph image `/brand/social/qaf-labs-og-1200x630.png` (1200 x 630). Twitter card `summary_large_image` with `/brand/social/qaf-labs-x-card-1200x600.png` (1200 x 600). Give both images the alt text "Qaf Labs: Where structure meets craft. A vermilion beam lands on the Qaf Labs mark." and declare their width and height. Favicons from `/brand/favicon/`, and `theme-color` `#0B0B0F`.
 
 ## 6. Motion and performance
 

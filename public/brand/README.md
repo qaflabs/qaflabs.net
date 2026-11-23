@@ -39,3 +39,16 @@ The name is set in Geist SemiBold (free, Google Fonts), outlined in the SVGs so 
 - Minimum size: logo 16 px tall on screen; mark 16 px.
 - Keep the square and circle touching at one point. Don't separate, rotate, recolour or add effects to them.
 - On vermilion backgrounds, use the ink square with a white circle (see the vermilion app icon).
+
+## Social images
+
+Files in `social/`. The light is rendered from the website's hero shader, so the images match the site.
+
+| File | Size | Use |
+| --- | --- | --- |
+| `qaf-labs-og-1200x630.png` | 1200 x 630 | Open Graph image for link previews (Facebook, LinkedIn, Slack, iMessage) |
+| `qaf-labs-x-card-1200x600.png` | 1200 x 600 | X `summary_large_image` card. X crops large cards to 2:1, so it has its own file. |
+| `qaf-labs-facebook-cover-1640x624.png` | 1640 x 624 | Facebook Page cover (2x of the 820 x 312 desktop view). Text sits inside the band phones show, x 265 to 1375. |
+| `qaf-labs-linkedin-cover-1512x256.png` | 1512 x 256 | LinkedIn company page cover. The left 240 px stays empty for the company logo. |
+
+Use `png/qaf-labs-avatar-800.png` as the profile picture on all three networks. The editable designs live on the Social page of the Claude design canvas.

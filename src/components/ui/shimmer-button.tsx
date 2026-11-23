@@ -71,7 +71,7 @@ export const ShimmerButton = React.forwardRef<
             "rounded-[inherit] shadow-[inset_0_1px_0_rgb(246_245_241/0.35),inset_0_-8px_14px_rgb(11_11_15/0.2)]",
 
             // transition
-            "transform-gpu transition-all duration-300 ease-in-out",
+            "transform-gpu transition-shadow duration-300 ease-in-out",
 
             // on hover
             "group-hover:shadow-[inset_0_1px_0_rgb(246_245_241/0.45),inset_0_-6px_14px_rgb(11_11_15/0.15)]",
