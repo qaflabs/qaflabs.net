@@ -105,6 +105,13 @@
     cursor: not-allowed;
   }
 
+  /* Resting outline colour is vermilion, so colour transitions never fade the ring in from grey. */
+  *,
+  ::before,
+  ::after {
+    outline-color: var(--vermilion);
+  }
+
   :focus-visible {
     outline: 2px solid var(--vermilion);
     outline-offset: 3px;
