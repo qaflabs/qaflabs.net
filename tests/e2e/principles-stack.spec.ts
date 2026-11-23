@@ -61,12 +61,13 @@ test.describe("principles and stack", () => {
     await button.click();
     const resume = page.getByRole("button", { name: "Resume orbit" });
     await expect(resume).toHaveAttribute("aria-pressed", "true");
-    expect(await orbitState(page)).toBe("paused");
+    await expect.poll(() => orbitState(page)).toBe("paused");
+    await page.waitForTimeout(200);
     const a = await tileTransform(page);
     await page.waitForTimeout(600);
     expect(await tileTransform(page)).toBe(a);
     await resume.click();
-    expect(await orbitState(page)).toBe("running");
+    await expect.poll(() => orbitState(page)).toBe("running");
   });
 
   test("tilt follows the mouse on desktop", async ({ page }, info) => {

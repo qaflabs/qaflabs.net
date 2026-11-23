@@ -269,6 +269,9 @@ export const contact = {
   primaryCta: "Start a conversation",
   copyCta: "Copy email",
   copiedLabel: "Copied",
+  copiedSuffix: "is on your clipboard.",
+  copyFailedLabel: "Copy failed",
+  copyFailedMessage: "Copy failed. The address is",
 } as const;
 
 export const footer = {

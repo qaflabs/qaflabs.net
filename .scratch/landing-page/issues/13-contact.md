@@ -13,3 +13,7 @@
 - [ ] Reduced motion: lamp shown in its end state, no morph animation
 - [ ] Tests: Copy email with clipboard granted shows "Copied" and announces it; with clipboard denied shows the address; Start a conversation href matches config; axe clean
 - [ ] Screenshots next to `desktop-10-contact.jpg` and `mobile-10-contact.jpg`; Delivery Gate reported
+
+## Comments
+
+- 2026-11-23: Implemented. Lamp rewritten in place (vermilion on ink, section-sized, opens once in view, static under reduced motion, demo export removed). Morph Button: motion/react, brand states, `announce` prop so the page's own live region (#copy-status) is the single announcement; on clipboard failure the address shows as selectable text. 136 tests pass.
