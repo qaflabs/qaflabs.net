@@ -5,7 +5,9 @@ test.describe("hero copy", () => {
   test.describe("without JavaScript", () => {
     test.use({ javaScriptEnabled: false });
 
-    test("headline, sub-headline and both buttons are readable", async ({ page }) => {
+    test("headline, sub-headline and buttons are readable", async ({ page }, info) => {
+      // Phones keep one call to action and drop the eyebrow; the logo above already names the company.
+      const desktop = info.project.name === "desktop";
       await page.goto("/");
       const hero = page.locator("#hero");
       await expect(hero.getByRole("heading", { level: 1 })).toHaveText("Where structure meets craft.");
@@ -15,8 +17,10 @@ test.describe("hero copy", () => {
         "href",
         "mailto:hello@qaflabs.net",
       );
-      await expect(hero.getByRole("link", { name: "See what we build" })).toHaveAttribute("href", "#capabilities");
-      await expect(hero.getByText("Qaf Labs · software company")).toBeVisible();
+      const secondary = hero.locator('a[href="#capabilities"]');
+      await expect(secondary).toHaveText("See what we build");
+      await expect(secondary).toBeVisible({ visible: desktop });
+      await expect(hero.getByText("Qaf Labs · software company")).toBeVisible({ visible: desktop });
     });
   });
 
@@ -31,7 +35,8 @@ test.describe("hero copy", () => {
     expect(state).toEqual({ opacity: "1", visibility: "visible" });
   });
 
-  test("See what we build reaches Capabilities", async ({ page }) => {
+  test("See what we build reaches Capabilities", async ({ page }, info) => {
+    test.skip(info.project.name !== "desktop", "phones show only the primary call to action");
     await page.goto("/");
     await page.locator("#hero").getByRole("link", { name: "See what we build" }).click();
     await expect(page).toHaveURL(/#capabilities$/);

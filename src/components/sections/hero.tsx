@@ -18,7 +18,8 @@ export function Hero() {
       />
       {/* Below 760px the text stops at 82% so no line reaches the beam at 90%. */}
       <div className="relative z-[11] mx-auto max-w-[1200px] max-[761px]:mr-[18%]">
-        <p className="flex w-fit max-w-full items-center gap-2.5 rounded-full border border-paper/12 bg-ink-2/70 py-1 pr-3 pl-2 font-mono text-[12px] md:py-1.5 md:pr-3.5 md:text-[13px]">
+        {/* Phones skip the eyebrow: the logo right above already names the company. */}
+        <p className="flex w-fit max-w-full items-center gap-2.5 rounded-full border border-paper/12 bg-ink-2/70 py-1.5 pr-3.5 pl-2 font-mono text-[13px] max-md:hidden">
           <Image src="/brand/svg/qaf-labs-mark-on-dark.svg" alt="" width={18} height={18} unoptimized />
           <AnimatedShinyText>{hero.eyebrow}</AnimatedShinyText>
         </p>
@@ -38,6 +39,7 @@ export function Hero() {
           <HoverBorderGradient
             as="a"
             href="#capabilities"
+            containerClassName="max-md:hidden"
             className="inline-flex min-h-11 items-center px-6 text-[15px] font-semibold md:min-h-[52px] md:px-[30px] md:text-base"
           >
             {hero.secondaryCta}
