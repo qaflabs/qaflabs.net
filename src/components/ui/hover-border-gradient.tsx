@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 // Brand edits (ADR 0002): rebuilt to the design's outline button. A hairline conic border with a
 // vermilion arc that turns only while hovered or keyboard-focused; CSS only, so no Motion or client JS.
+// No iOS long-press preview, which snapshots the pill as a square.
 interface HoverBorderGradientProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
   containerClassName?: string;
@@ -23,7 +24,7 @@ export function HoverBorderGradient({
   return (
     <Tag
       className={cn(
-        "group relative isolate inline-flex w-fit items-center justify-center rounded-full bg-ink-2 text-paper no-underline transition-transform duration-150 active:translate-y-px",
+        "group relative isolate inline-flex w-fit items-center justify-center rounded-full bg-ink-2 text-paper no-underline transition-transform duration-150 [-webkit-touch-callout:none] active:translate-y-px",
         containerClassName,
       )}
       {...props}

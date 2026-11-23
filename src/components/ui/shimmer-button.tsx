@@ -2,7 +2,8 @@ import React, { type ComponentPropsWithoutRef, type CSSProperties } from "react"
 
 import { cn } from "@/lib/utils"
 
-// Brand edits (ADR 0002): renders a link when given href, paper highlights, sheen runs twice then stops.
+// Brand edits (ADR 0002): renders a link when given href, paper highlights, sheen runs twice then stops,
+// no iOS long-press preview (it snapshots the pill as a square with its glow).
 export interface ShimmerButtonProps extends ComponentPropsWithoutRef<"button"> {
   href?: string
   shimmerColor?: string
@@ -41,7 +42,7 @@ export const ShimmerButton = React.forwardRef<
       "--bg": background,
     } as CSSProperties
     const classes = cn(
-      "group relative z-0 flex items-center justify-center overflow-hidden [border-radius:var(--radius)] border border-paper/10 px-6 py-3 whitespace-nowrap text-ink no-underline [background:var(--bg)]",
+      "group relative z-0 flex items-center justify-center overflow-hidden [border-radius:var(--radius)] border border-paper/10 px-6 py-3 whitespace-nowrap text-ink no-underline [background:var(--bg)] [-webkit-touch-callout:none]",
       "shadow-[0_10px_40px_-10px_rgb(255_74_28/0.85)] hover:shadow-[0_14px_56px_-8px_rgb(255_74_28/1)]",
       "transform-gpu transition-[transform,box-shadow] duration-300 ease-in-out active:translate-y-px",
       className

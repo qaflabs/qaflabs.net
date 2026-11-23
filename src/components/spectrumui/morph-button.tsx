@@ -1,7 +1,8 @@
 "use client"
 
 // Brand edits (ADR 0002): motion/react, SSR-safe reduced motion, ink and vermilion states,
-// vermilion focus ring, named prop types.
+// vermilion focus ring, named prop types, status icons drawn whole (a stroke draw-in could leave them
+// invisible on iOS while they still took up space).
 
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
@@ -59,9 +60,6 @@ const CONTENT_SHIFT = 8
 
 /** Duration (s) of the content slide between states */
 const CONTENT_DURATION = 0.3
-
-/** Duration (s) of the check/X stroke draw-in */
-const DRAW_DURATION = 0.25
 
 /** Tight error shake: ≤ 4px, no bounce */
 const SHAKE_KEYFRAMES = [0, -3, 3, -2, 2, 0]
@@ -130,10 +128,9 @@ function SpinnerIcon({ size }: SpinnerIconProps) {
 interface DrawnIconProps {
   paths: string[]
   size: number
-  instant: boolean
 }
 
-function DrawnIcon({ paths, size, instant }: DrawnIconProps) {
+function DrawnIcon({ paths, size }: DrawnIconProps) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -146,22 +143,8 @@ function DrawnIcon({ paths, size, instant }: DrawnIconProps) {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      {paths.map((d, index) => (
-        <motion.path
-          key={d}
-          d={d}
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={
-            instant
-              ? { duration: 0 }
-              : {
-                  duration: DRAW_DURATION,
-                  ease: EASE_REVEAL,
-                  delay: index * 0.05,
-                }
-          }
-        />
+      {paths.map((d) => (
+        <path key={d} d={d} />
       ))}
     </svg>
   )
@@ -250,11 +233,7 @@ export function MorphButton({
           animate={{ scale: 1 }}
           transition={SPRING_SOFT}
         >
-          <DrawnIcon
-            paths={[CHECK_PATH]}
-            size={iconSize}
-            instant={!!shouldReduceMotion}
-          />
+          <DrawnIcon paths={[CHECK_PATH]} size={iconSize} />
         </motion.span>
         {successLabel && <span>{successLabel}</span>}
       </>
@@ -262,7 +241,7 @@ export function MorphButton({
   } else if (state === "error") {
     content = (
       <>
-        <DrawnIcon paths={X_PATHS} size={iconSize} instant={!!shouldReduceMotion} />
+        <DrawnIcon paths={X_PATHS} size={iconSize} />
         {errorLabel && <span>{errorLabel}</span>}
       </>
     )
