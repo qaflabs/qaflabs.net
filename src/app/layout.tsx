@@ -16,11 +16,19 @@ const geistMono = Geist_Mono({
 });
 
 const { title, description } = meta;
-const shareImage = {
-  url: "/brand/png/qaf-labs-logo-on-dark-2400.png",
-  width: 2400,
-  height: 644,
-  alt: "Qaf Labs",
+const shareAlt = "Qaf Labs: Where structure meets craft. A vermilion beam lands on the Qaf Labs mark.";
+const ogImage = {
+  url: "/brand/social/qaf-labs-og-1200x630.png",
+  width: 1200,
+  height: 630,
+  alt: shareAlt,
+};
+// X crops large cards to 2:1, so it gets its own 1200 x 600 file.
+const xImage = {
+  url: "/brand/social/qaf-labs-x-card-1200x600.png",
+  width: 1200,
+  height: 600,
+  alt: shareAlt,
 };
 
 export const metadata: Metadata = {
@@ -34,13 +42,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     title,
     description,
-    images: [shareImage],
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: [shareImage.url],
+    images: [xImage],
   },
   icons: {
     icon: [

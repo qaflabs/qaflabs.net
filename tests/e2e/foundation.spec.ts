@@ -2,7 +2,8 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const TITLE = "Qaf Labs: Where structure meets craft";
-const SHARE_IMAGE = /^https:\/\/qaflabs\.net\/brand\/png\/qaf-labs-logo-on-dark-2400\.png$/;
+const OG_IMAGE = /^https:\/\/qaflabs\.net\/brand\/social\/qaf-labs-og-1200x630\.png$/;
+const X_IMAGE = /^https:\/\/qaflabs\.net\/brand\/social\/qaf-labs-x-card-1200x600\.png$/;
 // Stack and Manifesto follow the design: Stack titles with an h3 inside Principles, Manifesto has no heading.
 const SECTION_IDS = ["hero", "capabilities", "approach", "principles", "stack", "contact"];
 
@@ -18,10 +19,13 @@ test.describe("foundation", () => {
     await expect(meta('meta[name="theme-color"]')).toHaveAttribute("content", "#0B0B0F");
     await expect(meta('meta[property="og:title"]')).toHaveAttribute("content", TITLE);
     await expect(meta('meta[property="og:description"]')).toHaveAttribute("content", description ?? "");
-    await expect(meta('meta[property="og:image"]')).toHaveAttribute("content", SHARE_IMAGE);
+    await expect(meta('meta[property="og:image"]')).toHaveAttribute("content", OG_IMAGE);
+    await expect(meta('meta[property="og:image:width"]')).toHaveAttribute("content", "1200");
+    await expect(meta('meta[property="og:image:height"]')).toHaveAttribute("content", "630");
+    await expect(meta('meta[property="og:image:alt"]')).toHaveAttribute("content", /Where structure meets craft/);
     await expect(meta('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
     await expect(meta('meta[name="twitter:title"]')).toHaveAttribute("content", TITLE);
-    await expect(meta('meta[name="twitter:image"]')).toHaveAttribute("content", SHARE_IMAGE);
+    await expect(meta('meta[name="twitter:image"]')).toHaveAttribute("content", X_IMAGE);
     await expect(meta('link[rel="icon"][type="image/svg+xml"]')).toHaveAttribute("href", /favicon\.svg/);
     await expect(meta('link[rel="icon"][sizes="32x32"]')).toHaveAttribute("href", /favicon-32\.png/);
     await expect(meta('link[rel="apple-touch-icon"]')).toHaveAttribute("href", /favicon-180\.png/);
